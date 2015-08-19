@@ -35,7 +35,7 @@ var SubmitButton = React.createClass({
   mixins: [FormMixin],
   render: function () {
     return (<button onClick={this.submitForm}>
-      Submit
+      {this.props.children || 'Submit'}
     </button>);
   }
 });
