@@ -5,8 +5,7 @@ var NUMBER_REGEX = /^\d+$/;
 
 var contextTypes = {
   isValid: React.PropTypes.bool,
-  didSubmit: React.PropTypes.bool,
-  valueLinks: React.PropTypes.object,
+  didSubmit: React.PropTypes.func,
   submitForm: React.PropTypes.func,
   linkField: React.PropTypes.func,
   validateField: React.PropTypes.func
@@ -15,7 +14,7 @@ var contextTypes = {
 var FormMixin = {
   contextTypes,
   didSubmit: function () {
-    return this.context.didSubmit;
+    return this.context.didSubmit();
   },
   submitForm: function (e) {
     if (e) e.preventDefault();
@@ -43,7 +42,7 @@ var ErrorMessage = React.createClass({
   render: function () {
     var errors = this.validateField(this.props.field);
     return (<div className="errors" hidden={!errors || this.props.hidden}>
-      {errors && errors.map(error => <span>{error}</span>)}
+      {errors && errors.map(error => <span key={error}>{error}</span>)}
     </div>);
   }
 });
@@ -69,6 +68,10 @@ module.exports = {
         });
 
         return state;
+      },
+
+      didSubmit: function () {
+        return this.state.didSubmit;
       },
 
       submitForm: function() {
@@ -137,9 +140,8 @@ module.exports = {
       getChildContext: function() {
         return {
           isValid: this.state.isValid,
-          didSubmit: this.state.didSubmit,
+          didSubmit: this.didSubmit,
           submitForm: this.submitForm,
-          valueLinks: this.valueLinks,
           linkField: this.linkField,
           validateField: this.validateField
         }
