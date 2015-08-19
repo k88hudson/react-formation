@@ -1,13 +1,18 @@
-# Form
+# Guide
 
 Using this form library, you can
 
-1. Create forms with a schema, including validations
-2. Link inputs in child components back to the form
-3. Handle submitting and showing errors with helper components
-4. Get the "valid" or "submit attempt" state of the entire form at any time
+* Create forms with a schema, including validations
+* Link inputs in child components back to the form
+* Handle submitting and showing errors with helper components
+* Get the "valid" or "submit attempt" state of the entire form at any time
 
-To create a form, pass an object to `CreateForm` that includes a `schema` property and an `onSuccess` method:
+## Creating a form
+
+To create a form, pass an configuration object to `CreateForm` similar to what you would to `React.createClass`. You **must include**:
+
+1. a `schema` property that defines all the fields in the form that will be submitted
+2. an `onSuccess` method that gets called on a successful submit
 
 ```js
 var CreateForm = require('form.jsx').CreateForm;
@@ -40,6 +45,35 @@ var Form = CreateForm({
     </form>);
   }
 });
+```
+
+## Schema
+
+A schema should be an object, where each key represents a unique field. Each key's value is an object with can contain:
+
+* initial: the initial value the form field starts with (optional)
+* required: true/false
+* type: currently implemented types include `number` and `email`
+* label: this will show up in error messages
+
+Example:
+```js
+schema: {
+  name: {
+    initial: 'Bob Jones',
+    required: true,
+    label: 'Name'
+  },
+  email: {
+    required: true,
+    label: 'Email',
+    type: 'email'
+  },
+  cardNumber: {
+    type: 'number',
+    label: 'Credit card number'
+  }
+}
 ```
 
 ## Linking field values
@@ -166,6 +200,40 @@ var Form = CreateForm({
 });
 ```
 
+# API
+
+## `FormMixin`
+
+### `this.isValid()`
+
+Returns `true` or `false` depending on if the entire form is valid.
+
+### `this.didSubmit()`
+
+Returns `true` or `false` depending on if the user tried to submit the form yet or not.
+
+### `this.submitForm()`
+
+Will call `this.onSuccess` with the entire form's data if the form is valid.
+
+### `this.linkField(fieldName)`
+
+Returns a `valueLink` for an input to be linked to a form field value. Example usage:
+
+```
+<input valueLink={this.linkField('email')} />
+```
+
+### `this.validateField(fieldName)`
+
+Returns `false` if no errors were found when validating the field `fieldName`, otherwise an array of strings, where each string is an error message.
+
+For example, if the field `email` must be an email:
+
+```js
+this.validateField('email');
+// => ['Email must be an email.']
+```
 
 
 

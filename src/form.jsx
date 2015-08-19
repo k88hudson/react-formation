@@ -13,6 +13,9 @@ var contextTypes = {
 
 var FormMixin = {
   contextTypes,
+  isValid: function () {
+    return this.context.isValid;
+  },
   didSubmit: function () {
     return this.context.didSubmit();
   },
