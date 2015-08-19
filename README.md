@@ -1,3 +1,7 @@
+# Important note
+
+At current time of writing, this is a component API experiment -- the validation support etc. **is extremely naive and not ready for production**.
+
 # How to test this out
 
 I haven't published this or anything yet, you can try it out by cloning this repo and running:
