@@ -160,7 +160,7 @@ var Form = CreateForm({
   render: function () {
     return (<form>
       <input valueLink={this.linkField('email')} />
-      <ErrorMessage hidden={this.didSubmit()} field="email" />
+      <ErrorMessage hidden={!this.didSubmit()} field="email" />
     </form>);
   }
 });
