@@ -48,7 +48,7 @@ You can inputs to the form via the `valueLink` property. All you need to do is c
 
 Keep in mind if you are adding inputs to child components of the form, you will need to include the `FormMixin` mixin.
 
-```
+```js
 var {CreateForm, FormMixin} = require('form.jsx').CreateForm;
 
 var Form = CreateForm({
@@ -87,7 +87,7 @@ To submit the form, you can call `this.submitForm` or use the `<SubmitButton />`
 
 Make sure you define an `onSuccess` method on the form configuration object:
 
-```
+```js
 var {CreateForm, SubmitButton} = require('form.jsx').CreateForm;
 
 var Form = CreateForm({
@@ -119,7 +119,7 @@ var Form = CreateForm({
 
 You can easily show validation errors by using the `<ErrorMessage /> component. Simply pass in the name of the field to the `field` property.
 
-```
+```js
 var {CreateForm, ErrorMessage} = require('form.jsx').CreateForm;
 
 var Form = CreateForm({
@@ -145,7 +145,7 @@ If you only want to show the error message some of the time (for example, only a
 
 Remember you can get the `didSubmit` state in child components by using `this.didSubmit()` from the `FormMixin`.
 
-```
+```js
 var {CreateForm, ErrorMessage} = require('form.jsx').CreateForm;
 
 var Form = CreateForm({
