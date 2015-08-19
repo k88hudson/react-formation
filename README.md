@@ -7,9 +7,15 @@ Using this form library, you can
 * Handle submitting and showing errors with helper components
 * Get the "valid" or "submit attempt" state of the entire form at any time
 
+## Complete example
+
+Check out [the example](./src/eg.jsx).
+
 ## Creating a form
 
-To create a form, pass an configuration object to `CreateForm` similar to what you would to `React.createClass`. You **must include**:
+To create a form, pass an configuration object to `CreateForm` similar to what you would to `React.createClass`.
+
+You **must include**:
 
 1. a `schema` property that defines all the fields in the form that will be submitted
 2. an `onSuccess` method that gets called on a successful submit
