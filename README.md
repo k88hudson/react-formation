@@ -157,7 +157,7 @@ var Form = CreateForm({
 
 ## Errors
 
-You can easily show validation errors by using the `<ErrorMessage /> component. Simply pass in the name of the field to the `field` property.
+You can easily show validation errors by using the `<ErrorMessage />` component. Simply pass in the name of the field to the `field` property.
 
 ```js
 var {CreateForm, ErrorMessage} = require('form.jsx').CreateForm;
