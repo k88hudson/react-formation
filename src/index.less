@@ -27,8 +27,11 @@ label {
 input {
   font-size: inherit;
   border: 1px solid #999;
-  width: 100%;
   padding: 5px;
+  &[type="text"],
+  &[type="number"] {
+    width: 100%;
+  }
 }
 
 textarea {
@@ -49,4 +52,44 @@ textarea {
   padding: 10px;
   background: #FF7C7C;
   color: white;
+}
+
+
+/*********************************************************
+* step by step
+*/
+
+.step-by-step {
+  margin: 0 auto;
+  max-width: 700px;
+  background: white;
+  padding: 20px;
+}
+
+.sbs-nav {
+  text-align: center;
+}
+.sbs-nav-btn {
+  display: inline-block;
+  text-align: center;
+  margin-right: 10px;
+  .sbs-nav-btn-index,
+  .sbs-nav-btn-title {
+    display: block;
+  }
+  &.active .sbs-nav-btn-index {
+    background: #0095DD;
+    color: white;
+  }
+  .sbs-nav-btn-index {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #EAEFF2;
+    border: 8px solid #EAEFF2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+  }
 }

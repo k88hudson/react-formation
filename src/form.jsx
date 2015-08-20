@@ -1,4 +1,5 @@
 var React = require('react/addons');
+var assign = require('react/lib/Object.assign');
 
 var EMAIL_REGEX = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 var NUMBER_REGEX = /^\d+$/;
@@ -10,6 +11,23 @@ var contextTypes = {
   linkField: React.PropTypes.func,
   validateField: React.PropTypes.func
 };
+
+var Radio = React.createClass({
+  onChange: function (e) {
+    var value = e.target.value;
+    if (typeof this.props.value === 'number') value = +value;
+    this.props.radioLink.requestChange(value);
+  },
+  render: function () {
+    var props = assign({}, this.props, {
+      type: 'radio',
+      checked: this.props.value + '' === this.props.radioLink.value + '',
+      onChange: this.onChange
+    });
+    return <input {...props} />;
+  }
+});
+
 
 var FormMixin = {
   contextTypes,
@@ -155,5 +173,6 @@ module.exports = {
   },
   SubmitButton,
   FormMixin,
-  ErrorMessage
+  ErrorMessage,
+  Radio
 };
