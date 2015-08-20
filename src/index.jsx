@@ -138,7 +138,7 @@ var PersonalInfo = React.createClass({
 var ThankYou = React.createClass({
   render: function () {
     return (<div>
-      Thank you!!
+      <h1>Thank you!!</h1>
     </div>);
   }
 });
@@ -207,11 +207,11 @@ var Form = CreateForm({
     }
   ],
   onSuccess: function (data) {
-    console.log(data);
+    this.refs.sequence.goNext();
   },
   render: function () {
     return (<form>
-      <StepByStep>
+      <StepByStep ref="sequence">
         <Amount index={0} title="Amount" />
         <Payment index={1} title="Payment" />
         <PersonalInfo index={2} title="Info" />

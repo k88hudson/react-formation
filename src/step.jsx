@@ -2,7 +2,8 @@ var React = require('react/addons');
 
 var contextTypes = {
   activePage: React.PropTypes.number,
-  navigateTo: React.PropTypes.func
+  navigateTo: React.PropTypes.func,
+  goNext: React.PropTypes.func
 };
 
 var NavButton = React.createClass({
@@ -20,11 +21,10 @@ var StepMixin = {
     return this.context.activePage;
   },
   navigateTo: function (i) {
-    console.log(this.context);
     this.context.navigateTo(i);
   },
   goNext: function () {
-    this.navigateTo(this.context.activePage + 1);
+    this.context.goNext();
   }
 };
 
@@ -33,7 +33,8 @@ var StepByStep = React.createClass({
   getChildContext: function() {
     return {
       activePage: this.state.activePage,
-      navigateTo: this.navigateTo
+      navigateTo: this.navigateTo,
+      goNext: this.goNext
     };
   },
   getInitialState: function () {
@@ -43,6 +44,9 @@ var StepByStep = React.createClass({
   },
   navigateTo: function (i) {
     this.setState({activePage: i});
+  },
+  goNext: function (i) {
+    this.setState({activePage: this.state.activePage + 1});
   },
   render: function () {
     return (<div className="step-by-step">
@@ -57,10 +61,6 @@ var StepByStep = React.createClass({
     </div>);
   }
 });
-
-var CreateSequence = function (config) {
-  return React.createClass(config);
-};
 
 var NextButton = React.createClass({
   mixins: [StepMixin],
@@ -77,7 +77,6 @@ var NextButton = React.createClass({
 });
 
 module.exports = {
-  CreateSequence,
   StepByStep,
   StepMixin,
   NextButton
