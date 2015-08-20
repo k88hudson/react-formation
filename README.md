@@ -70,7 +70,7 @@ var Form = CreateForm({
 A schema should be an object, where each key represents a unique field. Each key's value is an object with can contain:
 
 * initial: the initial value the form field starts with (optional)
-* required: true/false
+* required: true/false OR a function
 * type: currently implemented types include `number` and `email`
 * label: this will show up in error messages
 
@@ -93,6 +93,8 @@ schema: {
   }
 }
 ```
+
+TODO: validation, conditional required
 
 ## Linking field values
 

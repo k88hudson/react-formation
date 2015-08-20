@@ -22,6 +22,9 @@ var StepMixin = {
   navigateTo: function (i) {
     console.log(this.context);
     this.context.navigateTo(i);
+  },
+  goNext: function () {
+    this.navigateTo(this.context.activePage + 1);
   }
 };
 
@@ -55,20 +58,26 @@ var StepByStep = React.createClass({
   }
 });
 
+var CreateSequence = function (config) {
+  return React.createClass(config);
+};
+
 var NextButton = React.createClass({
   mixins: [StepMixin],
-  goNext: function (e) {
+  onClick: function (e) {
     e.preventDefault();
-    this.navigateTo(this.activePage() + 1);
+    if (this.props.disabled) return;
+    this.goNext();
   },
   render: function () {
-    return (<button onClick={this.goNext}>
+    return (<button onClick={this.onClick} disabled={this.props.disabled}>
       {this.props.children || 'Next'}
     </button>);
   }
 });
 
 module.exports = {
+  CreateSequence,
   StepByStep,
   StepMixin,
   NextButton

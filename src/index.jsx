@@ -1,6 +1,12 @@
 var React = require('react/addons');
-var {CreateForm, SubmitButton, ErrorMessage, FormMixin, Radio} = require('./form.jsx');
-var {StepByStep, NextButton} = require('./step.jsx');
+var {CreateForm, SubmitButton, SubmitGroupButton, ErrorMessage, FormMixin, Radio} = require('./form.jsx');
+var {StepByStep, NextButton, StepMixin} = require('./step.jsx');
+
+var COUNTRY = ['Canada', 'US', 'Mexico'];
+var PROVINCES = {
+  Canada: ['Ontario', 'Quebec'],
+  US: ['New York', 'Washington']
+};
 
 var Page = React.createClass({
   render: function () {
@@ -11,7 +17,7 @@ var Page = React.createClass({
 });
 
 var Amount = React.createClass({
-  mixins: [FormMixin, React.addons.LinkedStateMixin],
+  mixins: [FormMixin, StepMixin],
   getInitialState: function () {
     return {
       customValue: null
@@ -33,17 +39,18 @@ var Amount = React.createClass({
         <li><Radio name="amount" value={10} radioLink={linkField} /> $10</li>
         <li><Radio name="amount" value={this.state.customValue || 0} radioLink={linkField}/> <input value={this.state.customValue} onChange={this.onCustomChange}/></li>
       </ul>
-      <ErrorMessage hidden={!this.didSubmit()} field="amount" />
-      <p hidden={this.validateField('amount')}><NextButton /></p>
+      <ErrorMessage field="amount" />
+      <SubmitGroupButton group={this.props.index} onSuccess={this.goNext} />
     </div>);
   }
 });
 
 var CreditCard = React.createClass({
 
-  mixins: [FormMixin],
+  mixins: [FormMixin, StepMixin],
 
   render: function () {
+    var provinces = PROVINCES[this.linkField('country').value];
     return (<div className="form-group" {...this.props}>
       <label>Enter your credit card number:</label>
       <input type="number" valueLink={this.linkField('cardNumber')} />
@@ -56,13 +63,35 @@ var CreditCard = React.createClass({
       <label>Enter your address</label>
       <textarea valueLink={this.linkField('cardAddress')} />
       <ErrorMessage field="cardAddress" />
+
+      <label>Enter your country</label>
+      <select valueLink={this.linkField('country')}>
+        <option value="" />
+        {COUNTRY.map(country => <option value={country} key={country}>{country}</option>)}
+      </select>
+      <ErrorMessage field="country" />
+
+      <div hidden={!provinces}>
+        <label>Enter your province</label>
+        <select valueLink={this.linkField('province')}>
+          <option value="" />
+          {provinces && provinces.map(province => <option value={province} key={province}>{province}</option>)}
+        </select>
+      </div>
+      <ErrorMessage field="province" />
     </div>);
   }
 });
 
 var Payment = React.createClass({
 
-  mixins: [FormMixin],
+  getInitialState: function () {
+    return {
+      didSubmit: false
+    };
+  },
+
+  mixins: [FormMixin, StepMixin],
 
   render: function () {
     var paymentTypeLink = this.linkField('paymentType');
@@ -77,8 +106,9 @@ var Payment = React.createClass({
           Paypal
         </li>
       </ul>
+      <ErrorMessage field="paymentType" />
       <CreditCard hidden={paymentTypeLink.value !== 'creditCard'} />
-      <p hidden={this.validateField('cardNumber')}><NextButton /></p>
+      <SubmitGroupButton group={this.props.index} onSuccess={this.goNext} />
     </div>);
   }
 });
@@ -92,15 +122,23 @@ var PersonalInfo = React.createClass({
       <div className="form-group">
         <label>Name</label>
         <input type="text" name="name" valueLink={this.linkField('name')} />
-        <ErrorMessage hidden={!this.didSubmit()} field="name" />
+        <ErrorMessage field="name" />
       </div>
       <div className="form-group">
         <label>Email</label>
         <input type="text" name="email" valueLink={this.linkField('email')} />
-        <ErrorMessage hidden={!this.didSubmit()} field="email" />
+        <ErrorMessage field="email" />
       </div>
 
-      <p><SubmitButton>Go</SubmitButton></p>
+      <p><SubmitButton /></p>
+    </div>);
+  }
+});
+
+var ThankYou = React.createClass({
+  render: function () {
+    return (<div>
+      Thank you!!
     </div>);
   }
 });
@@ -112,52 +150,72 @@ function requiredIfCreditCard() {
 }
 
 var Form = CreateForm({
-  schema: {
-    amount: {
-      required: true,
-      label: 'Amount',
-      type: 'number'
+  schema: [
+    {
+      amount: {
+        required: true,
+        label: 'Amount',
+        type: 'number'
+      }
     },
-    name: {
-      required: true,
-      label: 'Name',
-      type: 'string'
+    {
+      paymentType: {
+        type: 'string',
+        label: 'Payment type',
+        required: true
+      },
+      cardNumber: {
+        required: requiredIfCreditCard,
+        type: 'number',
+        label: 'Credit card number'
+      },
+      cardName: {
+        required: requiredIfCreditCard,
+        type: 'string',
+        label: 'Credit card name'
+      },
+      cardAddress: {
+        required: requiredIfCreditCard,
+        type: 'string',
+        label: 'Credit card address'
+      },
+      country: {
+        required: requiredIfCreditCard,
+        type: 'string',
+        label: 'Country'
+      },
+      province: {
+        required: function () {
+          if (this.state.paymentType !== 'creditCard') return false;
+          if (PROVINCES[this.state.country]) return true;
+        },
+        type: 'string',
+        label: 'Province'
+      }
     },
-    email: {
-      required: true,
-      label: 'Email',
-      type: 'email'
-    },
-    paymentType: {
-      type: 'string',
-      label: 'Payment type',
-      required: true
-    },
-    cardNumber: {
-      required: requiredIfCreditCard,
-      type: 'number',
-      label: 'Credit card number'
-    },
-    cardName: {
-      required: requiredIfCreditCard,
-      type: 'string',
-      label: 'Credit card name'
-    },
-    cardAddress: {
-      required: requiredIfCreditCard,
-      type: 'string',
-      label: 'Credit card address'
+    {
+      name: {
+        required: true,
+        label: 'Name',
+        type: 'string'
+      },
+      email: {
+        required: true,
+        label: 'Email',
+        type: 'email'
+      }
     }
-  },
+  ],
   onSuccess: function (data) {
     console.log(data);
   },
   render: function () {
     return (<form>
       <StepByStep>
-        <Amount title="Amount" />
-        <Payment title="Payment" />
-        <PersonalInfo title="Info" />
+        <Amount index={0} title="Amount" />
+        <Payment index={1} title="Payment" />
+        <PersonalInfo index={2} title="Info" />
+        <ThankYou index={3} title="Thanks" />
       </StepByStep>
     </form>);
   }
