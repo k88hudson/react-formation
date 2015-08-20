@@ -4,8 +4,36 @@
 body {
   font-family: sans-serif;
   color: #333;
+  background: #D1D6DC;
+}
+
+.container {
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 700px;
+  background: white;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+  border-bottom: 1px solid #CCC;
+  h2 {
+    margin: 0;
+  }
+  li {
+    list-style: none;
+  }
+  a {
+    color: #0095DD;
+    text-decoration: none;
+    &.active {
+      background: #0095DD;
+      color: white;
+    }
+  }
+}
+
+.body {
   padding: 20px;
 }
 
@@ -60,8 +88,6 @@ textarea {
 */
 
 .step-by-step {
-  margin: 0 auto;
-  max-width: 700px;
   background: white;
   padding: 20px;
 }

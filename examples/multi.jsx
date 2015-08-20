@@ -1,6 +1,6 @@
 var React = require('react/addons');
-var {CreateForm, SubmitButton, SubmitGroupButton, ErrorMessage, FormMixin, Radio} = require('./form.jsx');
-var {StepByStep, NextButton, StepMixin} = require('./step.jsx');
+var {CreateForm, SubmitButton, SubmitGroupButton, ErrorMessage, FormMixin, Radio} = require('../src/form.jsx');
+var {StepByStep, NextButton, StepMixin} = require('../src/lib/step.jsx');
 
 var COUNTRY = ['Canada', 'US', 'Mexico'];
 var PROVINCES = {
@@ -40,7 +40,7 @@ var Amount = React.createClass({
         <li><Radio name="amount" value={this.state.customValue || 0} radioLink={linkField}/> <input value={this.state.customValue} onChange={this.onCustomChange}/></li>
       </ul>
       <ErrorMessage field="amount" />
-      <SubmitGroupButton group={this.props.index} onSuccess={this.goNext} />
+      <p><SubmitGroupButton group={this.props.index} onSuccess={this.goNext} /></p>
     </div>);
   }
 });
@@ -108,7 +108,7 @@ var Payment = React.createClass({
       </ul>
       <ErrorMessage field="paymentType" />
       <CreditCard hidden={paymentTypeLink.value !== 'creditCard'} />
-      <SubmitGroupButton group={this.props.index} onSuccess={this.goNext} />
+      <p><SubmitGroupButton group={this.props.index} onSuccess={this.goNext} /></p>
     </div>);
   }
 });
@@ -211,7 +211,7 @@ var Form = CreateForm({
   },
   render: function () {
     return (<form>
-      <StepByStep ref="sequence">
+      <StepByStep interactiveNav={false} ref="sequence">
         <Amount index={0} title="Amount" />
         <Payment index={1} title="Payment" />
         <PersonalInfo index={2} title="Info" />
@@ -221,4 +221,4 @@ var Form = CreateForm({
   }
 });
 
-React.render(<Form />, document.getElementById('app'));
+module.exports = Form;

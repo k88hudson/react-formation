@@ -4,29 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
     "build": "npm-run-all build:**",
     "start": "npm run build && npm-run-all --parallel server watch:**",
-
     "prebuild": "rimraf www && mkdirp www",
     "prestart": "npm run prebuild",
-
-    "build:static": "cpx \"src/static/**/*\" www",
+    "build:static": "cpx \"examples/static/**/*\" www",
     "watch:static": "npm run build:static -- -w",
-
     "build:js": "webpack",
     "watch:js": "npm run build:js -- --watch",
-
     "build:css": "npm run watch:css -- --no-watch",
-    "watch:css": "autoless --source-map src www",
-
+    "watch:css": "autoless --source-map examples www",
     "server": "live-server www --port=4240"
-
   },
   "author": "k88hudson",
   "license": "MPL-2.0",
   "dependencies": {
-    "react": "^0.13.3"
+    "react": "^0.13.3",
+    "react-router": "^0.13.3"
   },
   "engines": {
     "npm": ">=2.0.0"

@@ -1,5 +1,5 @@
 var React = require('react/addons');
-var {CreateForm, SubmitButton, ErrorMessage, FormMixin} = require('./form.jsx');
+var {CreateForm, SubmitButton, ErrorMessage, FormMixin} = require('../src/form.jsx');
 
 var CreditCard = React.createClass({
 
@@ -8,7 +8,7 @@ var CreditCard = React.createClass({
   render: function () {
     return (<div className="form-group">
       <label>Enter your credit card number:</label>
-      <input valueLink={this.linkField('cardNumber')} onBlur={this.onBlur} />
+      <input type="number" valueLink={this.linkField('cardNumber')} />
       <ErrorMessage field="cardNumber" />
     </div>);
   }
@@ -22,13 +22,13 @@ var PersonalInfo = React.createClass({
     return (<div>
       <div className="form-group">
         <label>Name</label>
-        <input name="name" valueLink={this.linkField('name')} />
-        <ErrorMessage hidden={!this.didSubmit()} field="name" />
+        <input type="text" name="name" valueLink={this.linkField('name')} />
+        <ErrorMessage field="name" />
       </div>
       <div className="form-group">
         <label>Email</label>
-        <input name="email" valueLink={this.linkField('email')} />
-        <ErrorMessage hidden={!this.didSubmit()} field="email" />
+        <input type="text" name="email" valueLink={this.linkField('email')} />
+        <ErrorMessage field="email" />
       </div>
     </div>);
   }
@@ -52,7 +52,7 @@ var Form = CreateForm({
     }
   },
   onSuccess: function (data) {
-    console.log(data);
+    alert(JSON.stringify(data));
   },
   render: function () {
     return (<form>
@@ -63,5 +63,5 @@ var Form = CreateForm({
   }
 });
 
-React.render(<Form />, document.getElementById('app'));
+module.exports = Form;
 

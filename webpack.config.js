@@ -1,6 +1,7 @@
 var jsSrc = __dirname + '/src';
+var examples = __dirname + '/examples';
 module.exports = {
-  entry: jsSrc + '/index.jsx',
+  entry: examples + '/index.jsx',
   devtool: 'source-map', // To support Firefox, switch to exec
   output: {
     path: __dirname + '/www',
@@ -11,12 +12,12 @@ module.exports = {
       {
         test: /\.js$/,
         loaders:  ['babel-loader'],
-        include: jsSrc
+        include: [jsSrc, examples]
       },
       {
         test: /\.jsx$/,
         loaders:  ['babel-loader', 'jsx-loader'],
-        include: jsSrc
+        include: [jsSrc, examples]
       }
     ]
   }

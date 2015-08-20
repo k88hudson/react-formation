@@ -51,7 +51,7 @@ var StepByStep = React.createClass({
   render: function () {
     return (<div className="step-by-step">
       <div className="sbs-nav">
-        {this.props.children.map((page, i) => <NavButton active={i === this.state.activePage} index={i} title={page.props.title} onClick={() => this.navigateTo(i)} />)}
+        {this.props.children.map((page, i) => <NavButton active={i === this.state.activePage} index={i} title={page.props.title} onClick={this.props.interactiveNav ? () => this.navigateTo(i) : null} />)}
       </div>
       {this.props.children.map((page, i) => {
         return (<div hidden={i !== this.state.activePage}>

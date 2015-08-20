@@ -8,8 +8,6 @@ I haven't published this or anything yet, you can try it out by cloning this rep
 
 `npm start`
 
-Right now `src/index.jsx` is just a normal form — if you edit it, you can see the results at `http://localhost:4240`. For a complete reference of what the example would look like using `CreateForm`, look at `src/eg.jsx`.
-
 # Guide
 
 Using this form library, you can
@@ -21,7 +19,7 @@ Using this form library, you can
 
 ## Complete example
 
-Check out [the example](./src/eg.jsx).
+Check out [the example](./examples/simple.jsx).
 
 ## Creating a form
 
