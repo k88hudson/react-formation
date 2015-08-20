@@ -139,7 +139,11 @@ module.exports = {
         var currentValue = this.state[key];
         var label = schema.label || key;
 
-        if (schema.required && !currentValue) errors.push(label + ' is required');
+        if (schema.required === true && !currentValue) errors.push(label + ' is required');
+        if (typeof schema.required === 'function') {
+          var isConditionallyRequred = schema.required.bind(this)();
+          if (isConditionallyRequred && !currentValue) errors.push(label + ' is required');
+        }
         if (currentValue && schema.type && this.validations[schema.type]) {
           var typeError = this.validations[schema.type](currentValue);
           if (typeError) errors.push(label + typeError);

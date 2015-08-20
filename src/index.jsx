@@ -28,7 +28,7 @@ var Amount = React.createClass({
     var linkField = this.linkField('amount');
     return (<div>
       <label>Amount:</label>
-      <ul clasName="radio-group">
+      <ul className="radio-group">
         <li><Radio name="amount" value={20} radioLink={linkField} /> $20</li>
         <li><Radio name="amount" value={10} radioLink={linkField} /> $10</li>
         <li><Radio name="amount" value={this.state.customValue || 0} radioLink={linkField}/> <input value={this.state.customValue} onChange={this.onCustomChange}/></li>
@@ -44,10 +44,40 @@ var CreditCard = React.createClass({
   mixins: [FormMixin],
 
   render: function () {
-    return (<div className="form-group">
+    return (<div className="form-group" {...this.props}>
       <label>Enter your credit card number:</label>
-      <input type="number" valueLink={this.linkField('cardNumber')} onBlur={this.onBlur} />
-      <ErrorMessage hidden={!this.didSubmit()} field="cardNumber" />
+      <input type="number" valueLink={this.linkField('cardNumber')} />
+      <ErrorMessage field="cardNumber" />
+
+      <label>Enter your name</label>
+      <input type="text" valueLink={this.linkField('cardName')} />
+      <ErrorMessage field="cardName" />
+
+      <label>Enter your address</label>
+      <textarea valueLink={this.linkField('cardAddress')} />
+      <ErrorMessage field="cardAddress" />
+    </div>);
+  }
+});
+
+var Payment = React.createClass({
+
+  mixins: [FormMixin],
+
+  render: function () {
+    var paymentTypeLink = this.linkField('paymentType');
+    return (<div>
+      <ul className="radio-group">
+        <li>
+          <Radio name="paymentType" value="creditCard" radioLink={paymentTypeLink} />
+          Credit Card
+        </li>
+        <li>
+          <Radio name="paymentType" value="paypal" radioLink={paymentTypeLink} />
+          Paypal
+        </li>
+      </ul>
+      <CreditCard hidden={paymentTypeLink.value !== 'creditCard'} />
       <p hidden={this.validateField('cardNumber')}><NextButton /></p>
     </div>);
   }
@@ -75,6 +105,12 @@ var PersonalInfo = React.createClass({
   }
 });
 
+function requiredIfCreditCard() {
+  if (this.state.paymentType === 'creditCard') {
+    return true;
+  }
+}
+
 var Form = CreateForm({
   schema: {
     amount: {
@@ -92,10 +128,25 @@ var Form = CreateForm({
       label: 'Email',
       type: 'email'
     },
-    cardNumber: {
-      type: 'number',
-      label: 'Credit card number',
+    paymentType: {
+      type: 'string',
+      label: 'Payment type',
       required: true
+    },
+    cardNumber: {
+      required: requiredIfCreditCard,
+      type: 'number',
+      label: 'Credit card number'
+    },
+    cardName: {
+      required: requiredIfCreditCard,
+      type: 'string',
+      label: 'Credit card name'
+    },
+    cardAddress: {
+      required: requiredIfCreditCard,
+      type: 'string',
+      label: 'Credit card address'
     }
   },
   onSuccess: function (data) {
@@ -104,8 +155,8 @@ var Form = CreateForm({
   render: function () {
     return (<form>
       <StepByStep>
-        <CreditCard title="Payment" />
         <Amount title="Amount" />
+        <Payment title="Payment" />
         <PersonalInfo title="Info" />
       </StepByStep>
     </form>);
