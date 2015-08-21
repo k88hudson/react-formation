@@ -20,6 +20,7 @@ var App = React.createClass({
             <li><Link to="submitting">Submitting</Link></li>
             <li><Link to="schema">Schema and validation</Link></li>
             <li><Link to="multi">Multi-part forms</Link></li>
+            <li><Link to="ab">A/B testing</Link></li>
             <li><Link to="inputTypes">Input Types reference</Link></li>
           </ul>
         </header>
@@ -49,6 +50,7 @@ var routes = (
     <Route name="submitting" handler={require('./submitting/docs.jsx')}/>
     <Route name="inputTypes" handler={InputTypes}/>
     <Route name="multi" handler={require('./multi/docs.jsx')}/>
+    <Route name="ab" handler={require('./ab/docs.jsx')}/>
     <DefaultRoute handler={Home}/>
   </Route>
 );
