@@ -4,6 +4,10 @@
 
 At current time of writing, this is a component API experiment -- the validation support etc. is still in progress.
 
+## Try it out
+
+Clone the example repo from https://github.com/k88hudson/react-composable-form-example to try this out.
+
 ##  What it does
 
 Using this form library, you can
