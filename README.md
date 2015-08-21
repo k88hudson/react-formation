@@ -226,9 +226,10 @@ var Form = CreateForm({
 
 Returns `true` or `false` depending on if the entire form is valid.
 
-### `this.didSubmit()`
+### `this.didSubmit(field)`
 
 Returns `true` or `false` depending on if the user tried to submit the form yet or not.
+If a a `field` is provided, it will only check if the user tried to submit the group in which the field exists.
 
 ### `this.submitForm()`
 

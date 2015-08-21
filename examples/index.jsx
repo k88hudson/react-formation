@@ -2,9 +2,11 @@ var React = require('react/addons');
 var Router = require('react-router');
 var {DefaultRoute, Link, Route, RouteHandler} = Router;
 
-var Simple = require('./simple.jsx');
 var Multi = require('./multi.jsx');
 var InputTypes = require('./input-types.jsx');
+
+var Markdown = require('react-remarkable');
+var readme = require('../README.md');
 
 var App = React.createClass({
   render: function () {
@@ -30,14 +32,14 @@ var App = React.createClass({
 var Home = React.createClass({
   render: function () {
     return (<div>
-      Welcome!
+      <Markdown source={readme} />
     </div>);
   }
 });
 
 var routes = (
   <Route name="app" path="/" handler={App}>
-    <Route name="simple" handler={Simple}/>
+    <Route name="simple" handler={require('./simple/docs.jsx')}/>
     <Route name="inputTypes" handler={InputTypes}/>
     <Route name="multi" handler={Multi}/>
     <DefaultRoute handler={Home}/>

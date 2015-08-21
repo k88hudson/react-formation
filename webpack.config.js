@@ -15,6 +15,10 @@ module.exports = {
         include: [jsSrc, examples]
       },
       {
+        test: /\.md$/,
+        loaders:  ['raw-loader']
+      },
+      {
         test: /\.jsx$/,
         loaders:  ['babel-loader', 'jsx-loader'],
         include: [jsSrc, examples]

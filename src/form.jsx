@@ -5,14 +5,18 @@ var EMAIL_REGEX = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-
 var NUMBER_REGEX = /^\d+$/;
 
 var contextTypes = {
-  isValid: React.PropTypes.bool,
-  didSubmit: React.PropTypes.func,
-  submitForm: React.PropTypes.func,
-  linkField: React.PropTypes.func,
-  validateField: React.PropTypes.func,
-  isGroupValid: React.PropTypes.func,
-  submitGroup: React.PropTypes.func
+  composableForms: React.PropTypes.object
 };
+
+var contextMethods = [
+  'isValid',
+  'didSubmit',
+  'submitForm',
+  'linkField',
+  'validateField',
+  'isGroupValid',
+  'submitGroup'
+];
 
 var Radio = React.createClass({
   onChange: function (e) {
@@ -30,32 +34,12 @@ var Radio = React.createClass({
   }
 });
 
-
-var FormMixin = {
-  contextTypes,
-  isValid: function () {
-    return this.context.isValid.apply(null, arguments);
-  },
-  didSubmit: function () {
-    return this.context.didSubmit.apply(null, arguments);
-  },
-  submitForm: function (e) {
-    if (e) e.preventDefault();
-    this.context.submitForm();
-  },
-  linkField: function () {
-    return this.context.linkField.apply(null, arguments);
-  },
-  validateField: function () {
-    return this.context.validateField.apply(null, arguments);
-  },
-  isGroupValid: function () {
-    return this.context.isGroupValid.apply(null, arguments);
-  },
-  submitGroup: function () {
-    return this.context.submitGroup.apply(null, arguments);
-  }
-};
+var FormMixin = {contextTypes};
+contextMethods.forEach(method => {
+  FormMixin[method] = function () {
+    return this.context.composableForms[method].apply(null, arguments);
+  };
+});
 
 var SubmitButton = React.createClass({
   mixins: [FormMixin],
@@ -171,7 +155,10 @@ module.exports = {
         }
       },
 
-      submitForm: function() {
+      submitForm: function(e) {
+
+        if (e) e.preventDefault();
+
         // Make all fields dirty
         var dirtyFields = this.state.dirtyFields;
         Object.keys(this.schema).forEach(key => {
@@ -254,15 +241,13 @@ module.exports = {
       childContextTypes: contextTypes,
 
       getChildContext: function() {
+        var methods = {};
+        contextMethods.forEach(method => {
+          methods[method] = this[method];
+        });
         return {
-          isValid: this.state.isValid,
-          didSubmit: this.didSubmit,
-          submitForm: this.submitForm,
-          linkField: this.linkField,
-          validateField: this.validateField,
-          isGroupValid: this.isGroupValid,
-          submitGroup: this.submitGroup
-        }
+          composableForms: methods
+        };
       }
     });
 

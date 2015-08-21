@@ -1,5 +1,10 @@
 var React = require('react/addons');
-var {CreateForm, SubmitButton, ErrorMessage, FormMixin} = require('../src/form.jsx');
+var {
+  CreateForm,
+  SubmitButton,
+  ErrorMessage,
+  FormMixin
+} = require('../../src/form.jsx');
 
 var CreditCard = React.createClass({
 
