@@ -1,6 +1,7 @@
 var React = require('react/addons');
 var Router = require('react-router');
 var {DefaultRoute, Link, Route, RouteHandler} = Router;
+var Markdown = require('react-remarkable')
 
 var InputTypes = require('./input-types.jsx');
 
@@ -11,7 +12,8 @@ var App = React.createClass({
         <header>
           <h2>Guide</h2>
           <ul>
-            <li><Link to="/">Simple form</Link></li>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="simple">Simple form</Link></li>
             <li><Link to="children">Child components</Link></li>
             <li><Link to="linking">Linking field values</Link></li>
             <li><Link to="errors">Errors</Link></li>
@@ -29,8 +31,17 @@ var App = React.createClass({
   }
 });
 
+var Home = React.createClass({
+  render: function () {
+    return (<div className="docs">
+      <Markdown source={require('../README.md')} />
+    </div>);
+  }
+});
+
 var routes = (
   <Route name="app" path="/" handler={App}>
+    <Route name="simple" handler={require('./simple/docs.jsx')}/>
     <Route name="errors" handler={require('./errors/docs.jsx')}/>
     <Route name="linking" handler={require('./linking/docs.jsx')}/>
     <Route name="children" handler={require('./children/docs.jsx')}/>
@@ -38,7 +49,7 @@ var routes = (
     <Route name="submitting" handler={require('./submitting/docs.jsx')}/>
     <Route name="inputTypes" handler={InputTypes}/>
     <Route name="multi" handler={require('./multi/docs.jsx')}/>
-    <DefaultRoute handler={require('./simple/docs.jsx')}/>
+    <DefaultRoute handler={Home}/>
   </Route>
 );
 

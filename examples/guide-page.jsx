@@ -1,6 +1,6 @@
 var React = require('react/addons');
 var Highlight = require('react-highlight');
-var Markdown = require('react-remarkable')
+var Markdown = require('react-remarkable');
 
 module.exports = function(options) {
   return React.createClass({
