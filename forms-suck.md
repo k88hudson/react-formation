@@ -16,10 +16,11 @@ The Angular, jQuery, and React implementations were:
 
 * verbose
 * too rigid to easily allow for new fields or changes in structure
+* abstractions quickly become useless/too rigid
 * error handling logic is complex, under-abstracted
 * prone to state bugs
 
-HTML forms (i.e. no javascript) are *much* simpler and less rigit, but the mechanisms available for validation and error messages are too primitive to allow for a good user experience.
+HTML forms (i.e. no javascript) are *much* simpler and less rigid, but the mechanisms available for validation and error messages are too primitive to allow for a good user experience.
 
 Verdict: they all suck.
 
@@ -45,4 +46,23 @@ Wouldn't it be nice if we could just loop through our data model and generate in
 
 Unfortunately, building a good user experience often requires a lot of nested html structures and classes specific to the needs of each field/section.
 
-### Large and complex data models + variable nested UI = ultimate sadness
+### In summary,
+
+Large and complex data models + variable nested UI = sadness.
+
+## Existing libraries
+
+Examples:
+
+* https://github.com/prometheusresearch/react-forms
+* https://github.com/christianalfoni/formsy-react
+* https://github.com/christianalfoni/formsy-react
+
+### Where do they fail?
+
+* over-abstracting the UI or required rigid component structures
+* lacking utilties for handling error display in a robust way 
+* not accounting for multi-step forms
+* hard to inject state to test
+
+
