@@ -2,7 +2,7 @@
   "name": "react-composable-form",
   "version": "0.0.0",
   "description": "",
-  "main": "src/form.js",
+  "main": "src/form.jsx",
   "scripts": {
     "build": "npm-run-all build:**",
     "start": "npm run build && npm-run-all --parallel server watch:**",
