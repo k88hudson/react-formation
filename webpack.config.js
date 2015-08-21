@@ -1,18 +1,23 @@
 var jsSrc = __dirname + '/src';
 var examples = __dirname + '/examples';
+var tests = __dirname + '/tests';
+
 module.exports = {
-  entry: examples + '/index.jsx',
+  entry: {
+    examples: examples + '/index.jsx',
+    tests: tests + '/index.jsx'
+  },
   devtool: 'source-map', // To support Firefox, switch to exec
   output: {
     path: __dirname + '/www',
-    filename: 'index.bundle.js'
+    filename: '[name].bundle.js'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         loaders:  ['babel-loader'],
-        include: [jsSrc, examples]
+        include: [jsSrc, tests, examples]
       },
       {
         test: /\.md$/,
@@ -21,7 +26,7 @@ module.exports = {
       {
         test: /\.jsx$/,
         loaders:  ['babel-loader', 'jsx-loader'],
-        include: [jsSrc, examples]
+        include: [jsSrc, tests, examples]
       }
     ]
   }

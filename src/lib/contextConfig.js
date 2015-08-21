@@ -8,15 +8,10 @@ var types = {};
 types[CONTEXT_NAME] = React.PropTypes.object;
 
 // Methods that will be exposed on context.composableForms and FormMixin
-var methods = [
-  'isValid',
-  'didSubmit',
-  'submitForm',
-  'linkField',
-  'validateField',
-  'isGroupValid',
-  'submitGroup'
-];
+// Each method MUST have a .md file in src/lib/apiDocs
+// e.g. for this.didSubmit(), there should be a file called didSubmit.md
+var docFiles = require.context('./apiDocs', true, /\.md$/).keys();
+var methods = docFiles.map(file => file.replace('./', '').replace('.md', ''));
 
 module.exports = {
   name: CONTEXT_NAME,
