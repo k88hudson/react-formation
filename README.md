@@ -19,6 +19,12 @@ Handling any kind of nested display and control of user input can be tricky in R
 
 Inspired by `react-router`, react-composable-forms uses a top-level schema in combination with React's `context` feature to maintain a consistent api at all levels of the component tree.
 
+### Integrate existing input components and conventions
+
+Any form system that requires the use of generated inputs or specific input component structures quickly becomes too rigid except for the simplest of forms.
+
+react-composable-forms allows you to use **any input or component you like**, in any html structure you like. Links back to the single source of truth are managed via React's two-way-binding utility, which can be added directly to native inputs or controlled manually in an `onChange` handler.
+
 ### Simplify display of errors
 
 No matter how you chose to validate your data, displaying error messages almost always requires a lot of complex logic from multiple sources: did the user attempt to submit? Are there any errors? Is the field required?
