@@ -14,9 +14,9 @@ var App = React.createClass({
             <li><Link to="/">Simple form</Link></li>
             <li><Link to="children">Child components</Link></li>
             <li><Link to="linking">Linking field values</Link></li>
+            <li><Link to="errors">Errors</Link></li>
             <li><Link to="submitting">Submitting</Link></li>
             <li><Link to="schema">Schema and validation</Link></li>
-            <li><Link to="errors">Displaying Errors</Link></li>
             <li><Link to="multi">Multi-part forms</Link></li>
             <li><Link to="inputTypes">Input Types reference</Link></li>
           </ul>

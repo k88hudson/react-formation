@@ -1,14 +1,8 @@
-# Important note
+## Important note
 
-At current time of writing, this is a component API experiment -- the validation support etc. **is extremely naive and not ready for production**.
+At current time of writing, this is a component API experiment -- the validation support etc. is still in progress.
 
-# How to test this out
-
-I haven't published this or anything yet, you can try it out by cloning this repo and running:
-
-`npm start`
-
-# Guide
+##  What it does
 
 Using this form library, you can
 
@@ -17,18 +11,21 @@ Using this form library, you can
 * Handle submitting and showing errors with helper components
 * Get the "valid" or "submit attempt" state of the entire form at any time
 
-## Complete example
+## Rationale
 
-Check out [the examples](./examples)
+### Maintain a single source of truth
 
-## [Creating a form](./examples/simple/docs.md)
+Handling any kind of nested display and control of user input can be tricky in React. Generally, we want to **maintain a single source of truth** for our form's data instead of fragmenting it down the component tree; however, this can become overly complex, verbose, and/or fragile if the components get too nested or the data model of the form is very large.
 
-## [Schema](./examples/schema/docs.md)
+Inspired by `react-router`, React-composable-forms uses a top-level schema in combination with React's `context` feature to maintain a consistent api at all levels of the component tree.
 
-## [Linking field values](./examples/linking/docs.md)
+## Guide and examples
 
-## [Submitting](./examples/submitting/docs.md)
+Check out [the guide and examples](http://k88hudson.github.io/react-composable-form/www).
 
-## [Errors](./examples/errors/docs.md)
-
-## [API](./src/lib/apiDocs)
+*[Creating a form](./examples/simple/docs.md)
+*[Schema](./examples/schema/docs.md)
+*[Linking field values](./examples/linking/docs.md)
+*[Submitting](./examples/submitting/docs.md)
+*[Errors](./examples/errors/docs.md)
+*[API](./src/lib/apiDocs)
