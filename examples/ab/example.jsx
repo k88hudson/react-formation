@@ -24,22 +24,31 @@ var PersonalInfo = CreateForm({
   },
 
   render: function () {
-    return (<form style={{padding: 20, backgroundColor: this.props.backgroundColor}}>
 
+    var inputs = [
       <div className="form-group">
         <label>Name</label>
         <input type="text" name="name" valueLink={this.linkField('name')} />
-        <ErrorMessage show={this.props.showErrorsImmediately} field="name" />
-      </div>
+        <ErrorMessage field="name" />
+      </div>,
 
       <div className="form-group">
         <label>Email</label>
         <input type="text" name="email" valueLink={this.linkField('email')} />
-        <ErrorMessage show={this.props.showErrorsImmediately} field="email" />
+        <ErrorMessage field="email" />
       </div>
+    ];
 
+    if (this.props.emailFirst) inputs.reverse();
+
+    var style = {
+      padding: 20,
+      backgroundColor: this.props.backgroundColor
+    };
+
+    return (<form style={style}>
+      {inputs}
       <p><button onClick={this.submitForm}>Submit</button></p>
-
     </form>);
   }
 });
@@ -48,11 +57,11 @@ var PersonalInfo = CreateForm({
 var Form = React.createClass({
   render: function () {
     return (<div>
-      <h3>Version 1: Show errors after submit, white background</h3>
+      <h3>White background</h3>
       <PersonalInfo />
 
-      <h3>Version 1: Show error immediately, yellow background</h3>
-      <PersonalInfo showErrorsImmediately backgroundColor={'#FFEEBC'} />
+      <h3>Yellow background, email first</h3>
+      <PersonalInfo emailFirst backgroundColor="#FFEEBC" />
     </div>);
   }
 });
