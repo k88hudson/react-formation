@@ -17,6 +17,8 @@ var App = React.createClass({
           <ul>
             <li><Link to="/">Home</Link></li>
             <li><Link to="simple">Simple form</Link></li>
+            <li><Link to="errors">Displaying Errors</Link></li>
+            <li><Link to="children">Child components</Link></li>
             <li><Link to="inputTypes">Input Types</Link></li>
             <li><Link to="multi">Multi-part form</Link></li>
           </ul>
@@ -40,6 +42,8 @@ var Home = React.createClass({
 var routes = (
   <Route name="app" path="/" handler={App}>
     <Route name="simple" handler={require('./simple/docs.jsx')}/>
+    <Route name="errors" handler={require('./errors/docs.jsx')}/>
+    <Route name="children" handler={require('./children/docs.jsx')}/>
     <Route name="inputTypes" handler={InputTypes}/>
     <Route name="multi" handler={Multi}/>
     <DefaultRoute handler={Home}/>

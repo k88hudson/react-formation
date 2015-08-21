@@ -1,10 +1,12 @@
 var React = require('react/addons');
-var {
-  CreateForm,
-  SubmitButton,
-  ErrorMessage,
-  FormMixin
-} = require('../../src/form.jsx');
+var ComposableForm = require('../../src/form.jsx');
+
+var CreateForm = ComposableForm.CreateForm;
+var SubmitButton = ComposableForm.SubmitButton;
+var ErrorMessage = ComposableForm.ErrorMessage;
+// We need FormMixin so this child component
+// can have access to the global form API
+var FormMixin = ComposableForm.FormMixin;
 
 var CreditCard = React.createClass({
 

@@ -102,7 +102,7 @@ module.exports = {
     }
     if (currentValue && schema.type && this.validations[schema.type]) {
       var typeError = this.validations[schema.type](currentValue);
-      if (typeError) errors.push(label + typeError);
+      if (typeError) errors.push(typeError);
     }
     if (!errors.length) return false;
     return errors;

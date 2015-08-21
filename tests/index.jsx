@@ -50,15 +50,6 @@ describe('convertSchema', function () {
   });
 });
 
-var Injector = require('inject?./FormMixin!../src/lib/ErrorMessage.jsx');
-var ErrorMessage = Injector({
-  'react': 'react',
-  './FormMixin': {
-    didSubmit: () => {},
-    validateField: () => {}
-  }
-});
-
 describe('ErrorMessage', function () {
   var Injector = require('inject?./FormMixin!../src/lib/ErrorMessage.jsx');
   var ErrorMessage = Injector({

@@ -1,17 +1,23 @@
 var React = require('react');
-var CreateForm = require('../../src/form.jsx').CreateForm;
+var ComposableForm = require('../../src/form.jsx');
+
+var CreateForm = ComposableForm.CreateForm;
+var SubmitButton = ComposableForm.SubmitButton;
+var ErrorMessage = ComposableForm.ErrorMessage;
 
 var Form = CreateForm({
 
   // This defines all the fields in the form
   schema: {
     name: {
+      required: true,
       label: 'Name',
       type: 'string'
     },
     email: {
+      required: true,
       label: 'Email',
-      type: 'string'
+      type: 'email'
     }
   },
 
@@ -26,14 +32,16 @@ var Form = CreateForm({
       <div className="form-group">
         <label>Name</label>
         <input type="text" name="name" valueLink={this.linkField('name')} />
+        <ErrorMessage field="name" />
       </div>
 
       <div className="form-group">
         <label>Email</label>
         <input type="text" name="email" valueLink={this.linkField('email')} />
+        <ErrorMessage field="email" />
       </div>
 
-      <p><button onClick={this.submitForm}>Submit</button></p>
+      <p><SubmitButton /></p>
 
     </form>);
   }

@@ -19,49 +19,9 @@ Using this form library, you can
 
 ## Complete example
 
-Check out [the example](./examples/simple.jsx).
+Check out [the examples](./examples)
 
-## Creating a form
-
-To create a form, pass an configuration object to `CreateForm` similar to what you would to `React.createClass`.
-
-You **must include**:
-
-1. a `schema` property that defines all the fields in the form that will be submitted
-2. an `onSuccess` method that gets called on a successful submit
-
-```js
-var CreateForm = require('form.jsx').CreateForm;
-
-var Form = CreateForm({
-  schema: {
-    name: {
-      required: true,
-      label: 'Name',
-      type: 'string'
-    },
-    email: {
-      required: true,
-      label: 'Email',
-      type: 'email'
-    },
-    cardNumber: {
-      type: 'number',
-      label: 'Credit card number'
-    }
-  },
-  onSuccess: function (data) {
-    console.log(data);
-  },
-  render: function () {
-    return (<form>
-
-      ....
-
-    </form>);
-  }
-});
-```
+## [Creating a form](./examples/simple/docs.md)
 
 ## Schema
 
@@ -167,53 +127,6 @@ var Form = CreateForm({
 
 ```
 
-## Errors
+## [Errors](./examples/errors/docs.md)
 
-You can easily show validation errors by using the `<ErrorMessage />` component. Simply pass in the name of the field to the `field` property.
-
-```js
-var {CreateForm, ErrorMessage} = require('form.jsx').CreateForm;
-
-var Form = CreateForm({
-  schema: {
-    email: {
-      required: true,
-      type: 'email',
-      label: 'Email'
-    }
-  },
-  ...
-  render: function () {
-    return (<form>
-      <input valueLink={this.linkField('email')} />
-      <ErrorMessage field="email" />
-    </form>);
-  }
-});
-
-```
-
-If you only want to show the error message some of the time (for example, only after a submit attempt), you can use the `hidden` property.
-
-Remember you can get the `didSubmit` state in child components by using `this.didSubmit()` from the `FormMixin`.
-
-```js
-var {CreateForm, ErrorMessage} = require('form.jsx').CreateForm;
-
-var Form = CreateForm({
-  schema: {
-    email: {
-      required: true,
-      type: 'email',
-      label: 'Email'
-    }
-  },
-  ...
-  render: function () {
-    return (<form>
-      <input valueLink={this.linkField('email')} />
-      <ErrorMessage hidden={!this.didSubmit()} field="email" />
-    </form>);
-  }
-});
-```
+## [API](./src/lib/apiDocs)
