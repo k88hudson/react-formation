@@ -1,6 +1,5 @@
 # Forms are hard
 
-
 ## Points of reference
 
 I looked at: 
@@ -48,7 +47,7 @@ Unfortunately, building a good user experience often requires a lot of nested ht
 
 ### In summary,
 
-Large and complex data models + variable nested UI = sadness.
+Large and complex data models + variable nested UI = x_x
 
 ## Existing libraries
 
