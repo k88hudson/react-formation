@@ -34,7 +34,7 @@ var App = React.createClass({
 var Home = React.createClass({
   render: function () {
     return (<div className="docs">
-      <Markdown source={require('../README.md')} />
+      <Markdown source={require('../README.md').split('## Guide and examples')[0]} />
     </div>);
   }
 });
