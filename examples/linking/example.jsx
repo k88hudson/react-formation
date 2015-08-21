@@ -2,31 +2,30 @@ var React = require('react');
 var ComposableForm = require('../../src/form.jsx');
 
 var CreateForm = ComposableForm.CreateForm;
-var SubmitButton = ComposableForm.SubmitButton;
 var ErrorMessage = ComposableForm.ErrorMessage;
+var Radio = ComposableForm.Radio;
 
 var Form = CreateForm({
 
-  // This defines all the fields in the form
   schema: {
     name: {
-      required: true,
       label: 'Name',
-      type: 'string'
+      type: 'string',
+      required: true
     },
-    email: {
-      required: true,
-      label: 'Email',
-      type: 'email'
+    color: {
+      label: 'Favourite Color',
+      type: 'string',
+      required: true
     }
   },
 
-  // This code is run when the form is valid and submitted
   onSuccess: function (data) {
     alert(JSON.stringify(data));
   },
 
   render: function () {
+    var colorLink = this.linkField('color');
     return (<form>
 
       <div className="form-group">
@@ -36,12 +35,13 @@ var Form = CreateForm({
       </div>
 
       <div className="form-group">
-        <label>Email</label>
-        <input type="text" name="email" valueLink={this.linkField('email')} />
-        <ErrorMessage field="email" />
+        <label>What is your favourite colour?</label>
+        <p><Radio name="color" value="blue" radioLink={colorLink} /> Blue</p>
+        <p><Radio name="color" value="red" radioLink={colorLink} /> Red</p>
+        <p><Radio name="color" value="green" radioLink={colorLink} /> Green</p>
       </div>
 
-      <p><SubmitButton /></p>
+      <p><button onClick={this.submitForm}>Submit</button></p>
 
     </form>);
   }

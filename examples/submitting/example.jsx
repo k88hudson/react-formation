@@ -1,9 +1,8 @@
 var React = require('react');
-var CreateForm = require('../../src/form.jsx').CreateForm;
+var {CreateForm, SubmitButton} = require('../../src/form.jsx');
 
 var Form = CreateForm({
 
-  // This defines all the fields in the form
   schema: {
     name: {
       label: 'Name',
@@ -15,7 +14,6 @@ var Form = CreateForm({
     }
   },
 
-  // This code is run when the form is valid and submitted
   onSuccess: function (data) {
     alert(JSON.stringify(data));
   },
@@ -33,7 +31,8 @@ var Form = CreateForm({
         <input type="text" valueLink={this.linkField('email')} />
       </p>
 
-      <p><button onClick={this.submitForm}>Submit</button></p>
+      <p><SubmitButton /></p>
+      <p><button onClick={this.submitForm}>This will also submit</button></p>
 
     </form>);
   }

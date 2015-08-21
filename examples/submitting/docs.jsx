@@ -5,3 +5,4 @@ module.exports = GuidePage({
   example: require('./example.jsx'),
   code: require('!!raw!./example.jsx')
 });
+

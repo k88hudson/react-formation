@@ -1,6 +1,6 @@
 var React = require('react/addons');
-var {CreateForm, SubmitButton, SubmitGroupButton, ErrorMessage, FormMixin, Radio} = require('../src/form.jsx');
-var {StepByStep, NextButton, StepMixin} = require('../src/lib/step.jsx');
+var {CreateForm, SubmitButton, SubmitGroupButton, ErrorMessage, FormMixin, Radio} = require('../../src/form.jsx');
+var {StepByStep, NextButton, StepMixin} = require('../../src/lib/step.jsx');
 
 var COUNTRY = ['Canada', 'US', 'Mexico'];
 var PROVINCES = {

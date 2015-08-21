@@ -2,42 +2,12 @@
   box-sizing: border-box;
 }
 body {
-  font-family: sans-serif;
-  color: #333;
+  font-family: Roboto, sans-serif;
+  color: #545252;
   background: #D1D6DC;
 }
 
 @import 'highlight';
-
-.container {
-  margin: 0 auto;
-  max-width: 700px;
-  background: white;
-}
-
-header {
-  text-align: center;
-  padding: 20px;
-  border-bottom: 1px solid #CCC;
-  h2 {
-    margin: 0;
-  }
-  li {
-    list-style: none;
-  }
-  a {
-    color: #0095DD;
-    text-decoration: none;
-    &.active {
-      background: #0095DD;
-      color: white;
-    }
-  }
-}
-
-.body {
-  padding: 20px;
-}
 
 button {
   border: none;
@@ -88,10 +58,66 @@ textarea {
 * Docs
 */
 
+.container {
+  margin: 0 auto;
+  background: white;
+  display: flex;
+}
+
+header {
+  width: 270px;
+  flex-shrink: 0;
+  padding: 20px;
+  border-bottom: 1px solid #CCC;
+  h2 {
+    margin: 0;
+    margin-top: 22px;
+  }
+  ul {
+    padding: 0;
+  }
+  li {
+    list-style: none;
+    margin-bottom: 8px;
+  }
+  a {
+    color: #0095DD;
+    text-decoration: none;
+    padding: 5px;
+    margin-left: -5px;
+    border-radius: 3px;
+    &.active {
+      background: #0095DD;
+      color: white;
+    }
+  }
+}
+
+.body {
+  padding: 20px;
+  max-width: 700px;
+}
+
 .docs {
   line-height: 1.6;
   h1 {
+    font-size: 38px;
     margin-top: 0;
+    margin-bottom: 20px;
+  }
+  h1 + h3 {
+    margin-top: 0;
+  }
+  h3 {
+    font-size: 24px;
+    margin-top: 30px;
+    margin-bottom: 0;
+    border-bottom: 1px solid #DDD;
+  }
+  h2 {
+    font-size: 28px;
+    margin-top: 30px;
+    border-bottom: 1px solid #DDD;
   }
 }
 
