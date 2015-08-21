@@ -1,26 +1,26 @@
 var React = require('react/addons');
 var contextConfig = require('./contextConfig');
+var convertSchema = require('./convertSchema');
 
 var EMAIL_REGEX = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i;
 var NUMBER_REGEX = /^\d+$/;
 
 module.exports = function CreateForm(config) {
+
   if (!config.schema) throw new Error('You must include "schema" as one of the properties for CreateForm');
   if (!config.mixins) config.mixins = [];
 
+  // If we get an array for the schema,
+  // assume we want a multi-part form
   if (config.schema instanceof Array) {
-    var flatSchema = {};
-    config.schema.forEach((group, i) => {
-      Object.keys(group).forEach(key => {
-        group[key].group = i;
-        flatSchema[key] = group[key];
-      });
-    });
-    config.schema = flatSchema;
+    config.schema = convertSchema(config.schema);
   }
 
-  // Todo don't dupe
-  config.mixins.push(React.addons.LinkedStateMixin);
+  // We need this for setting up linked state
+  if (config.mixins.indexOf(React.addons.LinkedStateMixin) === -1) {
+    config.mixins.push(React.addons.LinkedStateMixin);
+  }
+
   config.mixins.push({
 
     getInitialState: function () {
@@ -38,17 +38,29 @@ module.exports = function CreateForm(config) {
       return state;
     },
 
-    values: function () {
+    childContextTypes: contextConfig.types,
+
+    getChildContext: function() {
+      var methods = {};
+      contextConfig.methods.forEach(method => {
+        methods[method] = this[method];
+      });
+      return {
+        composableForms: methods
+      };
+    },
+
+    linkField: function (key) {
+      if (!this.schema[key]) throw new Error('No value "' + key + '" exists in the schema');
+      return this.linkState(key);
+    },
+
+    getValues: function () {
       var values = {};
       Object.keys(this.schema).forEach(key => {
         values[key] = this.linkField(key).value;
       });
       return values;
-    },
-
-    didSubmit: function (field) {
-      if (!field) return this.state.didSubmit;
-      return this.state.dirtyFields.indexOf(field) !== -1;
     },
 
     submitGroup: function (group, onSuccess, onError) {
@@ -97,23 +109,7 @@ module.exports = function CreateForm(config) {
       }
     },
 
-    linkField: function (key) {
-      if (!this.schema[key]) throw new Error('No value "' + key + '" exists in the schema');
-      return this.linkState(key);
-    },
-
-    validations: {
-      email: function (value) {
-        if (!EMAIL_REGEX.test(value)) {
-          return ' must be an email';
-        }
-      },
-      number: function (value) {
-        if (!NUMBER_REGEX.test(value)) {
-          return ' must be a number';
-        }
-      }
-    },
+    validations: require('./validations'),
 
     validateField: function (key) {
       var errors = [];
@@ -134,7 +130,11 @@ module.exports = function CreateForm(config) {
       return errors;
     },
 
-    // TODO: rename to isGroupValid
+    didSubmit: function (field) {
+      if (!field) return this.state.didSubmit;
+      return this.state.dirtyFields.indexOf(field) !== -1;
+    },
+
     isGroupValid: function (groupName) {
       var isValid = true;
       var fields = Object.keys(this.schema).filter(key => this.schema[key].group === groupName);
@@ -150,18 +150,6 @@ module.exports = function CreateForm(config) {
         if (this.validateField(key)) isValid = false;
       });
       return isValid;
-    },
-
-    childContextTypes: contextConfig.types,
-
-    getChildContext: function() {
-      var methods = {};
-      contextConfig.methods.forEach(method => {
-        methods[method] = this[method];
-      });
-      return {
-        composableForms: methods
-      };
     }
   });
 
