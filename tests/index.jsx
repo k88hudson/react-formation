@@ -1,6 +1,3 @@
-// React needs a polyfill!
-require('phantomjs-polyfill');
-
 var should = require('should');
 var React = require('react/addons');
 var TestUtils = React.addons.TestUtils;
