@@ -1,11 +1,12 @@
 var jsSrc = __dirname + '/src';
-var examples = __dirname + '/examples';
-var tests = __dirname + '/tests';
+var examplesDir = __dirname + '/examples';
+var testsDir = __dirname + '/tests';
+
+var WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
   entry: {
-    examples: examples + '/index.jsx',
-    tests: tests + '/index.jsx'
+    examples: examplesDir + '/index.jsx'
   },
   devtool: 'source-map', // To support Firefox, switch to exec
   output: {
@@ -17,7 +18,7 @@ module.exports = {
       {
         test: /\.js$/,
         loaders:  ['babel-loader'],
-        include: [jsSrc, tests, examples]
+        include: [jsSrc, testsDir, examplesDir]
       },
       {
         test: /\.md$/,
@@ -26,8 +27,11 @@ module.exports = {
       {
         test: /\.jsx$/,
         loaders:  ['babel-loader', 'jsx-loader'],
-        include: [jsSrc, tests, examples]
+        include: [jsSrc, testsDir, examplesDir]
       }
     ]
-  }
+  },
+  plugins: [
+    new WebpackNotifierPlugin()
+  ]
 };
