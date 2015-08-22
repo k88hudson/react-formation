@@ -36,6 +36,7 @@ module.exports = {
   getValues: function () {
     var values = {};
     Object.keys(this.schema).forEach(key => {
+      if (typeof this.linkField(key).value === 'undefined') return;
       values[key] = this.linkField(key).value;
     });
     return values;

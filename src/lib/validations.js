@@ -3,8 +3,8 @@ var NUMBER_REGEX = /^\d+$/;
 
 // TODO: make configurable, localizable, add basic templating
 var messages = {
-  email: 'This must be a valid email.',
-  number: 'This must be a number.'
+  email: 'This must be a valid email',
+  number: 'This must be a number'
 };
 
 var validations = {

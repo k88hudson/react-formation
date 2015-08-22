@@ -1,6 +1,16 @@
 var should = require('should');
 var React = require('react/addons');
 var TestUtils = React.addons.TestUtils;
+var assign = require('react/lib/Object.assign');
+
+var ComposableForm = require('../src/form.jsx');
+
+function createValidSchema () {
+  return {
+    foo: {required: true},
+    bar: {required: true}
+  };
+}
 
 function createValidMultiSchema () {
   return [
@@ -9,6 +19,21 @@ function createValidMultiSchema () {
      baz: {required: true}}
   ];
 }
+
+function mockMixin () {
+  return {
+    didSubmit: () => {},
+    validateField: () => {}
+  };
+};
+
+// Make console.warn throw
+var warn = console.warn;
+console.warn = function (warning) {
+  throw new Error(warning);
+  warn.apply(console, arguments);
+};
+
 
 describe('CreateForm', function () {
 
@@ -20,6 +45,54 @@ describe('CreateForm', function () {
         should.equal(typeof createFormMixin[method], 'function');
       });
     });
+  });
+
+  describe('#linkField', function () {
+    var form;
+
+    beforeEach(function () {
+      var Form = ComposableForm.CreateForm({
+        schema: createValidSchema(),
+        onSuccess: function () {},
+        render: function () {
+          return <form />;
+        }
+      });
+      form = TestUtils.renderIntoDocument(<Form  />);
+    });
+
+    it('should return a ReactLink', function () {
+      var link = form.linkField('foo');
+      should.equal(link.constructor.name, 'ReactLink');
+    });
+
+    it('should throw if field is not in the schema', function () {
+      should.throws(() => {
+        form.linkField('blah');
+      });
+      should.throws(() => {
+        form.linkField();
+      });
+    });
+
+  });
+
+  describe('#getValues', function () {
+    var Form = ComposableForm.CreateForm({
+      schema: createValidSchema(),
+      onSuccess: function () {},
+      render: function () {
+        return <form />;
+      }
+    });
+    var form = TestUtils.renderIntoDocument(<Form  />);
+
+    it('should get all current values that are not undefined', function () {
+      form.setState({foo: 'foo'});
+      var currentValues = form.getValues();
+      should.deepEqual(currentValues, {foo: 'foo'});
+    });
+
   });
 
 });
@@ -49,18 +122,76 @@ describe('convertSchema', function () {
 
 describe('ErrorMessage', function () {
   var Injector = require('inject?./FormMixin!../src/lib/ErrorMessage.jsx');
-  var ErrorMessage = Injector({
-    'react': 'react',
-    './FormMixin': {
-      didSubmit: () => {},
-      validateField: () => {}
-    }
+
+  function CreateErrorMessage(customProps) {
+    return Injector({'./FormMixin': assign(mockMixin(), customProps || {})});
+  }
+
+  it('should require a field prop', function () {
+    var ErrorMessage = CreateErrorMessage();
+    should.throws(() => {
+      TestUtils.renderIntoDocument(<ErrorMessage />);
+    });
+
   });
 
   it('should retain arbitrary props', function () {
-    var testError = TestUtils.renderIntoDocument(<ErrorMessage className="foo" />);
+    var ErrorMessage = CreateErrorMessage();
+    var testError = TestUtils.renderIntoDocument(<ErrorMessage field="foo" className="foo" />);
     var el = testError.getDOMNode();
     should.equal(el.className, 'foo');
+  });
+
+  describe('hide/show', function () {
+    it('should be hidden if there are no errors', function () {
+      var ErrorMessage = CreateErrorMessage({
+        didSubmit: () => true
+      });
+      var testError = TestUtils.renderIntoDocument(<ErrorMessage field="foo" />);
+      var el = testError.getDOMNode();
+      should.equal(el.hidden, true);
+    });
+
+    it('should be hidden if the field was never submitted', function () {
+      var ErrorMessage = CreateErrorMessage({
+        didSubmit: () => false,
+        validateField: () => ['Has an error']
+      });
+      var testError = TestUtils.renderIntoDocument(<ErrorMessage field="foo" />);
+      var el = testError.getDOMNode();
+      should.equal(el.hidden, true);
+    });
+
+    it('should be shown if there was an error and the form was submitted', function () {
+      var ErrorMessage = CreateErrorMessage({
+        didSubmit: () => true,
+        validateField: () => ['Has an error']
+      });
+      var testError = TestUtils.renderIntoDocument(<ErrorMessage field="foo" />);
+      var el = testError.getDOMNode();
+      should.equal(el.hidden, false);
+    });
+
+    it('should be shown if there is an error and the show prop is true', function () {
+      var ErrorMessage = CreateErrorMessage({
+        didSubmit: () => false,
+        validateField: () => ['Has an error']
+      });
+      var testError = TestUtils.renderIntoDocument(<ErrorMessage show={true} field="foo" />);
+      var el = testError.getDOMNode();
+      should.equal(el.hidden, false);
+    });
+  });
+
+  describe('error message', function () {
+    it('should show the error text', function () {
+      var ErrorMessage = CreateErrorMessage({
+        validateField: () => ['Has an error']
+      });
+      var testError = TestUtils.renderIntoDocument(<ErrorMessage field="foo" className="foo" />);
+      var el = testError.getDOMNode();
+      should.equal(el.querySelector('span').innerHTML, 'Has an error');
+    });
   });
 
 });
