@@ -21,4 +21,4 @@ module.exports = function CreateForm(config) {
   config.mixins.push(createFormMixin);
 
   return React.createClass(config);
-}
+};

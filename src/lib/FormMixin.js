@@ -1,4 +1,3 @@
-var React = require('react');
 var contextConfig = require('./contextConfig');
 
 var FormMixin = {

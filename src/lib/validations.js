@@ -10,7 +10,7 @@ var messages = {
 var validations = {
   email: function (value) {
     if (!EMAIL_REGEX.test(value)) {
-      return messages.email
+      return messages.email;
     }
   },
   number: function (value) {

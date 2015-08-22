@@ -45,7 +45,7 @@ var StepByStep = React.createClass({
   navigateTo: function (i) {
     this.setState({activePage: i});
   },
-  goNext: function (i) {
+  goNext: function () {
     this.setState({activePage: this.state.activePage + 1});
   },
   render: function () {
