@@ -1,4 +1,6 @@
-# React composable forms
+# React composable form
+
+[![Build Status](https://travis-ci.org/k88hudson/react-composable-form.svg)](https://travis-ci.org/k88hudson/react-composable-form)
 
 ## Important note
 
