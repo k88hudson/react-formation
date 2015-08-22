@@ -17,7 +17,7 @@
     "no-duplicate-case": [2],
     "no-extra-semi": [2],
     "no-irregular-whitespace": [2],
-    "no-undefined": [2],
+    "no-undef": [2],
     "valid-typeof": [2],
     "curly": [0],
     "dot-notation": [2],
