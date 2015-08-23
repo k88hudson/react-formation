@@ -6,7 +6,7 @@ The easiest way to link inputs and other elements to the form is via React's bui
 
 See [React's Docs on Two Way Binding Helpers](https://facebook.github.io/react/docs/two-way-binding-helpers.html) for more info about the `valueLink` property.
 
-```html
+```jsx
 <input valueLink={this.linkField('name')} />
 ```
 
@@ -16,7 +16,7 @@ Keep in mind if you are adding inputs to child components of the form, you will 
 
 Checkboxes work a little bit differently in React; instead of `valueLink`, used `checkedLink`:
 
-```html
+```jsx
 <input type="checkbox" checkedLink={this.linkField('isHappy')} />
 ```
 
@@ -24,7 +24,7 @@ Checkboxes work a little bit differently in React; instead of `valueLink`, used 
 
 Radio buttons unfortunately do not support any form of two way binding out of the box; however, you can use the `<Radio />` component bundled with react-composable-forms:
 
-```
+```jsx
 var Radio = require('react-composable-forms').Radio;
 var link = this.linkField('color');
 
@@ -39,7 +39,7 @@ Make sure you use the same `name` property for all corresponding radio buttons.
 
 If you want, you can always manually update/access values using `this.linkField`:
 
-```javascript
+```jsx
 var link = this.linkField('foo');
 
 // Update the value. You could put this in an onChange handler
