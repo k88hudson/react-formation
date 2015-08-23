@@ -7,7 +7,7 @@
     "build": "npm-run-all build:**",
     "start": "npm run build && npm-run-all --parallel server watch:**",
     "test": "karma start",
-    "test:coverage": "karma start --reporters coverage",
+    "test:coverage": "karma start --reporters coverage,coveralls",
     "test:lint": "eslint src/**/*.js*",
     "watch:test": "karma start --no-single-run --browsers Chrome",
     "pretest": "npm run test:lint",
