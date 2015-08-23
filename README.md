@@ -1,6 +1,7 @@
 # React composable form
 
 [![Build Status](https://travis-ci.org/k88hudson/react-composable-form.svg)](https://travis-ci.org/k88hudson/react-composable-form)
+[![Coverage Status](https://coveralls.io/repos/k88hudson/react-composable-form/badge.svg?branch=master&service=github)](https://coveralls.io/github/k88hudson/react-composable-form?branch=master)
 
 ## Important note
 
