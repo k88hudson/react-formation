@@ -8,6 +8,8 @@ matrix:
 before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
+after_script:
+- npm run test:coverage
 cache:
   directories:
   - node_modules

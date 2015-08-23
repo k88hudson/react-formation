@@ -8,6 +8,7 @@
     "start": "npm run build && npm-run-all --parallel server watch:**",
     "test": "karma start",
     "test:watch": "karma start --no-single-run --browsers Chrome",
+    "test:coverage": "karma start --reporters coverage,coveralls",
     "test:lint": "eslint src/**/*.js*",
     "pretest": "npm run test:lint",
     "prebuild": "rimraf www && mkdirp www",

@@ -12,7 +12,7 @@ module.exports = function (config) {
     preprocessors: {
       'tests/index.jsx': ['webpack', 'sourcemap']
     },
-    reporters: ['mocha', 'coverage', 'coveralls'],
+    reporters: ['mocha'],
     coverageReporter: {
       type: 'lcov',
       dir: 'www/coverage/'
