@@ -1,32 +1,4 @@
-var contextConfig = require('./contextConfig');
-
 module.exports = {
-  getInitialState: function () {
-
-    var state = {
-      isValid: false,
-      didSubmit: false,
-      dirtyFields: []
-    };
-
-    Object.keys(this.schema).forEach(key => {
-      state[key] = this.schema[key].initial;
-    });
-
-    return state;
-  },
-
-  childContextTypes: contextConfig.types,
-
-  getChildContext: function() {
-    var methods = {};
-    contextConfig.methods.forEach(method => {
-      methods[method] = this[method];
-    });
-    return {
-      composableForms: methods
-    };
-  },
 
   linkField: function (key) {
     if (!this.schema[key]) throw new Error('No value "' + key + '" exists in the schema');
@@ -47,7 +19,7 @@ module.exports = {
     var dirtyFields = this.state.dirtyFields;
 
     Object.keys(this.schema).forEach(key => {
-      if (this.schema[key].group === group && dirtyFields.indexOf(key) === -1) dirtyFields.push(key);
+      if (this.schema[key].group === group) dirtyFields[key] = true;
     });
 
     this.setState({dirtyFields});
@@ -67,7 +39,7 @@ module.exports = {
     // Make all fields dirty
     var dirtyFields = this.state.dirtyFields;
     Object.keys(this.schema).forEach(key => {
-      if (dirtyFields.indexOf(key) === -1) dirtyFields.push(key);
+      dirtyFields[key] = true;
     });
 
     this.setState({
@@ -111,7 +83,7 @@ module.exports = {
 
   didSubmit: function (field) {
     if (!field) return this.state.didSubmit;
-    return this.state.dirtyFields.indexOf(field) !== -1;
+    return this.state.dirtyFields[field];
   },
 
   isGroupValid: function (groupName) {

@@ -1,6 +1,7 @@
 var React = require('react/addons');
 var convertSchema = require('./convertSchema');
-var createFormMixin = require('./createFormMixin');
+var CreateFormMixin = require('./CreateFormMixin');
+var contextConfig = require('./contextConfig');
 
 module.exports = function CreateForm(config) {
 
@@ -18,7 +19,37 @@ module.exports = function CreateForm(config) {
     config.mixins.push(React.addons.LinkedStateMixin);
   }
 
-  config.mixins.push(createFormMixin);
+  config.mixins.push({
+    getInitialState: function () {
+
+      var state = {
+        isValid: false,
+        didSubmit: false,
+        dirtyFields: {}
+      };
+
+      Object.keys(this.schema).forEach(key => {
+        state.dirtyFields[key] = false;
+        state[key] = this.schema[key].initial;
+      });
+
+      return state;
+    },
+
+    childContextTypes: contextConfig.types,
+
+    getChildContext: function() {
+      var methods = {};
+      contextConfig.methods.forEach(method => {
+        methods[method] = this[method];
+      });
+      return {
+        composableForms: methods
+      };
+    }
+  });
+
+  config.mixins.push(CreateFormMixin);
 
   return React.createClass(config);
 };
