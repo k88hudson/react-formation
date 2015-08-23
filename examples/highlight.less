@@ -9,8 +9,14 @@
 @highlightBackground: #F7EBC6;
 @highlightAccent: #F7D87C;
 
+@inlineCodeColor: #DB4C69;
+@inlineCodeBackground: #F9F2F4;
+
+@commentColor: #93A1A1;
+@punctuationColor: #999;
 @baseColor: #5C6E74;
 @functionColor: #DD4A68;
+@selectedColor: #b3d4fc;
 
 code,
 pre {
@@ -38,13 +44,13 @@ pre {
 pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
 code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
   text-shadow: none;
-  background: #b3d4fc;
+  background: @selectedColor;
 }
 
 pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
 code[class*="language-"]::selection, code[class*="language-"] ::selection {
   text-shadow: none;
-  background: #b3d4fc;
+  background: @selectedColor;
 }
 
 @media print {
@@ -61,7 +67,6 @@ pre {
   overflow: auto;
 }
 
-:not(pre) > code,
 pre {
   background: @blockBackground;
 }
@@ -70,18 +75,19 @@ pre {
 :not(pre) > code {
   padding: .1em .3em;
   border-radius: .3em;
-  color: #DB4C69;
+  color: @inlineCodeColor;
+  background: @inlineCodeBackground;
 }
 
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: slategray;
+  color: @commentColor;
 }
 
 .token.punctuation {
-  color: #999;
+  color: @punctuationColor;
 }
 
 .namespace {

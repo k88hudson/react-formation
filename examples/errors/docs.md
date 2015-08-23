@@ -2,7 +2,7 @@
 
 You can easily show validation errors by using the `ErrorMessage` component. Just pass in the name of the field to the `field` property.
 
-```html
+```jsx
 <ErrorMessage field="email" />
 ```
 
@@ -14,7 +14,7 @@ If the field is **invalid**, by default, `ErrorMessage` will only be shown after
 
 If you would like to show error messages immediately, or on some custom condition, you can pass an expression to the `show` property:
 
-```html
+```jsx
 // This will always show errors, if foo is invalid
 <ErrorMessage field="foo" show={true}/>
 ```
@@ -23,7 +23,7 @@ If you would like to show error messages immediately, or on some custom conditio
 
 By default, error messages are just a div with the classname `error`:
 
-```html
+```jsx
 <div class="error">Error message here</div>
 ```
 
