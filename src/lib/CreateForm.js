@@ -1,6 +1,6 @@
 var React = require('react/addons');
 var convertSchema = require('./convertSchema');
-var createFormMixin = require('./createFormMixin.jsx');
+var createFormMixin = require('./createFormMixin');
 
 module.exports = function CreateForm(config) {
 

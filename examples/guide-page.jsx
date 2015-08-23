@@ -9,7 +9,7 @@ module.exports = function(options) {
 
       var Example = options.example;
       var code = options.code
-        .replace('../../src/form.jsx', 'react-composable-form')
+        .replace('../../src/form', 'react-composable-form')
         .replace('module.exports = Form;', 'React.render(<Form />, document.body);');
 
         var highlight = function (str, lang) {

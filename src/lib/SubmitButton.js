@@ -7,8 +7,6 @@ module.exports = React.createClass({
     var props = assign({}, this.props, {
       onClick: this.submitForm
     });
-    return (<button {...props}>
-      {this.props.children || 'Submit'}
-    </button>);
+    return React.createElement('button', props, this.props.children || 'Submit');
   }
 });

@@ -11,18 +11,12 @@ module.exports = function (config) {
     ],
     preprocessors: {
       'tests/index.jsx': ['webpack', 'sourcemap'],
-      'src/**/*.js*': ['webpack', 'coverage']
+      'src/lib/validations.js': ['webpack', 'coverage']
     },
     reporters: ['mocha'],
     coverageReporter: {
-      type: 'lcovonly',
+      type: 'lcov',
       dir: 'www/coverage/'
-      // This is not working for jsx right now....
-      // Maybe try https://github.com/deepsweet/isparta-loader?
-      // instrumenters: { 'istanbul-react': require('istanbul-react') },
-      //  instrumenter: {
-      //    'src/**/*.js*': 'istanbul-react'
-      //  },
     },
     webpack: {
       devtool: 'inline-source-map',

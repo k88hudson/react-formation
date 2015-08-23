@@ -13,7 +13,7 @@ var Radio = React.createClass({
       checked: this.props.value + '' === this.props.radioLink.value + '',
       onChange: this.onChange
     });
-    return <input {...props} />;
+    return React.createElement('input', props);
   }
 });
 

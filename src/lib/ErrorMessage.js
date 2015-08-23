@@ -17,8 +17,7 @@ module.exports = React.createClass({
     var props = assign({className: 'errors'}, this.props, {
       hidden: !this.showErrors(errors)
     });
-    return (<div {...props}>
-      {errors && errors.map(error => <span key={error}>{error}</span>)}
-    </div>);
+    return React.createElement('div', props,
+      errors && errors.map(error => React.createElement('span', {key: error}, error)));
   }
 });

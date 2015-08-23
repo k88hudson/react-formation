@@ -1,5 +1,5 @@
 var React = require('react');
-var {CreateForm, SubmitButton} = require('../../src/form.jsx');
+var {CreateForm, SubmitButton} = require('../../src/form');
 
 var Form = CreateForm({
 

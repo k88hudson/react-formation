@@ -15,8 +15,6 @@ module.exports = React.createClass({
     delete props.onSuccess;
     delete props.onError;
 
-    return (<button {...props}>
-      {this.props.children || 'Submit'}
-    </button>);
+    return React.createElement('button', props, this.props.children || 'Submit');
   }
 });
