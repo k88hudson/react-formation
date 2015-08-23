@@ -23,17 +23,19 @@ var Form = CreateForm({
   render: function () {
     return (<form>
 
-      <p>
+      <div className="form-group">
         <label>Name</label>
         <input type="text" valueLink={this.linkField('name')} />
-      </p>
+      </div>
 
-      <p>
+      <div className="form-group">
         <label>Email</label>
         <input type="text" valueLink={this.linkField('email')} />
-      </p>
+      </div>
 
-      <p><button onClick={this.submitForm}>Submit</button></p>
+      <div className="form-group">
+        <button onClick={this.submitForm}>Submit</button>
+      </div>
 
     </form>);
   }
