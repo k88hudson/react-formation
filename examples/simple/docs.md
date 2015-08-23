@@ -1,10 +1,71 @@
 # Creating a form
 
-To create a form, pass an configuration object to `CreateForm` similar to what you would to `React.createClass`.
+To create a form, you can use `CreateForm` just like how you would use `React.createClass`:
 
-You **must include**:
+```jsx
+var Composable = require('react-composable-form');
+var Form = Composable.CreateForm({
+  ...
+});
+```
 
-1. a `schema` property that defines all the fields in the form that will be submitted
-2. an `onSuccess` method that gets called on a successful submit
+First, add **a schema** property that defines all the fields in the form:
 
-You can use `this.submitForm()` to submit the form.
+```jsx
+var Form = Composable.CreateForm({
+
+  schema: {
+    name: {required: true}
+    email: {type: 'email'}
+  }
+
+});
+```
+
+Next, add **an onSuccess** callback that gets called on a successful submit.
+
+```jsx
+var Form = Composable.CreateForm({
+
+  schema: {
+    name: {required: true}
+    email: {type: 'email'}
+  },
+
+  onSuccess: function (data) {
+    console.log(data);
+  }
+
+});
+```
+
+Finally, add elements to the render function:
+
+```jsx
+var Form = Composable.CreateForm({
+
+  schema: {
+    name: {required: true}
+    email: {type: 'email'}
+  },
+
+  onSuccess: function (data) {
+    console.log(data);
+  },
+
+  render: function () {
+    return (<form>
+
+      <label>Name</label>
+      <input type="text" valueLink={this.linkField('name')} />
+
+      <label>Email</label>
+      <input type="text" valueLink={this.linkField('email')} />
+
+      <SubmitButton />
+
+    </form>)
+  }
+
+});
+```

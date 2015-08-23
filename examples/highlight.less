@@ -5,8 +5,8 @@
  * @author Lea Verou
  */
 
-code[class*="language-"],
-pre[class*="language-"] {
+code,
+pre {
   color: black;
   font-size: 13px;
   text-shadow: 0 1px white;
@@ -54,15 +54,16 @@ pre {
   overflow: auto;
 }
 
-:not(pre) > code[class*="language-"],
+:not(pre) > code,
 pre {
   background: #f5f2f0;
 }
 
 /* Inline code */
-:not(pre) > code[class*="language-"] {
-  padding: .1em;
+:not(pre) > code {
+  padding: .1em .3em;
   border-radius: .3em;
+  color: #DB4C69;
 }
 
 .token.comment,
