@@ -1,7 +1,8 @@
 var React = require('react/addons');
 var Highlight = require('react-highlight');
 var Markdown = require('react-remarkable');
-var hljs = require('highlight.js');
+// var hljs = require('highlight.js');
+var PrismCode = require('./lib/Prism.jsx');
 
 module.exports = function(options) {
   return React.createClass({
@@ -13,17 +14,13 @@ module.exports = function(options) {
         .replace('module.exports = Form;', 'React.render(<Form />, document.body);');
 
         var highlight = function (str, lang) {
-          if (lang && hljs.getLanguage(lang)) {
-            try {
-              return hljs.highlight(lang, str).value;
-            } catch (err) {}
-          }
 
           try {
-            return hljs.highlightAuto(str).value;
-          } catch (err) {}
-
-          return ''; // use external default escaping
+            return window.Prism.highlight(str, lang && window.Prism.languages[lang]);
+          } catch (err) {
+            console.log(err);
+          }
+          return '';
         };
 
       return (<div className="docs">
@@ -32,9 +29,9 @@ module.exports = function(options) {
 
         <h2>Complete Example</h2>
         <div className="example"><Example /></div>
-        <Highlight className="javascript">
+        <PrismCode className="language-jsx">
           {code}
-        </Highlight>
+        </PrismCode>
       </div>);
     }
   });

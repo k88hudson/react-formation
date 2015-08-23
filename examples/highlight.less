@@ -1,239 +1,185 @@
+/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+jsx&plugins=line-highlight */
 /**
- * GitHub Gist Theme
- * Author : Louis Barranqueiro - https://github.com/LouisBarranqueiro
+ * prism.js default theme for JavaScript, CSS and HTML
+ * Based on dabblet (http://dabblet.com)
+ * @author Lea Verou
  */
-code {
-  font-family: Menlo, Inconsolata, mono;
-  border-radius: 3px;
-  padding: 2px 4px;
-  font-size: 0.8em;
-  background: #F9F2F4;
-  color: #C7254E;
+
+code[class*="language-"],
+pre[class*="language-"] {
+  color: black;
+  font-size: 13px;
+  text-shadow: 0 1px white;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
 }
 
-pre code {
-  border: none;
-  padding: none;
-  background: none;
-  border-radius: none;
-  color: inherit;
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
+  text-shadow: none;
+  background: #b3d4fc;
 }
 
-.hljs,
-.markdown pre {
-  font-family: Menlo, Inconsolata, mono;
-  display: block;
-  background: #F7F7F9;
-  border-radius: 3px;
-  border: 1px solid #E1E1E8;
-  padding: 0.5em;
-  color: #2F6F9F;
-  overflow-x: auto;
-  -webkit-text-size-adjust: none;
-  line-height: 1.1;
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+  text-shadow: none;
+  background: #b3d4fc;
 }
 
-.hljs-comment,
-.bash .hljs-shebang,
-.java .hljs-javadoc,
-.javascript .hljs-javadoc,
-.rust .hljs-preprocessor {
-  color: #969896;
+@media print {
+  code[class*="language-"],
+  pre[class*="language-"] {
+    text-shadow: none;
+  }
 }
 
-.hljs-string,
-.apache .hljs-sqbracket,
-.coffeescript .hljs-subst,
-.coffeescript .hljs-regexp,
-.cpp .hljs-preprocessor,
-.c .hljs-preprocessor,
-.javascript .hljs-regexp,
-.json .hljs-attribute,
-.makefile .hljs-variable,
-.markdown .hljs-value,
-.markdown .hljs-link_label,
-.markdown .hljs-strong,
-.markdown .hljs-emphasis,
-.markdown .hljs-blockquote,
-.nginx .hljs-regexp,
-.nginx .hljs-number,
-.objectivec .hljs-preprocessor .hljs-title,
-.perl .hljs-regexp,
-.php .hljs-regexp,
-.xml .hljs-value,
-.less .hljs-built_in,
-.scss .hljs-built_in {
-  color: #df5000;
+/* Code blocks */
+pre {
+  padding: 1em;
+  margin: .5em 0;
+  overflow: auto;
 }
 
-.hljs-keyword,
-.css .hljs-at_rule,
-.css .hljs-important,
-.http .hljs-request,
-.ini .hljs-setting,
-.haskell .hljs-type,
-.java .hljs-javadoctag,
-.javascript .hljs-tag,
-.javascript .hljs-javadoctag,
-.nginx .hljs-title,
-.objectivec .hljs-preprocessor,
-.php .hljs-phpdoc,
-.sql .hljs-built_in,
-.less .hljs-tag,
-.less .hljs-at_rule,
-.scss .hljs-tag,
-.scss .hljs-at_rule,
-.scss .hljs-important,
-.stylus .hljs-at_rule,
-.go .hljs-typename,
-.swift .hljs-preprocessor {
-  color: #a71d5d;
+:not(pre) > code[class*="language-"],
+pre {
+  background: #f5f2f0;
 }
 
-.apache .hljs-common,
-.apache .hljs-cbracket,
-.apache .hljs-keyword,
-.bash .hljs-literal,
-.bash .hljs-built_in,
-.coffeescript .hljs-literal,
-.coffeescript .hljs-built_in,
-.coffeescript .hljs-number,
-.cpp .hljs-number,
-.cpp .hljs-built_in,
-.c .hljs-number,
-.c .hljs-built_in,
-.cs .hljs-number,
-.cs .hljs-built_in,
-.css .hljs-attribute,
-.css .hljs-hexcolor,
-.css .hljs-number,
-.css .hljs-function,
-.haskell .hljs-number,
-.http .hljs-literal,
-.http .hljs-attribute,
-.java .hljs-number,
-.javascript .hljs-built_in,
-.javascript .hljs-literal,
-.javascript .hljs-number,
-.json .hljs-number,
-.makefile .hljs-keyword,
-.markdown .hljs-link_reference,
-.nginx .hljs-built_in,
-.objectivec .hljs-literal,
-.objectivec .hljs-number,
-.objectivec .hljs-built_in,
-.php .hljs-literal,
-.php .hljs-number,
-.python .hljs-number,
-.ruby .hljs-prompt,
-.ruby .hljs-constant,
-.ruby .hljs-number,
-.ruby .hljs-subst .hljs-keyword,
-.ruby .hljs-symbol,
-.rust .hljs-number,
-.sql .hljs-number,
-.puppet .hljs-function,
-.less .hljs-number,
-.less .hljs-hexcolor,
-.less .hljs-function,
-.less .hljs-attribute,
-.scss .hljs-preprocessor,
-.scss .hljs-number,
-.scss .hljs-hexcolor,
-.scss .hljs-function,
-.scss .hljs-attribute,
-.stylus .hljs-number,
-.stylus .hljs-hexcolor,
-.stylus .hljs-attribute,
-.stylus .hljs-params,
-.go .hljs-built_in,
-.go .hljs-constant,
-.swift .hljs-built_in,
-.swift .hljs-number {
-  color: #0086b3;
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
+  border-radius: .3em;
 }
 
-.apache .hljs-tag,
-.cs .hljs-xmlDocTag,
-.css .hljs-tag,
-.xml .hljs-title,
-.stylus .hljs-tag {
-  color: #63a35c;
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: slategray;
 }
 
-.bash .hljs-variable,
-.cs .hljs-preprocessor,
-.cs .hljs-preprocessor .hljs-keyword,
-.css .hljs-attr_selector,
-.css .hljs-value,
-.ini .hljs-value,
-.ini .hljs-keyword,
-.javascript .hljs-tag .hljs-title,
-.makefile .hljs-constant,
-.nginx .hljs-variable,
-.xml .hljs-tag,
-.scss .hljs-variable {
-  color: #2F6F9F;
+.token.punctuation {
+  color: #999;
 }
 
-.bash .hljs-title,
-.coffeescript .hljs-title,
-.cpp .hljs-title,
-.c .hljs-title,
-.cs .hljs-title,
-.css .hljs-id,
-.css .hljs-class,
-.css .hljs-pseudo,
-.ini .hljs-title,
-.haskell .hljs-title,
-.haskell .hljs-pragma,
-.java .hljs-title,
-.javascript .hljs-title,
-.makefile .hljs-title,
-.objectivec .hljs-title,
-.perl .hljs-sub,
-.php .hljs-title,
-.python .hljs-decorator,
-.python .hljs-title,
-.ruby .hljs-parent,
-.ruby .hljs-title,
-.rust .hljs-title,
-.xml .hljs-attribute,
-.puppet .hljs-title,
-.less .hljs-id,
-.less .hljs-pseudo,
-.less .hljs-class,
-.scss .hljs-id,
-.scss .hljs-pseudo,
-.scss .hljs-class,
-.stylus .hljs-class,
-.stylus .hljs-id,
-.stylus .hljs-pseudo,
-.stylus .hljs-title,
-.swift .hljs-title,
-.diff .hljs-chunk {
-  color: #795da3;
+.namespace {
+  opacity: .7;
 }
 
-.coffeescript .hljs-reserved,
-.coffeescript .hljs-attribute {
-  color: #1d3e81;
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #905;
 }
 
-.diff .hljs-chunk {
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #690;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #a67f59;
+  background: hsla(0, 0%, 100%, .5);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #07a;
+}
+
+.token.function {
+  color: #DD4A68;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #e90;
+}
+
+.token.important,
+.token.bold {
   font-weight: bold;
 }
-
-.diff .hljs-addition {
-  color: #55a532;
-  background-color: #eaffea;
+.token.italic {
+  font-style: italic;
 }
 
-.diff .hljs-deletion {
-  color: #bd2c00;
-  background-color: #ffecec;
+.token.entity {
+  cursor: help;
 }
 
-.markdown .hljs-link_url {
-  text-decoration: underline;
+pre[data-line] {
+  position: relative;
+  padding: 1em 0 1em 3em;
 }
+
+.line-highlight {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: inherit 0;
+  margin-top: 1em; /* Same as .prism’s padding-top */
+
+  background: hsla(24, 20%, 50%,.08);
+  background: -moz-linear-gradient(left, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  background: -webkit-linear-gradient(left, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  background: -o-linear-gradient(left, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  background: linear-gradient(left, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+  
+  pointer-events: none;
+  
+  line-height: inherit;
+  white-space: pre;
+}
+
+  .line-highlight:before,
+  .line-highlight[data-end]:after {
+    content: attr(data-start);
+    position: absolute;
+    top: .4em;
+    left: .6em;
+    min-width: 1em;
+    padding: 0 .5em;
+    background-color: hsla(24, 20%, 50%,.4);
+    color: hsl(24, 20%, 95%);
+    font: bold 65%/1.5 sans-serif;
+    text-align: center;
+    vertical-align: .3em;
+    border-radius: 999px;
+    text-shadow: none;
+    box-shadow: 0 1px white;
+  }
+  
+  .line-highlight[data-end]:after {
+    content: attr(data-end);
+    top: auto;
+    bottom: .4em;
+  }

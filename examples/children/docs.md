@@ -2,7 +2,7 @@
 
 Inputs can be linked in child components too; all you have to do is include `FormMixin`
 
-```javascript
+```jsx
 var Child = React.createClass({
 
   mixins: [ComposableForm.FormMixin],
