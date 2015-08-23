@@ -23,7 +23,6 @@ module.exports = function CreateForm(config) {
     getInitialState: function () {
 
       var state = {
-        isValid: false,
         didSubmit: false,
         dirtyFields: {}
       };
