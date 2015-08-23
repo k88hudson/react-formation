@@ -120,6 +120,10 @@ describe('convertSchema', function () {
   });
 });
 
+// This depends on a commit not landed in the original dependency,
+// https://github.com/nkbt/istanbul-instrumenter-loader/commit/42631c8495840a5a28842ef91b6feaa591d36cf0
+// See https://github.com/deepsweet/istanbul-instrumenter-loader/pull/12 for PR in progress
+
 describe('ErrorMessage', function () {
   var Injector = require('inject?./FormMixin!../src/lib/ErrorMessage');
 

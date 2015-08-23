@@ -39,7 +39,7 @@
     "highlight.js": "^8.7.0",
     "inject-loader": "^2.0.1",
     "isparta-loader": "^0.2.0",
-    "istanbul-instrumenter-loader": "^0.1.3",
+    "istanbul-instrumenter-loader": "https://github.com/nkbt/istanbul-instrumenter-loader.git#42631c8495840a5a28842ef91b6feaa591d36cf0",
     "istanbul-react": "^1.1.0",
     "jsx-loader": "^0.13.2",
     "karma": "^0.13.9",

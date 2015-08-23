@@ -15,14 +15,8 @@ module.exports = function (config) {
     },
     reporters: ['mocha'],
     coverageReporter: {
-      type: 'lcovonly',
+      type: 'lcov',
       dir: 'www/coverage/'
-      // This is not working for jsx right now....
-      // Maybe try https://github.com/deepsweet/isparta-loader?
-      // instrumenters: { 'istanbul-react': require('istanbul-react') },
-      //  instrumenter: {
-      //    'src/**/*.js*': 'istanbul-react'
-      //  },
     },
     webpack: {
       devtool: 'inline-source-map',
