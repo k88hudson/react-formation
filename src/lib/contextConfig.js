@@ -13,6 +13,16 @@ types[CONTEXT_NAME] = React.PropTypes.object;
 var docFiles = require.context('./apiDocs', true, /\.md$/).keys();
 var methods = docFiles.map(file => file.replace('./', '').replace('.md', ''));
 
+// var methods = [
+//   'didSubmit',
+//   'isGroupValid',
+//   'isValid',
+//   'linkField',
+//   'submitForm',
+//   'submitGroup',
+//   'validateField'
+// ];
+
 module.exports = {
   name: CONTEXT_NAME,
   types,
