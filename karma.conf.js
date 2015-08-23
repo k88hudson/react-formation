@@ -12,7 +12,11 @@ module.exports = function (config) {
     preprocessors: {
       'tests/index.jsx': ['webpack', 'sourcemap']
     },
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage', 'coveralls'],
+    coverageReporter: {
+      type: 'lcov',
+      dir: 'www/coverage/'
+    },
     webpack: {
       devtool: 'inline-source-map',
       module: webpackConfig.module
