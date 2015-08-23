@@ -3,7 +3,7 @@ var React = require('react/addons');
 var TestUtils = React.addons.TestUtils;
 var assign = require('react/lib/Object.assign');
 
-var ComposableForm = require('../src/form.jsx');
+var ComposableForm = require('../src/form');
 
 function createValidSchema () {
   return {
@@ -39,7 +39,7 @@ describe('CreateForm', function () {
 
   describe('api', function () {
     var contextConfig = require('../src/lib/contextConfig');
-    var createFormMixin = require('../src/lib/createFormMixin.jsx');
+    var createFormMixin = require('../src/lib/createFormMixin');
     contextConfig.methods.forEach(method => {
       it('should have method #' + method, function () {
         should.equal(typeof createFormMixin[method], 'function');
@@ -121,7 +121,7 @@ describe('convertSchema', function () {
 });
 
 describe('ErrorMessage', function () {
-  var Injector = require('inject?./FormMixin!../src/lib/ErrorMessage.jsx');
+  var Injector = require('inject?./FormMixin!../src/lib/ErrorMessage');
 
   function CreateErrorMessage(customProps) {
     return Injector({'./FormMixin': assign(mockMixin(), customProps || {})});

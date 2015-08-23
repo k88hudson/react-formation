@@ -1,5 +1,5 @@
 var React = require('react');
-var CreateForm = require('../../src/form.jsx').CreateForm;
+var CreateForm = require('../../src/form').CreateForm;
 
 var Form = CreateForm({
 

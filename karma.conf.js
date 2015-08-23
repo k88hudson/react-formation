@@ -11,7 +11,7 @@ module.exports = function (config) {
     ],
     preprocessors: {
       'tests/index.jsx': ['webpack', 'sourcemap'],
-      'src/**/*.js*': ['webpack', 'coverage']
+      'src/lib/validations.js': ['webpack', 'coverage']
     },
     reporters: ['mocha'],
     coverageReporter: {

@@ -6,7 +6,7 @@ var {
   ErrorMessage,
   FormMixin,
   Radio
-} = require('../../src/form.jsx');
+} = require('../../src/form');
 var {StepByStep, NextButton, StepMixin} = require('../../src/lib/step.jsx');
 
 var COUNTRY = ['Canada', 'US', 'Mexico'];

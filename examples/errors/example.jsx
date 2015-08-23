@@ -1,5 +1,5 @@
 var React = require('react');
-var ComposableForm = require('../../src/form.jsx');
+var ComposableForm = require('../../src/form');
 
 var CreateForm = ComposableForm.CreateForm;
 var ErrorMessage = ComposableForm.ErrorMessage;
