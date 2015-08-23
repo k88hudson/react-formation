@@ -9,12 +9,16 @@ var messages = {
 
 var validations = {
   email: function (value) {
-    if (!EMAIL_REGEX.test(value)) {
+    if (EMAIL_REGEX.test(value)) {
+      return false;
+    } else {
       return messages.email;
     }
   },
   number: function (value) {
-    if (!NUMBER_REGEX.test(value)) {
+    if (NUMBER_REGEX.test(value)) {
+      return false;
+    } else {
       return messages.number;
     }
   }
