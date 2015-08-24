@@ -4,6 +4,8 @@ var ComposableForm = require('../../src/form');
 var CreateForm = ComposableForm.CreateForm;
 var ErrorMessage = ComposableForm.ErrorMessage;
 
+var Input = require('../../src/lib/components/Input');
+
 var PersonalInfo = CreateForm({
 
   schema: {
@@ -26,17 +28,8 @@ var PersonalInfo = CreateForm({
   render: function () {
 
     var inputs = [
-      <div className="form-group">
-        <label>Name</label>
-        <input type="text" name="name" valueLink={this.linkField('name')} />
-        <ErrorMessage field="name" />
-      </div>,
-
-      <div className="form-group">
-        <label>Email</label>
-        <input type="text" name="email" valueLink={this.linkField('email')} />
-        <ErrorMessage field="email" />
-      </div>
+      <Input label="Name" field="name" />,
+      <Input label="Email" field="email" />
     ];
 
     if (this.props.emailFirst) inputs.reverse();

@@ -18,7 +18,7 @@ var Examples = React.createClass({
         <header className="links">
           <h2>Guide</h2>
           <ul>
-            <li><Link to="/">Home</Link></li>
+            <li><Link to="examplesHome">Home</Link></li>
             <li><Link to="simple">Simple form</Link></li>
             <li><Link to="children">Child components</Link></li>
             <li><Link to="linking">Linking field values</Link></li>
@@ -73,7 +73,7 @@ var routes = (
       <Route name="multi" handler={require('./multi/docs.jsx')}/>
       <Route name="ab" handler={require('./ab/docs.jsx')}/>
       <Route name="airbnb" handler={require('./airbnb/index.jsx')}/>
-      <DefaultRoute handler={ExamplesHome}/>
+      <DefaultRoute name="examplesHome" handler={ExamplesHome}/>
     </Route>
     <DefaultRoute handler={Home}/>
   </Route>
