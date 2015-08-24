@@ -1,6 +1,5 @@
 var React = require('react/addons');
-var Highlight = require('react-highlight');
-var Markdown = require('./lib/Remarkable.jsx');
+var {Markdown} = require('react-markdocs');
 // var hljs = require('highlight.js');
 var PrismCode = require('./lib/Prism.jsx');
 

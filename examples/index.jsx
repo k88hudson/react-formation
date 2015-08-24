@@ -1,7 +1,7 @@
 var React = require('react/addons');
 var Router = require('react-router');
 var {DefaultRoute, Link, Route, RouteHandler} = Router;
-var Markdown = require('./lib/Remarkable.jsx');
+var {Markdown} = require('react-markdocs');
 
 var InputTypes = require('./input-types.jsx');
 

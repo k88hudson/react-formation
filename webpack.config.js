@@ -18,7 +18,7 @@ module.exports = {
       {
         test: /\.js$/,
         loaders:  ['babel-loader'],
-        include: [jsSrc, testsDir, examplesDir]
+        include: [jsSrc, testsDir, examplesDir],
       },
       {
         test: /\.md$/,

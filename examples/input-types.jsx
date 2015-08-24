@@ -1,7 +1,7 @@
 var React = require('react');
 var {CreateForm, SubmitButton, ErrorMessage, FormMixin, Radio} = require('../src/form');
 
-var Highlight = require('react-highlight');
+var Highlight = require('./lib/Prism.jsx');
 var hljsClass = 'html';
 
 var InputEg = React.createClass({
