@@ -2,7 +2,7 @@
   box-sizing: border-box;
 }
 body {
-  font-family: Lato, Roboto, sans-serif;
+  font-family: Roboto, sans-serif;
   color: #545252;
   background: #D1D6DC;
 }
@@ -189,6 +189,23 @@ header.links {
       &:hover {
         color: #F8D97A;
       }
+    }
+  }
+
+  .password-strength {
+    margin-top: 10px;
+    &.strength-0 .indicator { background: #CCC; }
+    &.strength-1 .indicator { background: #FB4A46; }
+    &.strength-2 .indicator { background: #F8D97A; }
+    &.strength-3 .indicator,
+    &.strength-4 .indicator { background: #50FA7B; }
+
+    .indicator {
+      display: block;
+      background: #282A36;
+      height: 5px;
+      margin-top: 5px;
+      border-radius: 5px;
     }
   }
 

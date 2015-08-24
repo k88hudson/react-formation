@@ -58,6 +58,7 @@
     "rimraf": "^2.3.3",
     "should": "^7.0.4",
     "webpack": "^1.9.4",
-    "webpack-notifier": "^1.2.1"
+    "webpack-notifier": "^1.2.1",
+    "zxcvbn": "^3.2.2"
   }
 }

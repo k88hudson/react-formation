@@ -23,7 +23,7 @@ var Form = Composable.CreateForm({
 
 Next, add **a schema** property that defines all the fields in the form, and link corresponding inputs with `this.linkField`:
 
-```jsx{3-6,12,15}
+```jsx{3-6,11,14}
 var Form = Composable.CreateForm({
 
   schema: {
