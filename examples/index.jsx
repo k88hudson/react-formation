@@ -72,6 +72,7 @@ var routes = (
       <Route name="inputTypes" handler={InputTypes}/>
       <Route name="multi" handler={require('./multi/docs.jsx')}/>
       <Route name="ab" handler={require('./ab/docs.jsx')}/>
+      <Route name="airbnb" handler={require('./airbnb/index.jsx')}/>
       <DefaultRoute handler={ExamplesHome}/>
     </Route>
     <DefaultRoute handler={Home}/>
