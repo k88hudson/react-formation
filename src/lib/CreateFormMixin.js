@@ -73,8 +73,12 @@ module.exports = {
       var isConditionallyRequred = schema.required.bind(this)();
       if (isConditionallyRequred && !currentValue) errors.push(label + ' is required');
     }
-    if (currentValue && schema.type && this.validations[schema.type]) {
+    if (currentValue && typeof schema.type === 'string' && this.validations[schema.type]) {
       var typeError = this.validations[schema.type](currentValue);
+      if (typeError) errors.push(typeError);
+    }
+    if (currentValue && typeof schema.type === 'function') {
+      var typeError = schema.type(currentValue);
       if (typeError) errors.push(typeError);
     }
     if (!errors.length) return false;

@@ -176,6 +176,10 @@ describe('CreateForm', function () {
       var Form = ComposableForm.CreateForm({
         schema: {
           foo: {label: 'Foo', required: true},
+          bar : {type: (val) => {
+            if (val > 10) return false;
+            return 'Must be greater than 10';
+          }},
           email: {required: true, type: 'email'},
           name: {type: 'string'},
           lastName: {required: function () {
@@ -203,6 +207,12 @@ describe('CreateForm', function () {
       should.deepEqual(form.validateField('email'), ['email is required']);
       form.setState({email: 'hello'});
       should.deepEqual(form.validateField('email'), ['This must be a valid email']);
+    });
+    it('should return a validation error for a custom type', function () {
+      form.setState({bar: 4});
+      should.deepEqual(form.validateField('bar'), ['Must be greater than 10']);
+      form.setState({bar: 11});
+      should.deepEqual(form.validateField('bar'), false);
     });
     it('should return false for valid values', function () {
       form.setState({email: 'kate@fff.com'});

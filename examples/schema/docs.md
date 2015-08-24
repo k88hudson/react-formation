@@ -2,10 +2,12 @@
 
 A schema should be an object, where each key represents a unique field. Each key's value is an object which can contain:
 
-* `initial`: the initial value the form field starts with (optional)
-* `required`: true/false OR a function
-* `type`: currently implemented types include `number` and `email`
-* `label`: this will show up in error messages
+Property | Default | Description
+---------|---------|-------------
+`initial`| | The initial value the form field starts with (optional).
+`required`| `false` | Can be true, false or a function that returns true or false. The function is evaluated in the context of the form component instance.
+`type`| | A string (currently implemented types include `number` and `email`) or a custom function. The function should return `false` if the value is valid, or else a string representing the error message.
+`label`| | This will be used in some error messages.
 
 ```js
 schema: {

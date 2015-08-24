@@ -7,9 +7,15 @@ var InputTypes = require('./input-types.jsx');
 
 var App = React.createClass({
   render: function () {
+    return (<RouteHandler/>);
+  }
+});
+
+var Examples = React.createClass({
+  render: function () {
     return (
       <div className="container">
-        <header>
+        <header className="links">
           <h2>Guide</h2>
           <ul>
             <li><Link to="/">Home</Link></li>
@@ -32,7 +38,21 @@ var App = React.createClass({
   }
 });
 
+var Login = require('./login/index.jsx');
+
 var Home = React.createClass({
+  render: function () {
+    return (<div className="home">
+      <header>
+        <h1>Build robust, testable, composable forms in minutes.</h1>
+        <p><Link to="examples">See the guide</Link></p>
+      </header>
+      <Login />
+    </div>);
+  }
+});
+
+var ExamplesHome = React.createClass({
   render: function () {
     return (<div className="docs">
       <Markdown source={require('../README.md').split('## Guide and examples')[0]} />
@@ -42,15 +62,18 @@ var Home = React.createClass({
 
 var routes = (
   <Route name="app" path="/" handler={App}>
-    <Route name="simple" handler={require('./simple/docs.jsx')}/>
-    <Route name="errors" handler={require('./errors/docs.jsx')}/>
-    <Route name="linking" handler={require('./linking/docs.jsx')}/>
-    <Route name="children" handler={require('./children/docs.jsx')}/>
-    <Route name="schema" handler={require('./schema/docs.jsx')}/>
-    <Route name="submitting" handler={require('./submitting/docs.jsx')}/>
-    <Route name="inputTypes" handler={InputTypes}/>
-    <Route name="multi" handler={require('./multi/docs.jsx')}/>
-    <Route name="ab" handler={require('./ab/docs.jsx')}/>
+    <Route name="examples" handler={Examples}>
+      <Route name="simple" handler={require('./simple/docs.jsx')}/>
+      <Route name="errors" handler={require('./errors/docs.jsx')}/>
+      <Route name="linking" handler={require('./linking/docs.jsx')}/>
+      <Route name="children" handler={require('./children/docs.jsx')}/>
+      <Route name="schema" handler={require('./schema/docs.jsx')}/>
+      <Route name="submitting" handler={require('./submitting/docs.jsx')}/>
+      <Route name="inputTypes" handler={InputTypes}/>
+      <Route name="multi" handler={require('./multi/docs.jsx')}/>
+      <Route name="ab" handler={require('./ab/docs.jsx')}/>
+      <DefaultRoute handler={ExamplesHome}/>
+    </Route>
     <DefaultRoute handler={Home}/>
   </Route>
 );
