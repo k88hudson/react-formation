@@ -42,12 +42,34 @@ var Login = require('./login/index.jsx');
 
 var Home = React.createClass({
   render: function () {
+    var variants = [{
+      variantClass: 'variant-1',
+      signUpMessage: 'Sign up'
+    },{
+      variantClass: 'variant-2',
+      signUpMessage: 'Join'
+    }
+    ];
+
+    var variant = variants[Math.floor(Math.random() * (variants.length))];
+
     return (<div className="home">
       <header>
         <h1>Build robust, testable, composable forms in minutes.</h1>
         <p><Link to="examples">See the guide</Link></p>
       </header>
-      <Login />
+
+      <Login {...variant} />
+      <footer>
+        <p>This login form was built in <a href="https://github.com/k88hudson/react-composable-form/blob/master/examples/login/index.jsx">under 100 lines of code</a> and includes:</p>
+        <ul>
+          <li>Advanced custom validations for each field</li>
+          <li>Password strength testing</li>
+          <li>Pre-submit validation</li>
+          <li>Smart display of error messages</li>
+          <li>Hooks for A/B testing variations (try refreshing the page!)</li>
+        </ul>
+      </footer>
     </div>);
   }
 });

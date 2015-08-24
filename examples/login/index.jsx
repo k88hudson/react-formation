@@ -6,6 +6,7 @@ var SubmitButton = ComposableForm.SubmitButton;
 var ErrorMessage = ComposableForm.ErrorMessage;
 
 var zxcvbn = require('zxcvbn');
+var classnames = require('classnames');
 
 var Form = CreateForm({
   schema: {
@@ -57,18 +58,21 @@ var Form = CreateForm({
     var passStrength = this.getPassStrength();
     return (<form className="login-eg">
 
-      <div className="body">
+      <div className={classnames('body', this.props.variantClass)}>
         <div className="form-group">
+          <label>Login</label>
           <input placeholder="Username" type="text" onBlur={this.onBlur('username')} valueLink={this.linkField('username')} />
           <ErrorMessage show={this.state.blurred.username} field="username" />
         </div>
 
         <div className="form-group">
+          <label>Email</label>
           <input placeholder="Email" type="text" onBlur={this.onBlur('email')} valueLink={this.linkField('email')} />
           <ErrorMessage show={this.state.blurred.email} field="email" />
         </div>
 
         <div className="form-group">
+          <label>Password</label>
           <input placeholder="Password" type="password" name="password" onBlur={this.onBlur('password')} valueLink={this.linkField('password')} />
           <div className={'password-strength strength-' + passStrength}>
             {passStrength >= 0 && this.passStrengthStrings[passStrength]}
@@ -79,7 +83,7 @@ var Form = CreateForm({
       </div>
 
       <div className="submit-footer">
-        <SubmitButton>Sign Up</SubmitButton>
+        <SubmitButton>{this.props.signUpMessage || 'Sign Up'}</SubmitButton>
       </div>
     </form>);
   }
