@@ -57,7 +57,7 @@ var Form = CreateForm({
 
   render: function () {
     var passStrength = this.getPassStrength();
-    return (<form className="login-eg">
+    return (<form className="login-eg animated fadeInUp">
 
       <div className="body">
         <div className="form-group">
