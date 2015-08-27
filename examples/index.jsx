@@ -38,28 +38,46 @@ var Examples = React.createClass({
   }
 });
 
+function generateVariant(propsets) {
+  var props = Object.keys(propsets);
+  var variation = {};
+  props.forEach(prop => {
+    var variants = propsets[prop];
+    variation[prop] = variants[Math.floor(Math.random() * (variants.length))];
+  });
+  return variation;
+}
+
+
 var Login = require('./login/index.jsx');
+var variants = {
+  showLabels: [true, false],
+  signUpMessage: ['Sign up', 'Join', 'Join us', 'ONE OF US ONE OF US'],
+  buttonColor: ['#00BE94', '#69A0FC']
+};
 
 var Home = React.createClass({
-  render: function () {
-    var variants = [{
-      variantClass: 'variant-1',
-      signUpMessage: 'Sign up'
-    },{
-      variantClass: 'variant-2',
-      signUpMessage: 'Join'
-    }
-    ];
 
-    var variant = variants[Math.floor(Math.random() * (variants.length))];
+  getInitialState: function () {
+    return {
+      variants: generateVariant(variants)
+    };
+  },
+
+  refreshTest: function (e) {
+    e.preventDefault();
+    this.setState({variants: generateVariant(variants)});
+  },
+
+  render: function () {
 
     return (<div className="home">
       <header>
-        <h1>Build robust, testable, composable forms in minutes.</h1>
+        <h1>Build robust, testable forms in minutes<br/>with <strong>React Formation</strong></h1>
         <p><Link to="examples">See the guide</Link></p>
       </header>
 
-      <Login {...variant} />
+      <Login {...this.state.variants} />
       <footer>
         <p>This login form was built in <a href="https://github.com/k88hudson/react-composable-form/blob/master/examples/login/index.jsx">under 100 lines of code</a> and includes:</p>
         <ul>
@@ -67,7 +85,7 @@ var Home = React.createClass({
           <li>Password strength testing</li>
           <li>Pre-submit validation</li>
           <li>Smart display of error messages</li>
-          <li>Hooks for A/B testing variations (try refreshing the page!)</li>
+          <li>Hooks for A/B testing variations (<a href="#" onClick={this.refreshTest}>try refreshing!</a>)</li>
         </ul>
       </footer>
     </div>);

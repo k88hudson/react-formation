@@ -7,6 +7,10 @@ body {
   background: #D1D6DC;
 }
 
+*[hidden] {
+  display: none !important;
+}
+
 @import 'highlight';
 
 button {
@@ -171,6 +175,11 @@ header.links {
     h1 {
       font-weight: 300;
       margin-bottom: 30px;
+      color: fade(white, 70%);
+      strong {
+        font-weight: inherit;
+        color: white;
+      }
     }
 
     p {
@@ -198,13 +207,13 @@ header.links {
 
     p {
       font-size: 18px;
-      a {
-        font-weight: inherit;
-        color: #F8D97A;
-        text-decoration: none;
-        &:hover {
-          text-decoration: underline;
-        }
+    }
+    a {
+      font-weight: inherit;
+      color: #F8D97A;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
       }
     }
     //text-align: left;

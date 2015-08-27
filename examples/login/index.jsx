@@ -54,26 +54,27 @@ var Form = CreateForm({
     return this.state.password ? zxcvbn(this.state.password).score : -1;
   },
   passStrengthStrings: ['Not strong enough', 'Weak', 'OK', 'Good', 'Strong'],
+
   render: function () {
     var passStrength = this.getPassStrength();
     return (<form className="login-eg">
 
-      <div className={classnames('body', this.props.variantClass)}>
+      <div className="body">
         <div className="form-group">
-          <label>Login</label>
-          <input placeholder="Username" type="text" onBlur={this.onBlur('username')} valueLink={this.linkField('username')} />
+          <label hidden={!this.props.showLabels}>Username</label>
+          <input placeholder={this.props.showLabels ? '' : 'Username'} type="text" onBlur={this.onBlur('username')} valueLink={this.linkField('username')} />
           <ErrorMessage show={this.state.blurred.username} field="username" />
         </div>
 
         <div className="form-group">
-          <label>Email</label>
-          <input placeholder="Email" type="text" onBlur={this.onBlur('email')} valueLink={this.linkField('email')} />
+          <label hidden={!this.props.showLabels}>Email</label>
+          <input placeholder={this.props.showLabels ? '' : 'Email'} type="text" onBlur={this.onBlur('email')} valueLink={this.linkField('email')} />
           <ErrorMessage show={this.state.blurred.email} field="email" />
         </div>
 
         <div className="form-group">
-          <label>Password</label>
-          <input placeholder="Password" type="password" name="password" onBlur={this.onBlur('password')} valueLink={this.linkField('password')} />
+          <label hidden={!this.props.showLabels}>Password</label>
+          <input placeholder={this.props.showLabels ? '' : 'Password'} type="password" name="password" onBlur={this.onBlur('password')} valueLink={this.linkField('password')} />
           <div className={'password-strength strength-' + passStrength}>
             {passStrength >= 0 && this.passStrengthStrings[passStrength]}
             <span className="indicator" style={{width: ((passStrength + 1) * 20) + '%'}} />
@@ -83,7 +84,7 @@ var Form = CreateForm({
       </div>
 
       <div className="submit-footer">
-        <SubmitButton>{this.props.signUpMessage || 'Sign Up'}</SubmitButton>
+        <SubmitButton style={{backgroundColor: this.props.buttonColor}} >{this.props.signUpMessage || 'Sign Up'}</SubmitButton>
       </div>
     </form>);
   }
