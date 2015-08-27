@@ -56,6 +56,17 @@ var variants = {
   buttonColor: ['#00BE94', '#69A0FC']
 };
 
+var GithubLink = React.createClass({
+  render: function () {
+    return (<iframe
+      className="gh-star" src="https://ghbtns.com/github-btn.html?user=k88hudson&repo=react-formation&type=star&count=true&size=large"
+      frameborder="0"
+      scrolling="0"
+      width="160px"
+      height="30px"></iframe>);
+  }
+});
+
 var Home = React.createClass({
 
   getInitialState: function () {
@@ -87,6 +98,7 @@ var Home = React.createClass({
           <li>Smart display of error messages</li>
           <li>Hooks for A/B testing variations (<a href="#" onClick={this.refreshTest}>try refreshing!</a>)</li>
         </ul>
+        <p><GithubLink /></p>
       </footer>
     </div>);
   }
