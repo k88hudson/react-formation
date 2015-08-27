@@ -1,9 +1,9 @@
 var React = require('react/addons');
-var ComposableForm = require('../../src/form');
+var Formation = require('../../src/form');
 
-var CreateForm = ComposableForm.CreateForm;
-var SubmitButton = ComposableForm.SubmitButton;
-var ErrorMessage = ComposableForm.ErrorMessage;
+var CreateForm = Formation.CreateForm;
+var SubmitButton = Formation.SubmitButton;
+var ErrorMessage = Formation.ErrorMessage;
 
 var zxcvbn = require('zxcvbn');
 var classnames = require('classnames');

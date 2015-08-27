@@ -1,6 +1,6 @@
 # Multi-part forms
 
-React-composable-form also has support for form "groups", that will allow you to manage validation and submitting within each group.
+react-formation also has support for form "groups", that will allow you to manage validation and submitting within each group.
 
 ### Creating the schema
 

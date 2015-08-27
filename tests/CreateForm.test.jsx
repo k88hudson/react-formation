@@ -5,7 +5,7 @@ var assign = require('react/lib/Object.assign');
 
 describe('CreateForm', function () {
 
-  var ComposableForm = require('../src/form');
+  var Formation = require('../src/form');
 
   describe('api', function () {
     var contextConfig = require('../src/lib/contextConfig');
@@ -21,7 +21,7 @@ describe('CreateForm', function () {
     var form;
 
     beforeEach(function () {
-      var Form = ComposableForm.CreateForm({
+      var Form = Formation.CreateForm({
         schema: {
           foo: {required: true},
           bar: {required: true}
@@ -51,7 +51,7 @@ describe('CreateForm', function () {
   });
 
   describe('#getValues', function () {
-    var Form = ComposableForm.CreateForm({
+    var Form = Formation.CreateForm({
       schema: {
         foo: {required: true},
         bar: {required: true}
@@ -75,7 +75,7 @@ describe('CreateForm', function () {
     var form;
 
     beforeEach(function () {
-      var Form = ComposableForm.CreateForm({
+      var Form = Formation.CreateForm({
         schema: {
           foo: {required: true, group: 0},
           bar: {required: true, group: 1},
@@ -123,7 +123,7 @@ describe('CreateForm', function () {
 
     beforeEach(function () {
       didSubmit = false;
-      var Form = ComposableForm.CreateForm({
+      var Form = Formation.CreateForm({
         schema: {
           foo: {required: true, group: 0},
           bar: {required: true, group: 1},
@@ -173,7 +173,7 @@ describe('CreateForm', function () {
   describe('#validateField', function () {
     var form;
     beforeEach(function () {
-      var Form = ComposableForm.CreateForm({
+      var Form = Formation.CreateForm({
         schema: {
           foo: {label: 'Foo', required: true},
           bar : {type: (val) => {
@@ -225,7 +225,7 @@ describe('CreateForm', function () {
     var form;
 
     beforeEach(function () {
-      var Form = ComposableForm.CreateForm({
+      var Form = Formation.CreateForm({
         schema: {
           foo: {required: true, group: 0},
           baz: {group: 1}

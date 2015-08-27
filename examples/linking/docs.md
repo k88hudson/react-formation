@@ -10,7 +10,7 @@ See [React's Docs on Two Way Binding Helpers](https://facebook.github.io/react/d
 <input valueLink={this.linkField('name')} />
 ```
 
-Keep in mind if you are adding inputs to child components of the form, you will need to include the `FormMixin` bundled with react-composable-forms.
+Keep in mind if you are adding inputs to child components of the form, you will need to include the `FormMixin` bundled with react-formations.
 
 ### Checkboxes
 
@@ -22,10 +22,10 @@ Checkboxes work a little bit differently in React; instead of `valueLink`, used 
 
 ### Radio Buttons
 
-Radio buttons unfortunately do not support any form of two way binding out of the box; however, you can use the `<Radio />` component bundled with react-composable-forms:
+Radio buttons unfortunately do not support any form of two way binding out of the box; however, you can use the `<Radio />` component bundled with react-formations:
 
 ```jsx
-var Radio = require('react-composable-forms').Radio;
+var Radio = require('react-formations').Radio;
 var link = this.linkField('color');
 
 <Radio name="color" value="blue" radioLink={link} /> Blue

@@ -3,8 +3,8 @@
 To create a form, you can use the `render` function of `CreateForm` just like how you would use `React.createClass`:
 
 ```jsx
-var Composable = require('react-composable-form');
-var Form = Composable.CreateForm({
+var Formation = require('react-formation');
+var Form = Formation.CreateForm({
   render: function () {
     return (<form>
 
@@ -24,7 +24,7 @@ var Form = Composable.CreateForm({
 Next, add **a schema** property that defines all the fields in the form, and link corresponding inputs with `this.linkField`:
 
 ```jsx{3-6,11,14}
-var Form = Composable.CreateForm({
+var Form = Formation.CreateForm({
 
   schema: {
     name: {required: true}
@@ -51,7 +51,7 @@ var Form = Composable.CreateForm({
 Finally, add **an onSuccess** callback that gets called on a successful submit, and add `this.submitForm` as a callback to any submit buttons.
 
 ```jsx{8-10,21}
-var Form = Composable.CreateForm({
+var Form = Formation.CreateForm({
 
   schema: {
     name: {required: true}

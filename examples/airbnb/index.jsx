@@ -1,10 +1,10 @@
 var React = require('react/addons');
-var ComposableForm = require('../../src/form');
+var Formation = require('../../src/form');
 var classnames = require('classnames');
 
-var CreateForm = ComposableForm.CreateForm;
-var SubmitButton = ComposableForm.SubmitButton;
-var ErrorMessage = ComposableForm.ErrorMessage;
+var CreateForm = Formation.CreateForm;
+var SubmitButton = Formation.SubmitButton;
+var ErrorMessage = Formation.ErrorMessage;
 
 var days = [];
 var years = [];
@@ -17,7 +17,7 @@ var dateData = {
 };
 
 var Input = React.createClass({
-  mixins: [ComposableForm.FormMixin],
+  mixins: [Formation.FormMixin],
   render: function () {
     var errors = this.validateField(this.props.field);
     var inputClass = classnames('input', {

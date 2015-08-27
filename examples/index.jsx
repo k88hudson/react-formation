@@ -79,7 +79,7 @@ var Home = React.createClass({
 
       <Login {...this.state.variants} />
       <footer>
-        <p>This login form was built in <a href="https://github.com/k88hudson/react-composable-form/blob/master/examples/login/index.jsx">under 100 lines of code</a> and includes:</p>
+        <p>This login form was built in <a href="https://github.com/k88hudson/react-formation/blob/master/examples/login/index.jsx">under 100 lines of code</a> and includes:</p>
         <ul>
           <li>Advanced custom validations for each field</li>
           <li>Password strength testing</li>
