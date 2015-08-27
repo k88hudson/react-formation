@@ -1,3 +1,5 @@
+'use strict';
+
 var React = require('react');
 
 // This is the name of the object that we will add to the context
@@ -13,18 +15,10 @@ types[CONTEXT_NAME] = React.PropTypes.object;
 // var docFiles = require.context('./apiDocs', true, /\.md$/).keys();
 // var methods = docFiles.map(file => file.replace('./', '').replace('.md', ''));
 
-var methods = [
-  'didSubmit',
-  'isGroupValid',
-  'isValid',
-  'linkField',
-  'submitForm',
-  'submitGroup',
-  'validateField'
-];
+var methods = ['didSubmit', 'isGroupValid', 'isValid', 'linkField', 'submitForm', 'submitGroup', 'validateField'];
 
 module.exports = {
   name: CONTEXT_NAME,
-  types,
-  methods
+  types: types,
+  methods: methods
 };

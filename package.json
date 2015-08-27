@@ -2,7 +2,7 @@
   "name": "react-formation",
   "version": "0.0.0",
   "description": "",
-  "main": "src/form.js",
+  "main": "dist/form.js",
   "scripts": {
     "build": "npm-run-all build:**",
     "start": "npm run build && npm-run-all --parallel server watch:**",
@@ -19,6 +19,8 @@
     "watch:js": "npm run build:js -- --watch",
     "build:css": "npm run watch:css -- --no-watch",
     "watch:css": "autoless --source-map examples www",
+    "build:dist": "babel src --out-dir dist",
+    "watch:dist": "npm run build:dist --- --watch",
     "server": "live-server www --port=4240"
   },
   "author": "k88hudson",
@@ -32,6 +34,7 @@
   },
   "devDependencies": {
     "autoless": "^0.1.7",
+    "babel": "^5.8.21",
     "babel-core": "^5.2.17",
     "babel-loader": "^5.0.0",
     "cpx": "^1.1.6",
