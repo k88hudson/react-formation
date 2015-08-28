@@ -4,6 +4,8 @@ var Formation = require('../../src/form');
 var CreateForm = Formation.CreateForm;
 var SubmitButton = Formation.SubmitButton;
 var ErrorMessage = Formation.ErrorMessage;
+var Validator = Formation.Validator;
+
 // We need FormMixin so this child component
 // can have access to the global form API
 var FormMixin = Formation.FormMixin;
@@ -14,7 +16,7 @@ var CreditCard = React.createClass({
 
   render: function () {
     return (<div className="form-group">
-      <label>Enter your credit card number:</label>
+      <label>Enter your credit card number (try 4111111111111111):</label>
       <input type="number" valueLink={this.linkField('cardNumber')} />
       <ErrorMessage field="cardNumber" />
     </div>);
@@ -28,9 +30,9 @@ var PersonalInfo = React.createClass({
   render: function () {
     return (<div>
       <div className="form-group">
-        <label>Name</label>
-        <input type="text" name="name" valueLink={this.linkField('name')} />
-        <ErrorMessage field="name" />
+        <label>Username</label>
+        <input type="text" name="username" valueLink={this.linkField('username')} />
+        <ErrorMessage field="username" />
       </div>
       <div className="form-group">
         <label>Email</label>
@@ -43,19 +45,19 @@ var PersonalInfo = React.createClass({
 
 var Form = CreateForm({
   schema: {
-    name: {
+    username: {
       required: true,
-      label: 'Name',
-      type: 'string'
+      label: 'Username',
+      type: Validator.alpha()
     },
     email: {
       required: true,
       label: 'Email',
-      type: 'email'
+      type: Validator.email()
     },
     cardNumber: {
-      type: 'number',
-      label: 'Credit card number'
+      type: Validator.creditCard(),
+      label: 'Credit card'
     }
   },
   onSuccess: function (data) {
