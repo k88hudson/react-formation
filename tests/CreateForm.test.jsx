@@ -212,7 +212,7 @@ describe('CreateForm', function () {
       form.setState({email: 'hello'});
       should.deepEqual(form.validateField('email'), ['Must be an email']);
     });
-    it('DEPRECATED: should return a validation error for a custom type', function () {
+    it('should return a validation error for a custom type', function () {
       form.setState({bar: 4});
       should.deepEqual(form.validateField('bar'), ['Must be greater than 10']);
       form.setState({bar: 11});

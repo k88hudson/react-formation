@@ -87,12 +87,10 @@ module.exports = {
     } else if (currentValue && typeof schema.type === 'string' && Validator[schema.type]) {
       var typeError = Validator[schema.type]().assert(currentValue);
       if (typeError) errors = errors.concat(typeError);
+    } else if (currentValue && typeof schema.type === 'function') {
+      var typeError = schema.type(currentValue);
+      if (typeError) errors.push(typeError);
     }
-    // legacy
-    else if (currentValue && typeof schema.type === 'function') {
-        var typeError = schema.type(currentValue);
-        if (typeError) errors.push(typeError);
-      }
 
     return errors.length ? errors : false;
   },

@@ -62,8 +62,6 @@ module.exports = {
     }
   },
 
-  validations: require('./validations'),
-
   validateField: function (key) {
     var errors = [];
     var schema = this.schema[key];
@@ -78,13 +76,10 @@ module.exports = {
     if (currentValue && schema.type instanceof Validator) {
       var typeError = schema.type.assert(currentValue, this);
       if (typeError) errors = errors.concat(typeError);
-    }
-    else if (currentValue && typeof schema.type === 'string' && Validator[schema.type]) {
+    } else if (currentValue && typeof schema.type === 'string' && Validator[schema.type]) {
        var typeError = Validator[schema.type]().assert(currentValue);
        if (typeError) errors = errors.concat(typeError);
-    }
-    // legacy
-    else if (currentValue && typeof schema.type === 'function') {
+    } else if (currentValue && typeof schema.type === 'function') {
       var typeError = schema.type(currentValue);
       if (typeError) errors.push(typeError);
     }

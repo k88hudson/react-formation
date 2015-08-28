@@ -47,7 +47,7 @@ Validator.definitions = {
   },
   custom: function (definition) {
     return definition;
-  },
+  }
 };
 
 Object.keys(Validator.definitions).forEach(key => {
