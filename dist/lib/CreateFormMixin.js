@@ -68,8 +68,6 @@ module.exports = {
     }
   },
 
-  validations: require('./validations'),
-
   validateField: function validateField(key) {
     var errors = [];
     var schema = this.schema[key];
