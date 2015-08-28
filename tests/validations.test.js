@@ -1,5 +1,15 @@
 var should = require('should');
 
+var Validator = require('../src/lib/Validator');
+
+describe('Validator', function () {
+  it('should validate a string', function () {
+    var v = new Validator().oneOf(['foo', 'bar']);
+    should.deepEqual(v.assert('foo'), [false]);
+  });
+});
+
+
 describe('validations', function () {
   var validations = require('../src/lib/validations');
 
@@ -27,3 +37,4 @@ describe('validations', function () {
   });
 
 });
+

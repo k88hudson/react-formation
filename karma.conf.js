@@ -1,4 +1,3 @@
-var webpack = require('webpack');
 var webpackConfig = require('./webpack.config.js');
 
 module.exports = function (config) {
@@ -10,7 +9,7 @@ module.exports = function (config) {
       'tests/index.jsx'
     ],
     preprocessors: {
-      'tests/index.jsx': ['webpack', 'sourcemap'],
+      'tests/index.jsx': ['webpack', 'sourcemap']
     },
     reporters: ['mocha'],
     coverageReporter: {
