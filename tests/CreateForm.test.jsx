@@ -181,7 +181,7 @@ describe('CreateForm', function () {
             return 'Must be greater than 10';
           }},
           email: {required: true, type: 'email'},
-          name: {type: 'string'},
+          name: {type: 'alpha'},
           lastName: {required: function () {
             return this.state.name;
           }}
@@ -203,10 +203,14 @@ describe('CreateForm', function () {
       form.setState({name: 'Kate'});
       should.deepEqual(form.validateField('lastName'), ['lastName is required']);
     });
-    it('should return a validation error for a particular type', function () {
+    it('should return a validation error for a Validator instance', function () {
+      form.setState({name: 'hello1'});
+      should.deepEqual(form.validateField('name'), ['Must be letters only (A-Z)']);
+    });
+    it('should return a validation error for string', function () {
       should.deepEqual(form.validateField('email'), ['email is required']);
       form.setState({email: 'hello'});
-      should.deepEqual(form.validateField('email'), ['This must be a valid email']);
+      should.deepEqual(form.validateField('email'), ['Must be an email']);
     });
     it('should return a validation error for a custom type', function () {
       form.setState({bar: 4});

@@ -1,5 +1,7 @@
 'use strict';
 
+var Validator = require('./Validator');
+
 module.exports = {
 
   linkField: function linkField(key) {
@@ -66,8 +68,6 @@ module.exports = {
     }
   },
 
-  validations: require('./validations'),
-
   validateField: function validateField(key) {
     var errors = [];
     var schema = this.schema[key];
@@ -79,16 +79,18 @@ module.exports = {
       var isConditionallyRequred = schema.required.bind(this)();
       if (isConditionallyRequred && !currentValue) errors.push(label + ' is required');
     }
-    if (currentValue && typeof schema.type === 'string' && this.validations[schema.type]) {
-      var typeError = this.validations[schema.type](currentValue);
-      if (typeError) errors.push(typeError);
-    }
-    if (currentValue && typeof schema.type === 'function') {
+    if (currentValue && schema.type instanceof Validator) {
+      var typeError = schema.type.assert(currentValue, this);
+      if (typeError) errors = errors.concat(typeError);
+    } else if (currentValue && typeof schema.type === 'string' && Validator[schema.type]) {
+      var typeError = Validator[schema.type]().assert(currentValue);
+      if (typeError) errors = errors.concat(typeError);
+    } else if (currentValue && typeof schema.type === 'function') {
       var typeError = schema.type(currentValue);
       if (typeError) errors.push(typeError);
     }
-    if (!errors.length) return false;
-    return errors;
+
+    return errors.length ? errors : false;
   },
 
   didSubmit: function didSubmit(field) {

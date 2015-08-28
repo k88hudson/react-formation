@@ -8,4 +8,4 @@ console.warn = function (warning) {
 require('./CreateForm.test.jsx');
 require('./convertSchema.test');
 require('./ErrorMessage.test.jsx');
-require('./validations.test');
+require('./Validator.test');
