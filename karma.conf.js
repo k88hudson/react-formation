@@ -11,7 +11,6 @@ module.exports = function (config) {
     ],
     preprocessors: {
       'tests/index.jsx': ['webpack', 'sourcemap'],
-      'src/lib/validations.js': ['webpack', 'coverage']
     },
     reporters: ['mocha'],
     coverageReporter: {
@@ -22,11 +21,11 @@ module.exports = function (config) {
       devtool: 'inline-source-map',
       module: {
         loaders: webpackConfig.module.loaders,
-        postLoaders: [{
+        postLoaders: process.env.KARMA_ENV === 'coverage' ? [{
           test: /\.js$/,
           loader: 'istanbul-instrumenter',
           include: [__dirname + '/src']
-        }]
+        }] : null
       }
     },
     webpackServer: {
