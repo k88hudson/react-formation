@@ -89,6 +89,26 @@ describe('Validator', function () {
         ['1', false],
         ['1.1d', ['Must be a number']]
       ],
+      url: [
+        Validator.url(),
+        ['foo.foo.com?asdd&asdad#adsda', false],
+        ['foobaradsdd', ['Must be a URL']]
+      ],
+      date: [
+        Validator.date(),
+        ['January 9, 2013', false],
+        ['foo', ['Must be a date']]
+      ],
+      before: [
+        Validator.before('January 10, 2010'),
+        ['January 9 2010', false],
+        ['January 9 2011', ['Must be before January 10, 2010']]
+      ],
+      after: [
+        Validator.after('January 10, 2010'),
+        ['January 15 2010', false],
+        ['February 8 2000', ['Must be after January 10, 2010']]
+      ],
       alpha: [
         Validator.alpha(),
         ['aasdDSAasd', false],
@@ -103,6 +123,31 @@ describe('Validator', function () {
         Validator.creditCard(),
         ['4012888888881881', false],
         ['1231231232', ['Please enter a valid credit card']]
+      ],
+      max: [
+        Validator.max(10),
+        [9, false],
+        [11, ['Must be less than 10']]
+      ],
+      min: [
+        Validator.min(10),
+        ['10', false],
+        ['8', ['Must be greater than 10']]
+      ],
+      maxLength: [
+        Validator.maxLength(5),
+        ['abcde', false],
+        ['asdadsadasda', ['Must be less than 5 characters']]
+      ],
+      minLength: [
+        Validator.minLength(2),
+        ['adasdasdasd', false],
+        ['a', ['Must be at least 2 characters']]
+      ],
+      pattern: [
+        Validator.pattern(/foo/),
+        ['foo', false],
+        ['bar', ['Does not match pattern']]
       ]
     };
 
