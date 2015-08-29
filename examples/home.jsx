@@ -14,7 +14,7 @@ function generateVariant(propsets) {
 
 var variants = {
   showLabels: [true, false],
-  signUpMessage: ['Sign up', 'Join', 'Join us', 'ONE OF US ONE OF US'],
+  signUpMessage: ['Sign up', 'Join', 'Join us', 'One. Of. Us.'],
   buttonColor: ['#00BE94', '#69A0FC']
 };
 
