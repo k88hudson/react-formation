@@ -1,12 +1,16 @@
 var jsSrc = __dirname + '/src';
 var examplesDir = __dirname + '/examples';
 var testsDir = __dirname + '/tests';
-
+var webpack = require('webpack');
 var WebpackNotifierPlugin = require('webpack-notifier');
 
 module.exports = {
   entry: {
     examples: examplesDir + '/index.jsx'
+  },
+  externals: {
+    'react': 'React',
+    'react/addons': 'React'
   },
   devtool: 'source-map', // To support Firefox, switch to exec
   output: {
