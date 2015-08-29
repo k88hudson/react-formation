@@ -21,7 +21,7 @@
     "watch:css": "autoless --source-map examples www",
     "build:dist": "babel src --out-dir dist",
     "watch:dist": "npm run build:dist --- --watch",
-    "server": "live-server www --port=4240"
+    "server": "live-server ./ --port=4240"
   },
   "author": "k88hudson",
   "license": "MPL-2.0",
