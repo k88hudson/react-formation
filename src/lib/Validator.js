@@ -36,7 +36,7 @@ Validator.definitions = {
         return this._validator.isURL(value, options);
       },
       message: () => this.messages.url
-    }
+    };
   },
   date: function () {
     return {
