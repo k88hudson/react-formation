@@ -4,10 +4,10 @@ var {DefaultRoute, Link, Route, RouteHandler} = Router;
 var {Markdown} = require('react-markdocs');
 
 var routeDefinitions = [
-  <Route name="simple" label="Simple form" handler={require('./pages/simple/docs.jsx')} />,
-  <Route name="children" label="Child components" handler={require('./pages/children/docs.jsx')} />,
-  <Route name="linking" label="Linking field values" handler={require('./pages/linking/docs.jsx')} />,
-  <Route name="validations" label="Validations" handler={require('./pages/validations/docs.jsx')} />,
+  <DefaultRoute name="simple" label="Get started" handler={require('./pages/simple/docs.jsx')} />,
+  <Route name="linking" label="Adding inputs" handler={require('./pages/linking/docs.jsx')} />,
+  <Route name="children" label="Building modular UI" handler={require('./pages/children/docs.jsx')} />,
+  <Route name="validations" label="Validation" handler={require('./pages/validations/docs.jsx')} />,
   <Route name="errors" label="Errors" handler={require('./pages/errors/docs.jsx')} />,
   <Route name="submitting" label="Submitting" handler={require('./pages/submitting/docs.jsx')} />,
   <Route name="schema" label="Schema" handler={require('./pages/schema/docs.jsx')} />,
@@ -54,7 +54,6 @@ var routes = (
   <Route name="app" path="/" handler={App}>
     <Route name="examples" handler={Examples}>
       {routeDefinitions}
-      <DefaultRoute handler={ExamplesHome}/>
     </Route>
     <DefaultRoute handler={require('./home.jsx')}/>
   </Route>

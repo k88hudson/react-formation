@@ -1,14 +1,14 @@
-# Linking field values
+# Adding inputs
 
-### With valueLink and this.linkField
+### Text inputs
 
-The easiest way to link inputs and other elements to the form is via React's build-in `valueLink` property. All you need to do is call `this.linkField(field)` with the name of the field as defined in your form's schema.
-
-See [React's Docs on Two Way Binding Helpers](https://facebook.github.io/react/docs/two-way-binding-helpers.html) for more info about the `valueLink` property.
+The easiest way to link `text` inputs (as well as `number`, `password` and many other elements) to the form is with their build-in `valueLink` property. All you need to do is call `this.linkField(field)` with the name of the field as defined in your form's schema.
 
 ```jsx
 <input valueLink={this.linkField('name')} />
 ```
+
+See [React's Docs on Two Way Binding Helpers](https://facebook.github.io/react/docs/two-way-binding-helpers.html) for more info about the `valueLink` property.
 
 Keep in mind if you are adding inputs to child components of the form, you will need to include the `FormMixin` bundled with react-formations.
 

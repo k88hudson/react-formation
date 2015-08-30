@@ -1,9 +1,20 @@
-# Creating a form
+# Get started
 
-To create a form, you can use the `render` function of `CreateForm` just like how you would use `React.createClass`:
+## Install
+
+You can install React Formation from npm by running `npm install react-formation`. If you are using common js, you can require it like this:
 
 ```jsx
 var Formation = require('react-formation');
+```
+
+## Create a Form
+
+First, let's define the structure of your form. You can do that by using `CreateForm` just like how you would use `React.createClass`, including a `render` function:
+
+```jsx{3}
+var Formation = require('react-formation');
+
 var Form = Formation.CreateForm({
   render: function () {
     return (<form>
@@ -77,4 +88,12 @@ var Form = Formation.CreateForm({
   }
 
 });
+```
+
+## Rendering a Form
+
+You can use your new `Form` class just like you would any other React element, including passing props. For example, if you wanted to render it directly into `document.body`:
+
+```jsx
+React.render(<Form />, document.body);
 ```
