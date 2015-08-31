@@ -22,7 +22,8 @@ Validator.messages = {
   min: 'Must be greater than ${min}',
   maxLength: 'Must be less than ${max} characters',
   minLength: 'Must be at least ${min} characters',
-  pattern: 'Does not match pattern'
+  pattern: 'Does not match pattern',
+  currency: 'Must be a valid currency'
 };
 
 Validator.definitions = {
@@ -184,6 +185,18 @@ Validator.definitions = {
       }
     };
   },
+  currency: function currency(options) {
+    var _this15 = this;
+
+    return {
+      validate: function validate(value) {
+        return this._validator.isCurrency(value, options);
+      },
+      message: function message() {
+        return _this15.messages.currency;
+      }
+    };
+  },
   custom: function custom(definition) {
     return definition;
   }
@@ -198,11 +211,11 @@ Object.keys(Validator.definitions).forEach(function (key) {
 });
 
 Validator.prototype.assert = function (value, context) {
-  var _this15 = this;
+  var _this16 = this;
 
   var results = this.schema.map(function (definition) {
-    var errorMessage = typeof definition.message === 'function' ? definition.message.call(_this15, value) : definition.message;
-    return definition.validate.call(context || _this15, value) ? false : errorMessage;
+    var errorMessage = typeof definition.message === 'function' ? definition.message.call(_this16, value) : definition.message;
+    return definition.validate.call(context || _this16, value) ? false : errorMessage;
   }).filter(function (error) {
     return error;
   });
