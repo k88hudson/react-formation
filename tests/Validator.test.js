@@ -148,7 +148,12 @@ describe('Validator', function () {
         Validator.pattern(/foo/),
         ['foo', false],
         ['bar', ['Does not match pattern']]
-      ]
+      ],
+      currency: [
+        Validator.currency(),
+        ['42.42', false],
+        ['42..42', ['Must be a valid currency']]
+      ],
     };
 
     Object.keys(testData).forEach(key => {
