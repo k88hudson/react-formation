@@ -20,7 +20,9 @@ Validator.messages = {
   min: 'Must be greater than ${min}',
   maxLength: 'Must be less than ${max} characters',
   minLength: 'Must be at least ${min} characters',
-  pattern: 'Does not match pattern'
+  pattern: 'Does not match pattern',
+  currency: 'Must be a valid currency',
+  hexColor: 'Must be a valid hex color'
 };
 
 Validator.definitions = {
@@ -120,6 +122,20 @@ Validator.definitions = {
     return {
       validate: (val) => this._validator.matches(val, pattern),
       message: () => this.messages.pattern
+    };
+  },
+  currency: function (options) {
+    return {
+      validate: function (value) {
+        return this._validator.isCurrency(value, options);
+      },
+      message: () => this.messages.currency
+    };
+  },
+  hexColor: function () {
+    return {
+      validate: this._validator.isHexColor,
+      message: () => this.messages.hexColor
     };
   },
   custom: function (definition) {

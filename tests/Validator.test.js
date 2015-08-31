@@ -148,6 +148,16 @@ describe('Validator', function () {
         Validator.pattern(/foo/),
         ['foo', false],
         ['bar', ['Does not match pattern']]
+      ],
+      currency: [
+        Validator.currency(),
+        ['42.42', false],
+        ['42..42', ['Must be a valid currency']]
+      ],
+      hexColor: [
+        Validator.hexColor(),
+        ['1f1f1F', false],
+        ['030k93l', ['Must be a valid hex color']]
       ]
     };
 
