@@ -154,6 +154,11 @@ describe('Validator', function () {
         ['42.42', false],
         ['42..42', ['Must be a valid currency']]
       ],
+      hexColor: [
+        Validator.hexColor(),
+        ['1f1f1F', false],
+        ['030k93l', ['Must be a valid hex color']]
+      ]
     };
 
     Object.keys(testData).forEach(key => {
