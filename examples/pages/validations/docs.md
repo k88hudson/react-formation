@@ -20,7 +20,7 @@ var schema = {
 
 ## Built-in validations
 
-React Formation includes several built-in validations from [chriso's validator.js](http://github.com/chriso/validator.js), including `url`, `email`, `alpha`, `creditCard`, `number`, `min`, `max`, `date`, `before`, `after`, `minLength`, `maxLength`, `oneOf`, `pattern`, and `currency`.
+React Formation includes several built-in validations from [chriso's validator.js](http://github.com/chriso/validator.js), including `url`, `email`, `alpha`, `creditCard`, `number`, `min`, `max`, `date`, `before`, `after`, `minLength`, `maxLength`, `oneOf`, `pattern`, `currency`, and `hexColor`.
 
 All built in validations are functions and can be called like this:
 
