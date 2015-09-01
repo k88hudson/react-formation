@@ -7,17 +7,19 @@ var Radio = Formation.Radio;
 
 var Form = CreateForm({
 
-  schema: {
-    name: {
-      label: 'Name',
-      type: 'string',
-      required: true
-    },
-    color: {
-      label: 'Favourite Color',
-      type: 'string',
-      required: true
-    }
+  getSchema: function () {
+    return {
+      name: {
+        label: 'Name',
+        type: 'string',
+        required: true
+      },
+      color: {
+        label: 'Favourite Color',
+        type: 'string',
+        required: true
+      }
+    };
   },
 
   onSuccess: function (data) {

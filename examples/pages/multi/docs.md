@@ -4,44 +4,48 @@ react-formation also has support for form "groups", that will allow you to manag
 
 ### Creating the schema
 
-Instead of passing an object to the schema property to the form configuration, pass an **array of objects** representing groups of fields. Groups will be named after their index.
+Instead of returning an object from the getSchema method to the form configuration, return an **array of objects** representing groups of fields. Groups will be named after their index.
 
 ```js
-schema: [
-  // This is group 0
-  {
-    amount: {
-      type: 'number'
-    }
-  },
-  // This is group 1
-  {
-    paymentType: {
-      type: 'string'
+getSchema: function ()  {
+  return [
+    // This is group 0
+    {
+      amount: {
+        type: 'number'
+      }
     },
-    cardNumber: {
-      type: 'number'
+    // This is group 1
+    {
+      paymentType: {
+        type: 'string'
+      },
+      cardNumber: {
+        type: 'number'
+      }
     }
-  }
-]
+  ];
+}
 ```
 
 Alternatively, you can include a `group` property with each field.
 
 ```js
-schema: {
-  amount: {
-    type: 'number',
-    group: 0
-  }
-  paymentType: {
-    type: 'string',
-    group: 1
-  },
-  cardNumber: {
-    type: 'number',
-    group: 1
-  }
+getSchema: function ()  {
+  return {
+    amount: {
+      type: 'number',
+      group: 0
+    }
+    paymentType: {
+      type: 'string',
+      group: 1
+    },
+    cardNumber: {
+      type: 'number',
+      group: 1
+    }
+  };
 }
 ```
 

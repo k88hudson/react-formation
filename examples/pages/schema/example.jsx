@@ -4,15 +4,17 @@ var CreateForm = require('../../../src/form').CreateForm;
 var Form = CreateForm({
 
   // This defines all the fields in the form
-  schema: {
-    name: {
-      label: 'Name',
-      type: 'string'
-    },
-    email: {
-      label: 'Email',
-      type: 'string'
-    }
+  getSchema: function () {
+    return {
+      name: {
+        label: 'Name',
+        type: 'string'
+      },
+      email: {
+        label: 'Email',
+        type: 'string'
+      }
+    };
   },
 
   // This code is run when the form is valid and submitted

@@ -164,71 +164,73 @@ function requiredIfCreditCard() {
 }
 
 var Form = CreateForm({
-  schema: [
-    {
-      amount: {
-        required: true,
-        label: 'Amount',
-        type: 'number'
-      },
-      isMonthly: {
-        initial: false,
-        type: 'boolean'
-      }
-    },
-    {
-      paymentType: {
-        type: 'string',
-        label: 'Payment type',
-        required: true
-      },
-      cardNumber: {
-        required: requiredIfCreditCard,
-        type: 'number',
-        label: 'Credit card number'
-      },
-      cardExpiryM: {
-        required: requiredIfCreditCard,
-        type: 'number',
-        label: 'Expiry Month'
-      },
-      cardExpiryY: {
-        required: requiredIfCreditCard,
-        type: 'number',
-        label: 'Expiry Year'
-      },
-      cardCVC: {
-        required: requiredIfCreditCard,
-        type: 'string',
-        label: 'Credit card CVC'
-      }
-    },
-    {
-      name: {
-        required: true,
-        label: 'Name',
-        type: 'string'
-      },
-      email: {
-        required: true,
-        label: 'Email',
-        type: 'email'
-      },
-      country: {
-        required: true,
-        type: 'string',
-        label: 'Country'
-      },
-      province: {
-        required: function () {
-          if (this.state.paymentType !== 'creditCard') return false;
-          if (PROVINCES[this.state.country]) return true;
+  getSchema: function () {
+    return [
+      {
+        amount: {
+          required: true,
+          label: 'Amount',
+          type: 'number'
         },
-        type: 'string',
-        label: 'Province'
+        isMonthly: {
+          initial: false,
+          type: 'boolean'
+        }
+      },
+      {
+        paymentType: {
+          type: 'string',
+          label: 'Payment type',
+          required: true
+        },
+        cardNumber: {
+          required: requiredIfCreditCard,
+          type: 'number',
+          label: 'Credit card number'
+        },
+        cardExpiryM: {
+          required: requiredIfCreditCard,
+          type: 'number',
+          label: 'Expiry Month'
+        },
+        cardExpiryY: {
+          required: requiredIfCreditCard,
+          type: 'number',
+          label: 'Expiry Year'
+        },
+        cardCVC: {
+          required: requiredIfCreditCard,
+          type: 'string',
+          label: 'Credit card CVC'
+        }
+      },
+      {
+        name: {
+          required: true,
+          label: 'Name',
+          type: 'string'
+        },
+        email: {
+          required: true,
+          label: 'Email',
+          type: 'email'
+        },
+        country: {
+          required: true,
+          type: 'string',
+          label: 'Country'
+        },
+        province: {
+          required: function () {
+            if (this.state.paymentType !== 'creditCard') return false;
+            if (PROVINCES[this.state.country]) return true;
+          },
+          type: 'string',
+          label: 'Province'
+        }
       }
-    }
-  ],
+    ];
+  },
   onSuccess: function (data) {
     this.refs.sequence.goNext();
   },

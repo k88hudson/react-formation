@@ -1,6 +1,6 @@
 # Schema
 
-A schema should be an object, where each key represents a unique field. Each key's value is an object which can contain:
+A schema should be an object return by the method `getSchema`, where each key represents a unique field. Each key's value is an object which can contain:
 
 Property | Default | Description
 ---------|---------|-------------
@@ -10,21 +10,23 @@ Property | Default | Description
 `label`| | This will be used in some error messages.
 
 ```js
-schema: {
-  name: {
-    initial: 'Bob Jones',
-    required: true,
-    label: 'Name'
-  },
-  email: {
-    required: true,
-    label: 'Email',
-    type: 'email'
-  },
-  cardNumber: {
-    type: 'number',
-    label: 'Credit card number'
-  }
+getSchema: function () {
+  return {
+    name: {
+      initial: 'Bob Jones',
+      required: true,
+      label: 'Name'
+    },
+    email: {
+      required: true,
+      label: 'Email',
+      type: 'email'
+    },
+    cardNumber: {
+      type: 'number',
+      label: 'Credit card number'
+    }
+  };
 }
 ```
 
