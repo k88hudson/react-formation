@@ -176,12 +176,12 @@ describe('CreateForm', function () {
       var Form = Formation.CreateForm({
         schema: {
           foo: {label: 'Foo', required: true},
-          bar : {type: (val) => {
-            if (val > 10) return false;
-            return 'Must be greater than 10';
+          bar : {type: function (val) {
+            if (val > this.state.max) return false;
+            return 'Must be greater than ' + this.state.max;
           }},
           email: {required: true, type: 'email'},
-          name: {type: 'alpha'},
+          name: {type: Formation.Validator.maxLength(10)},
           lastName: {required: function () {
             return this.state.name;
           }}
@@ -203,17 +203,19 @@ describe('CreateForm', function () {
       form.setState({name: 'Kate'});
       should.deepEqual(form.validateField('lastName'), ['lastName is required']);
     });
-    it('should return a validation error for a Validator instance', function () {
-      form.setState({name: 'hello1'});
-      should.deepEqual(form.validateField('name'), ['Must be letters only (A-Z)']);
+    it('should validate built in validators in the right context', function () {
+      form.setState({name: 'Kate'});
+      should.deepEqual(form.validateField('name'), false);
+      form.setState({name: 'Kateasdasdsadasdasdasdasd'});
+      should.deepEqual(form.validateField('name'), ['Must be less than 10 characters']);
     });
     it('should return a validation error for string', function () {
       should.deepEqual(form.validateField('email'), ['email is required']);
       form.setState({email: 'hello'});
       should.deepEqual(form.validateField('email'), ['Must be an email']);
     });
-    it('should return a validation error for a custom type', function () {
-      form.setState({bar: 4});
+    it('should return a validation error for a custom type with the right context', function () {
+      form.setState({bar: 4, max: 10});
       should.deepEqual(form.validateField('bar'), ['Must be greater than 10']);
       form.setState({bar: 11});
       should.deepEqual(form.validateField('bar'), false);

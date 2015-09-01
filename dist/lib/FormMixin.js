@@ -9,7 +9,7 @@ var FormMixin = {
 // Add each method defined in the context to the mixin
 contextConfig.methods.forEach(function (method) {
   FormMixin[method] = function () {
-    return this.context.composableForms[method].apply(null, arguments);
+    return this.context[contextConfig.name][method].apply(null, arguments);
   };
 });
 

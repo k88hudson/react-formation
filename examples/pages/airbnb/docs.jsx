@@ -5,6 +5,9 @@ var classnames = require('classnames');
 var CreateForm = Formation.CreateForm;
 var SubmitButton = Formation.SubmitButton;
 var ErrorMessage = Formation.ErrorMessage;
+var Validator = Formation.Validator;
+
+var {FormattedMessage, IntlMixin} = require('react-intl').IntlMixin;
 
 var days = [];
 var years = [];
@@ -15,6 +18,7 @@ var dateData = {
   months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   days
 };
+
 
 var Input = React.createClass({
   mixins: [Formation.FormMixin],
@@ -32,11 +36,12 @@ var Input = React.createClass({
 });
 
 var Form = CreateForm({
+  mixins: [IntlMixin],
   schema: {
     firstName: {
       required: true,
-      label: 'First name',
-      type: 'string'
+      type: Validator.maxLength(5),
+      label: 'First name'
     },
     lastName: {
       required: true,
@@ -80,7 +85,7 @@ var Form = CreateForm({
         <Input label="Email" field="email" />
         <Input label="Password" field="password" type="password" />
 
-        <label>Birthday</label>
+        <label><FormattedMessage message={this.getIntlMessage('birthday')} /></label>
         <div className="helper-error" hidden={!this.didSubmit() || (!this.validateField('birthdayMonth') && !this.validateField('birthdayDay') && !this.validateField('birthdayYear'))}>
           Select your birth date to continue
         </div>

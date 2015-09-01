@@ -74,13 +74,13 @@ module.exports = {
       if (isConditionallyRequred && !currentValue) errors.push(label + ' is required');
     }
     if (currentValue && schema.type instanceof Validator) {
-      var typeError = schema.type.assert(currentValue, this);
+      var typeError = schema.type.assert(currentValue);
       if (typeError) errors = errors.concat(typeError);
     } else if (currentValue && typeof schema.type === 'string' && Validator[schema.type]) {
        var typeError = Validator[schema.type]().assert(currentValue);
        if (typeError) errors = errors.concat(typeError);
     } else if (currentValue && typeof schema.type === 'function') {
-      var typeError = schema.type(currentValue);
+      var typeError = schema.type.call(this, currentValue);
       if (typeError) errors.push(typeError);
     }
 

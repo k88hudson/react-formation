@@ -47,9 +47,10 @@ module.exports = function CreateForm(config) {
       contextConfig.methods.forEach(function (method) {
         methods[method] = _this2[method];
       });
-      return {
-        composableForms: methods
-      };
+
+      var context = {};
+      context[contextConfig.name] = methods;
+      return context;
     }
   });
 

@@ -2,6 +2,7 @@ var React = require('react/addons');
 var Router = require('react-router');
 var {DefaultRoute, Link, Route, RouteHandler} = Router;
 var {Markdown} = require('react-markdocs');
+var IntlMixin = require('react-intl').IntlMixin;
 
 var routeDefinitions = [
   <DefaultRoute name="simple" label="Get started" handler={require('./pages/simple/docs.jsx')} />,
@@ -17,9 +18,18 @@ var routeDefinitions = [
   <Route name="airbnb" label="Example: airbnb" handler={require('./pages/airbnb/docs.jsx')} />
 ];
 
+var intlData = {
+  locales : ['en-US'],
+  messages: {
+    birthday: 'Birthday',
+    foo: 'foo'
+  }
+};
+
 var App = React.createClass({
+  mixins: [IntlMixin],
   render: function () {
-    return (<RouteHandler/>);
+    return (<RouteHandler />);
   }
 });
 
@@ -60,5 +70,5 @@ var routes = (
 );
 
 Router.run(routes, function (Handler) {
-  React.render(<Handler/>, document.getElementById('app'));
+  React.render(<Handler {...intlData} />, document.getElementById('app'));
 });

@@ -58,6 +58,7 @@
     "mocha": "^2.2.5",
     "npm-run-all": "^1.2.4",
     "raw-loader": "^0.5.1",
+    "react-intl": "^1.2.0",
     "react-markdocs": "k88hudson/react-markdocs",
     "react-router": "^0.13.3",
     "rimraf": "^2.3.3",

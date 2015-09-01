@@ -42,13 +42,15 @@ module.exports = function CreateForm(config) {
       contextConfig.methods.forEach(method => {
         methods[method] = this[method];
       });
-      return {
-        composableForms: methods
-      };
+
+      var context = {};
+      context[contextConfig.name] = methods;
+      return context;
     }
   });
 
   config.mixins.push(CreateFormMixin);
 
   return React.createClass(config);
+
 };
