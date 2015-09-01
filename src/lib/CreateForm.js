@@ -30,7 +30,7 @@ module.exports = function CreateForm(config) {
       Object.keys(this.__schema).forEach(key => {
         state.__dirtyFields[key] = false;
         state[key] = this.__schema[key].initial;
-      }.bind(this));
+      });
 
       return state;
     },
