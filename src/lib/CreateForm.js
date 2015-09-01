@@ -4,15 +4,8 @@ var CreateFormMixin = require('./CreateFormMixin');
 var contextConfig = require('./contextConfig');
 
 module.exports = function CreateForm(config) {
-
-  if (!config.schema) throw new Error('You must include "schema" as one of the properties for CreateForm');
+  if (!config.getSchema) throw new Error('You must include "getSchema" as one of the properties for CreateForm');
   if (!config.mixins) config.mixins = [];
-
-  // If we get an array for the schema,
-  // assume we want a multi-part form
-  if (config.schema instanceof Array) {
-    config.schema = convertSchema(config.schema);
-  }
 
   // We need this for setting up linked state
   if (config.mixins.indexOf(React.addons.LinkedStateMixin) === -1) {
@@ -23,13 +16,20 @@ module.exports = function CreateForm(config) {
     getInitialState: function () {
 
       var state = {
-        didSubmit: false,
-        dirtyFields: {}
+        __didSubmit: false,
+        __dirtyFields: {}
       };
 
-      Object.keys(this.schema).forEach(key => {
-        state.dirtyFields[key] = false;
-        state[key] = this.schema[key].initial;
+      this.__schema = this.getSchema();
+
+      // assume we want a multi-part form
+      if (this.__schema instanceof Array) {
+        this.__schema = convertSchema(this.__schema);
+      }
+
+      Object.keys(schema).forEach(key => {
+        state.__dirtyFields[key] = false;
+        state[key] = this.__schema[key].initial;
       });
 
       return state;

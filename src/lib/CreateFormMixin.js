@@ -3,13 +3,13 @@ var Validator = require('./Validator');
 module.exports = {
 
   linkField: function (key) {
-    if (!this.schema[key]) throw new Error('No value "' + key + '" exists in the schema');
+    if (!this.__schema[key]) throw new Error('No value "' + key + '" exists in the schema');
     return this.linkState(key);
   },
 
   getValues: function () {
     var values = {};
-    Object.keys(this.schema).forEach(key => {
+    Object.keys(this.__schema).forEach(key => {
       if (typeof this.linkField(key).value === 'undefined') return;
       values[key] = this.linkField(key).value;
     });
@@ -18,13 +18,13 @@ module.exports = {
 
   submitGroup: function (group, onSuccess, onError) {
 
-    var dirtyFields = this.state.dirtyFields;
+    var __dirtyFields = this.state.__dirtyFields;
 
-    Object.keys(this.schema).forEach(key => {
-      if (this.schema[key].group === group) dirtyFields[key] = true;
+    Object.keys(this.__schema).forEach(key => {
+      if (this.__schema[key].group === group) __dirtyFields[key] = true;
     });
 
-    this.setState({dirtyFields});
+    this.setState({__dirtyFields});
 
     // TODO return values
     if (this.isGroupValid(group)) {
@@ -39,21 +39,21 @@ module.exports = {
     if (e) e.preventDefault();
 
     // Make all fields dirty
-    var dirtyFields = this.state.dirtyFields;
-    Object.keys(this.schema).forEach(key => {
-      dirtyFields[key] = true;
+    var __dirtyFields = this.state.__dirtyFields;
+    Object.keys(this.__schema).forEach(key => {
+      __dirtyFields[key] = true;
     });
 
     this.setState({
-      dirtyFields,
-      didSubmit: true
+      __dirtyFields,
+      __didSubmit: true
     });
 
     if (!this.isValid()) return;
 
     var data = {};
 
-    Object.keys(this.schema).forEach(key => {
+    Object.keys(this.__schema).forEach(key => {
       if (typeof this.state[key] !== 'undefined') data[key] = this.state[key];
     });
 
@@ -64,7 +64,7 @@ module.exports = {
 
   validateField: function (key) {
     var errors = [];
-    var schema = this.schema[key];
+    var schema = this.__schema[key];
     var currentValue = this.state[key];
     var label = schema.label || key;
 
@@ -88,13 +88,13 @@ module.exports = {
   },
 
   didSubmit: function (field) {
-    if (!field) return this.state.didSubmit;
-    return this.state.dirtyFields[field];
+    if (!field) return this.state.__didSubmit;
+    return this.state.__dirtyFields[field];
   },
 
   isGroupValid: function (groupName) {
     var isValid = true;
-    var fields = Object.keys(this.schema).filter(key => this.schema[key].group === groupName);
+    var fields = Object.keys(this.__schema).filter(key => this.__schema[key].group === groupName);
     fields.forEach(key => {
       if (this.validateField(key)) isValid = false;
     });
@@ -103,7 +103,7 @@ module.exports = {
 
   isValid: function () {
     var isValid = true;
-    Object.keys(this.schema).forEach(key => {
+    Object.keys(this.__schema).forEach(key => {
       if (this.validateField(key)) isValid = false;
     });
     return isValid;
