@@ -27,7 +27,7 @@ module.exports = function CreateForm(config) {
         this.__schema = convertSchema(this.__schema);
       }
 
-      Object.keys(schema).forEach(key => {
+      Object.keys(this.__schema).forEach(key => {
         state.__dirtyFields[key] = false;
         state[key] = this.__schema[key].initial;
       });
