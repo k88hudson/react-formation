@@ -242,9 +242,11 @@ describe('CreateForm', function () {
 
     beforeEach(function () {
       var Form = Formation.CreateForm({
-        schema: {
-          foo: {required: true, group: 0},
-          baz: {group: 1}
+        getSchema: function () {
+          return {
+            foo: {required: true, group: 0},
+            baz: {group: 1}
+          };
         },
         onSuccess: function () {},
         render: function () {
