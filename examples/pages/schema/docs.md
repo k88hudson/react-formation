@@ -1,6 +1,6 @@
 # Schema
 
-A schema should be an object return by the method `getSchema`, where each key represents a unique field. Each key's value is an object which can contain:
+A schema should be an object returned by the method `getSchema, where each key represents a unique field. Each key's value is an object which can contain:
 
 Property | Default | Description
 ---------|---------|-------------
