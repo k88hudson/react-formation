@@ -79,93 +79,113 @@ describe('Validator', function () {
 
   describe('definitions', function () {
     var testData = {
-      oneOf: [
-        Validator.oneOf(['foo', 'bar']),
-        ['foo', false],
-        ['baz', ['Must be one of foo, bar']]
-      ],
-      number: [
-        Validator.number(),
-        ['1', false],
-        ['1.1d', ['Must be a number']]
-      ],
-      url: [
-        Validator.url(),
-        ['foo.foo.com?asdd&asdad#adsda', false],
-        ['foobaradsdd', ['Must be a URL']]
-      ],
-      date: [
-        Validator.date(),
-        ['January 9, 2013', false],
-        ['foo', ['Must be a date']]
-      ],
-      before: [
-        Validator.before('January 10, 2010'),
-        ['January 9 2010', false],
-        ['January 9 2011', ['Must be before January 10, 2010']]
-      ],
-      after: [
-        Validator.after('January 10, 2010'),
-        ['January 15 2010', false],
-        ['February 8 2000', ['Must be after January 10, 2010']]
-      ],
-      alpha: [
-        Validator.alpha(),
-        ['aasdDSAasd', false],
-        ['ad1asdd', ['Must be letters only (A-Z)']]
-      ],
-      email: [
-        Validator.email(),
-        ['aad@dasd.com', false],
-        ['asdd.com', ['Must be an email']]
-      ],
-      creditCard: [
-        Validator.creditCard(),
-        ['4012888888881881', false],
-        ['1231231232', ['Please enter a valid credit card']]
-      ],
-      max: [
-        Validator.max(10),
-        [9, false],
-        [11, ['Must be less than 10']]
-      ],
-      min: [
-        Validator.min(10),
-        ['10', false],
-        ['8', ['Must be greater than 10']]
-      ],
-      maxLength: [
-        Validator.maxLength(5),
-        ['abcde', false],
-        ['asdadsadasda', ['Must be less than 5 characters']]
-      ],
-      minLength: [
-        Validator.minLength(2),
-        ['adasdasdasd', false],
-        ['a', ['Must be at least 2 characters']]
-      ],
-      pattern: [
-        Validator.pattern(/foo/),
-        ['foo', false],
-        ['bar', ['Does not match pattern']]
-      ],
-      currency: [
-        Validator.currency(),
-        ['42.42', false],
-        ['42..42', ['Must be a valid currency']]
-      ],
-      hexColor: [
-        Validator.hexColor(),
-        ['1f1f1F', false],
-        ['030k93l', ['Must be a valid hex color']]
-      ]
+      oneOf : {
+        validatorTerm: Validator.oneOf(['foo', 'bar']),
+        valid: ['foo','bar'],
+        invalid: ['baz','foi'],
+        invalidMessage: ['Must be one of foo, bar']
+      },
+      number : {
+        validatorTerm: Validator.number(),
+        valid: ['1','42','987'],
+        invalid: ['1.1d','j3883','3897h38'],
+        invalidMessage: ['Must be a number']
+      },
+      url : {
+        validatorTerm: Validator.url(),
+        valid: ['foo.foo.com?asdd&asdad#adsda','http://www.google.ca','torontobluejaysworldchampionship.com'],
+        invalid: ['foobaradsdd','adalova..com','next..test.com'],
+        invalidMessage: ['Must be a URL']
+      },
+      date: {
+        validatorTerm: Validator.date(),
+        valid: ['January 9, 2013','December 20, 1903'],
+        invalid: ['foo', 'Jan 2012 1202'],
+        invalidMessage: ['Must be a date']
+      },
+      before: {
+        validatorTerm: Validator.before('January 10, 2010'),
+        valid: ['January 9 2010'],
+        invalid: ['January 9 2011'],
+        invalidMessage: ['Must be before January 10, 2010']
+      },
+      after: {
+        validatorTerm: Validator.after('January 10, 2010'),
+        valid: ['January 15 2010'],
+        invalid: ['February 8 2000'],
+        invalidMessage: ['Must be after January 10, 2010']
+      },
+      alpha: {
+        validatorTerm: Validator.alpha(),
+        valid: ['aasdDSAasd','la','Ada'],
+        invalid: ['ad1asdd','Ada1ovelace'],
+        invalidMessage: ['Must be letters only (A-Z)']
+      },
+      email: {
+        validatorTerm: Validator.email(),
+        valid: ['aad@dasd.com'],
+        invalid: ['asdd.com','ada@lovelace..com','bar@@foo.com'],
+        invalidMessage: ['Must be an email']
+      },
+      creditCard: {
+        validatorTerm: Validator.creditCard(),
+        valid: ['4012888888881881'],
+        invalid: ['1231231232','11111888888881881333'],
+        invalidMessage: ['Please enter a valid credit card']
+      },
+      max: {
+        validatorTerm: Validator.max(10),
+        valid: [9],
+        invalid: [11],
+        invalidMessage: ['Must be less than 10']
+      },
+      min: {
+        validatorTerm: Validator.min(10),
+        valid: ['10'],
+        invalid: ['8'],
+        invalidMessage: ['Must be greater than 10']
+      },
+      maxLength: {
+        validatorTerm: Validator.maxLength(5),
+        valid: ['abcde'],
+        invalid: ['asdadsadasda'],
+        invalidMessage: ['Must be less than 5 characters']
+      },
+      minLength: {
+        validatorTerm: Validator.minLength(2),
+        valid: ['adasdasdasd'],
+        invalid: ['a'],
+        invalidMessage: ['Must be at least 2 characters']
+      },
+      pattern: {
+        validatorTerm: Validator.pattern(/foo/),
+        valid: ['foo'],
+        invalid: ['bar'],
+        invalidMessage: ['Does not match pattern']
+      },
+      currency: {
+        validatorTerm: Validator.currency(),
+        valid: ['42.42','2897.99','2829873'],
+        invalid: ['42..42','..38','32.3'],
+        invalidMessage: ['Must be a valid currency']
+      },
+      hexColor: {
+        validatorTerm: Validator.hexColor(),
+        valid: ['1f1f1F'],
+        invalid: ['030k93l'],
+        invalidMessage: ['Must be a valid hex color']
+      }
     };
 
     Object.keys(testData).forEach(key => {
       var data = testData[key];
-      it('#' + key, function () {
-        should.deepEqual(data[0].assert(data[1][0]), data[1][1]);
-        should.deepEqual(data[0].assert(data[2][0]), data[2][1]);
+      it('#' + key, () => {
+        data.valid.forEach( testCase => {
+          should.deepEqual(data.validatorTerm.assert(testCase), false);
+        });
+        data.invalid.forEach( testCase => {
+          should.deepEqual(data.validatorTerm.assert(testCase), data.invalidMessage );
+        });
       });
     });
 
