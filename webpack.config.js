@@ -1,6 +1,7 @@
-var jsSrc = __dirname + '/src';
-var examplesDir = __dirname + '/examples';
-var testsDir = __dirname + '/tests';
+var path = require('path');
+var jsSrc = path.join(__dirname, '/src');
+var examplesDir = path.join(__dirname, '/examples');
+var testsDir = path.join(__dirname, '/tests');
 var webpack = require('webpack');
 var WebpackNotifierPlugin = require('webpack-notifier');
 
@@ -14,7 +15,7 @@ module.exports = {
   },
   devtool: 'source-map', // To support Firefox, switch to exec
   output: {
-    path: __dirname + '/www',
+    path: path.join(__dirname, '/www'),
     filename: '[name].bundle.js'
   },
   module: {

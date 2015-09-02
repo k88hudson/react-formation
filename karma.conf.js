@@ -1,4 +1,5 @@
 var webpackConfig = require('./webpack.config.js');
+var path = require('path');
 
 module.exports = function (config) {
   config.set({
@@ -23,7 +24,7 @@ module.exports = function (config) {
         postLoaders: process.env.KARMA_ENV === 'coverage' ? [{
           test: /\.js$/,
           loader: 'istanbul-instrumenter',
-          include: [__dirname + '/src']
+          include: [path.join(__dirname, '/src')]
         }] : null
       }
     },
