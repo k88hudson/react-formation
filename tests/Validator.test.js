@@ -169,6 +169,12 @@ describe('Validator', function () {
         invalid: ['42..42','..38','32.3'],
         invalidMessage: ['Must be a valid currency']
       },
+      hexColor: {
+        validatorTerm: Validator.hexColor(),
+        valid: ['1f1f1F'],
+        invalid: ['030k93l'],
+        invalidMessage: ['Must be a valid hex color']
+      }
     };
 
     Object.keys(testData).forEach(key => {
