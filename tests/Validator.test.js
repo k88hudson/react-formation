@@ -174,11 +174,11 @@ describe('Validator', function () {
     Object.keys(testData).forEach(key => {
       var data = testData[key];
       it('#' + key, () => {
-        data.valid.forEach( e => {
-          should.deepEqual(data.validatorTerm.assert(e), false);
+        data.valid.forEach( testCase => {
+          should.deepEqual(data.validatorTerm.assert(testCase), false);
         });
-        data.invalid.forEach( e => {
-          should.deepEqual(data.validatorTerm.assert(e), data.invalidMessage );
+        data.invalid.forEach( testCase => {
+          should.deepEqual(data.validatorTerm.assert(testCase), data.invalidMessage );
         });
       });
     });
