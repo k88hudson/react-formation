@@ -44,11 +44,12 @@ It also includes an <ErrorMessage /> component with good default behaviour in bo
 
 ## Guide and examples
 
-Check out [the guide and examples](http://k88hudson.github.io/react-formation/www).
+Check out the guide and examples:
 
-* [Creating a form](./examples/simple/docs.md)
-* [Schema](./examples/schema/docs.md)
-* [Linking field values](./examples/linking/docs.md)
-* [Submitting](./examples/submitting/docs.md)
-* [Errors](./examples/errors/docs.md)
+* [Creating a form](http://k88hudson.github.io/react-formation/#/examples/)
+* [Schema](http://k88hudson.github.io/react-formation/#/examples/schema)
+* [Linking field values](http://k88hudson.github.io/react-formation/#/examples/linking)
+* [Submitting](http://k88hudson.github.io/react-formation/#/examples/submitting)
+* [Errors](http://k88hudson.github.io/react-formation/#/examples/errors)
 * [API](./src/lib/apiDocs)
+* [Example: airbnb](http://k88hudson.github.io/react-formation/#/examples/airbnb)
