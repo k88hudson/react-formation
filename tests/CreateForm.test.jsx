@@ -24,9 +24,6 @@ describe('CreateForm', function () {
     var foo = 'john@doe.com';
     var bar = 10;
 
-    var fooDefinition = {required: true, type: 'email', initial: foo}
-    var barDefinition = {required: true, type: 'number', initial: bar}
-
     beforeEach(function () {
       var Form = Formation.CreateForm({
         getSchema: function () {
@@ -44,39 +41,12 @@ describe('CreateForm', function () {
     });
 
     it('should create instance property __schema correctly', function () {
+      should.equal(form.__schema.foo.required, true);
       should.equal(form.__schema.foo.initial, foo);
-      should.equal(form.__schema.foo.type, fooDefinition.type);
+      should.equal(form.__schema.foo.type, 'email');
+      should.equal(form.__schema.bar.required, true);
       should.equal(form.__schema.bar.initial, bar);
-      should.equal(form.__schema.bar.type, barDefinition.type);
-    });
-  });
-
-  describe('getSchema (using this.props as initial values)', function () {
-    var form;
-    var didSubmit;
-
-    var foo = 'john@doe.com';
-    var bar = 10;
-
-    beforeEach(function () {
-      var Form = Formation.CreateForm({
-        getSchema: function () {
-          return {
-            foo: {required: true, initial: this.props.foo},
-            bar: {required: true, initial: this.props.bar}
-          };
-        },
-        onSuccess: function () {},
-        render: function () {
-          return <form />;
-        }
-      });
-      form = TestUtils.renderIntoDocument(<Form foo={foo} bar={bar} />);
-    });
-
-    it('should create schema correctly', function () {
-      should.equal(form.__schema.foo.initial, foo);
-      should.equal(form.__schema.bar.initial, bar);
+      should.equal(form.__schema.bar.type, 'number');
     });
 
     it('should set initial state correctly', function () {
