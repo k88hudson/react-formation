@@ -17,6 +17,74 @@ describe('CreateForm', function () {
     });
   });
 
+  describe('getSchema', function () {
+    var form;
+    var didSubmit;
+
+    var foo = 'john@doe.com';
+    var bar = 10;
+
+    var fooDefinition = {required: true, type: 'email', initial: foo}
+    var barDefinition = {required: true, type: 'number', initial: bar}
+
+    beforeEach(function () {
+      var Form = Formation.CreateForm({
+        getSchema: function () {
+          return {
+            foo: {required: true, type: 'email', initial: this.props.foo},
+            bar: {required: true, type: 'number', initial: this.props.bar}
+          };
+        },
+        onSuccess: function () {},
+        render: function () {
+          return <form />;
+        }
+      });
+      form = TestUtils.renderIntoDocument(<Form foo={foo} bar={bar} />);
+    });
+
+    it('should create instance property __schema correctly', function () {
+      should.equal(form.__schema.foo.initial, foo);
+      should.equal(form.__schema.foo.type, fooDefinition.type);
+      should.equal(form.__schema.bar.initial, bar);
+      should.equal(form.__schema.bar.type, barDefinition.type);
+    });
+  });
+
+  describe('getSchema (using this.props as initial values)', function () {
+    var form;
+    var didSubmit;
+
+    var foo = 'john@doe.com';
+    var bar = 10;
+
+    beforeEach(function () {
+      var Form = Formation.CreateForm({
+        getSchema: function () {
+          return {
+            foo: {required: true, initial: this.props.foo},
+            bar: {required: true, initial: this.props.bar}
+          };
+        },
+        onSuccess: function () {},
+        render: function () {
+          return <form />;
+        }
+      });
+      form = TestUtils.renderIntoDocument(<Form foo={foo} bar={bar} />);
+    });
+
+    it('should create schema correctly', function () {
+      should.equal(form.__schema.foo.initial, foo);
+      should.equal(form.__schema.bar.initial, bar);
+    });
+
+    it('should set initial state correctly', function () {
+      should.equal(form.state.foo, foo);
+      should.equal(form.state.bar, bar);
+    });
+  });
+
   describe('#linkField', function () {
     var form;
 
