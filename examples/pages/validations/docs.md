@@ -5,16 +5,18 @@ You can validate fields by adding a `Formation.Validator` object to the `type` p
 ```jsx{5,8,11}
 var Validator = require('react-formation').Validator;
 
-var schema = {
-  email: {
-    type: Validator.email()
-  },
-  creditCard: {
-    type: Validator.creditCard()
-  },
-  numberOfApples: {
-    type: Validator.number().min(1).max(10)
-  }
+var getSchema = function () {
+  return {
+    email: {
+      type: Validator.email()
+    },
+    creditCard: {
+      type: Validator.creditCard()
+    },
+    numberOfApples: {
+      type: Validator.number().min(1).max(10)
+    }
+  };
 };
 ```
 
@@ -92,8 +94,10 @@ function isBob(value) {
   }
 }
 
-var schema = {
-  name: {type: isBob}
+var getSchema = function () {
+  return {
+    name: {type: isBob}
+  };
 };
 ```
 
@@ -108,9 +112,11 @@ function sameAsPassword(value) {
   }
 }
 
-var schema = {
-  password: {required: true},
-  name: {type: sameAsPassword}
+var getSchema = function () {
+  return {
+    password: {required: true},
+    name: {type: sameAsPassword}
+  };
 };
 ```
 

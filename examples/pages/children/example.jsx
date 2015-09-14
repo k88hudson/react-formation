@@ -44,21 +44,23 @@ var PersonalInfo = React.createClass({
 });
 
 var Form = CreateForm({
-  schema: {
-    username: {
-      required: true,
-      label: 'Username',
-      type: Validator.alpha()
-    },
-    email: {
-      required: true,
-      label: 'Email',
-      type: Validator.email()
-    },
-    cardNumber: {
-      type: Validator.creditCard(),
-      label: 'Credit card'
-    }
+  getSchema: function () {
+    return {
+      username: {
+        required: true,
+        label: 'Username',
+        type: Validator.alpha()
+      },
+      email: {
+        required: true,
+        label: 'Email',
+        type: Validator.email()
+      },
+      cardNumber: {
+        type: Validator.creditCard(),
+        label: 'Credit card'
+      }
+    };
   },
   onSuccess: function (data) {
     alert(JSON.stringify(data));

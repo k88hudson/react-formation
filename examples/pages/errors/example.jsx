@@ -6,17 +6,19 @@ var ErrorMessage = Formation.ErrorMessage;
 
 var Form = CreateForm({
 
-  schema: {
-    name: {
-      label: 'Name',
-      type: 'string',
-      required: true
-    },
-    email: {
-      label: 'Email',
-      type: 'email',
-      required: true
-    }
+  getSchema: function () {
+    return {
+      name: {
+        label: 'Name',
+        type: 'string',
+        required: true
+      },
+      email: {
+        label: 'Email',
+        type: 'email',
+        required: true
+      }
+    };
   },
 
   onSuccess: function (data) {

@@ -9,32 +9,35 @@ var zxcvbn = require('zxcvbn');
 var classnames = require('classnames');
 
 var Form = CreateForm({
-  schema: {
-    username: {
-      required: true,
-      label: 'Username',
-      type: function (val) {
-        if (/^[a-zA-Z0-9\-]{1,20}$/.test(val)) return false;
-        return 'Must be 1-20 characters long and use only "-" and alphanumeric symbols';
-      }
-    },
-    email: {
-      required: true,
-      label: 'Email',
-      type: 'email'
-    },
-    password: {
-      required: true,
-      label: 'Password',
-      type: function (val) {
-        if (val && zxcvbn(val).score > 0) return false;
-        return 'Password is not strong enough';
+  getSchema: function () {
+    return {
+      username: {
+        required: true,
+        label: 'Username',
+        type: function (val) {
+          if (/^[a-zA-Z0-9\-]{1,20}$/.test(val)) return false;
+          return 'Must be 1-20 characters long and use only "-" and alphanumeric symbols';
+        }
       },
-    },
-    subscribe: {
-      type: 'boolean'
+      email: {
+        required: true,
+        label: 'Email',
+        type: 'email'
+      },
+      password: {
+        required: true,
+        label: 'Password',
+        type: function (val) {
+          if (val && zxcvbn(val).score > 0) return false;
+          return 'Password is not strong enough';
+        },
+      },
+      subscribe: {
+        type: 'boolean'
+      }
     }
   },
+
   getInitialState: function () {
     return {
       blurred: {}

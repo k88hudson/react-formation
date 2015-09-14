@@ -87,25 +87,27 @@ var SelectEg = React.createClass({
 });
 
 var Form = CreateForm({
-  schema: {
-    name: {
-      label: 'Name',
-      type: 'string'
-    },
-    age: {
-      label: 'Age',
-      type: 'number'
-    },
-    likeDogs: {
-      label: 'Do you like dogs',
-      type: 'boolean'
-    },
-    color: {
-      type: 'string'
-    },
-    country: {
-      type: 'string'
-    }
+  getSchema: function () {
+    return {
+      name: {
+        label: 'Name',
+        type: 'string'
+      },
+      age: {
+        label: 'Age',
+        type: 'number'
+      },
+      likeDogs: {
+        label: 'Do you like dogs',
+        type: 'boolean'
+      },
+      color: {
+        type: 'string'
+      },
+      country: {
+        type: 'string'
+      }
+    };
   },
   onSuccess: function (data) {
     alert(JSON.stringify(data));

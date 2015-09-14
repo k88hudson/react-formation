@@ -32,14 +32,16 @@ var Form = Formation.CreateForm({
 });
 ```
 
-Next, add **a schema** property that defines all the fields in the form, and link corresponding inputs with `this.linkField`:
+Next, add **a `getSchema`** method that returns a schema defining all the fields in the form, and link corresponding inputs with `this.linkField`:
 
 ```jsx{3-6,11,14}
 var Form = Formation.CreateForm({
 
-  schema: {
-    name: {required: true}
-    email: {type: 'email'}
+  getSchema: function () {
+    return {
+      name: {required: true}
+      email: {type: 'email'}
+    };
   },
 
   render: function () {
@@ -64,9 +66,11 @@ Finally, add **an onSuccess** callback that gets called on a successful submit, 
 ```jsx{8-10,21}
 var Form = Formation.CreateForm({
 
-  schema: {
-    name: {required: true}
-    email: {type: 'email'}
+  getSchema: function () {
+    return {
+      name: {required: true}
+      email: {type: 'email'}
+    };
   },
 
   onSuccess: function (data) {

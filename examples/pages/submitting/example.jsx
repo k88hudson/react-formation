@@ -3,14 +3,16 @@ var {CreateForm, SubmitButton} = require('../../../src/form');
 
 var Form = CreateForm({
 
-  schema: {
-    name: {
-      label: 'Name',
-      type: 'string'
-    },
-    email: {
-      label: 'Email',
-      type: 'string'
+  getSchema: function () {
+    return {
+      name: {
+        label: 'Name',
+        type: 'string'
+      },
+      email: {
+        label: 'Email',
+        type: 'string'
+      }
     }
   },
 

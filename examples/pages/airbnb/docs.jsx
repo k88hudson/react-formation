@@ -37,42 +37,44 @@ var Input = React.createClass({
 
 var Form = CreateForm({
   mixins: [IntlMixin],
-  schema: {
-    firstName: {
-      required: true,
-      type: Validator.maxLength(5),
-      label: 'First name'
-    },
-    lastName: {
-      required: true,
-      label: 'Last name',
-      type: 'string'
-    },
-    email: {
-      label: 'Email',
-      required: true,
-      type: 'email'
-    },
-    password: {
-      required: true,
-      label: 'Password',
-      type: function (val) {
-        if (val.length >= 5) return false;
-        return 'Password must be at least 5 characters. Please try again';
+  getSchema: function () {
+    return {
+      firstName: {
+        required: true,
+        type: Validator.maxLength(5),
+        label: 'First name'
       },
-    },
-    birthdayMonth: {
-      required: true
-    },
-    birthdayDay: {
-      required: true
-    },
-    birthdayYear: {
-      required: true
-    },
-    mailingList: {
-      type: 'boolean'
-    }
+      lastName: {
+        required: true,
+        label: 'Last name',
+        type: 'string'
+      },
+      email: {
+        label: 'Email',
+        required: true,
+        type: 'email'
+      },
+      password: {
+        required: true,
+        label: 'Password',
+        type: function (val) {
+          if (val.length >= 5) return false;
+          return 'Password must be at least 5 characters. Please try again';
+        },
+      },
+      birthdayMonth: {
+        required: true
+      },
+      birthdayDay: {
+        required: true
+      },
+      birthdayYear: {
+        required: true
+      },
+      mailingList: {
+        type: 'boolean'
+      }
+    };
   },
   onSuccess: function (data) {
     alert(JSON.stringify(data));

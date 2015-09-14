@@ -17,14 +17,54 @@ describe('CreateForm', function () {
     });
   });
 
+  describe('getSchema', function () {
+    var form;
+    var didSubmit;
+
+    var foo = 'john@doe.com';
+    var bar = 10;
+
+    beforeEach(function () {
+      var Form = Formation.CreateForm({
+        getSchema: function () {
+          return {
+            foo: {required: true, type: 'email', initial: this.props.foo},
+            bar: {required: true, type: 'number', initial: this.props.bar}
+          };
+        },
+        onSuccess: function () {},
+        render: function () {
+          return <form />;
+        }
+      });
+      form = TestUtils.renderIntoDocument(<Form foo={foo} bar={bar} />);
+    });
+
+    it('should create instance property __schema correctly', function () {
+      should.equal(form.__schema.foo.required, true);
+      should.equal(form.__schema.foo.initial, foo);
+      should.equal(form.__schema.foo.type, 'email');
+      should.equal(form.__schema.bar.required, true);
+      should.equal(form.__schema.bar.initial, bar);
+      should.equal(form.__schema.bar.type, 'number');
+    });
+
+    it('should set initial state correctly', function () {
+      should.equal(form.state.foo, foo);
+      should.equal(form.state.bar, bar);
+    });
+  });
+
   describe('#linkField', function () {
     var form;
 
     beforeEach(function () {
       var Form = Formation.CreateForm({
-        schema: {
-          foo: {required: true},
-          bar: {required: true}
+        getSchema: function () {
+          return {
+            foo: {required: true},
+            bar: {required: true}
+          };
         },
         onSuccess: function () {},
         render: function () {
@@ -52,9 +92,11 @@ describe('CreateForm', function () {
 
   describe('#getValues', function () {
     var Form = Formation.CreateForm({
-      schema: {
-        foo: {required: true},
-        bar: {required: true}
+      getSchema: function () {
+        return {
+          foo: {required: true},
+          bar: {required: true}
+        };
       },
       onSuccess: function () {},
       render: function () {
@@ -76,10 +118,12 @@ describe('CreateForm', function () {
 
     beforeEach(function () {
       var Form = Formation.CreateForm({
-        schema: {
-          foo: {required: true, group: 0},
-          bar: {required: true, group: 1},
-          baz: {required: true, group: 1}
+        getSchema: function () {
+          return {
+            foo: {required: true, group: 0},
+            bar: {required: true, group: 1},
+            baz: {required: true, group: 1}
+          };
         },
         onSuccess: function () {},
         render: function () {
@@ -91,7 +135,7 @@ describe('CreateForm', function () {
 
     it('should make all fields dirty in a group', function () {
       form.submitGroup(1);
-      should.deepEqual(form.state.dirtyFields, {foo: false, bar: true, baz: true});
+      should.deepEqual(form.state.__dirtyFields, {foo: false, bar: true, baz: true});
     });
 
     it('should call onSuccess if the group is valid', function () {
@@ -124,11 +168,13 @@ describe('CreateForm', function () {
     beforeEach(function () {
       didSubmit = false;
       var Form = Formation.CreateForm({
-        schema: {
-          foo: {required: true, group: 0},
-          bar: {required: true, group: 1},
-          baz: {required: true, type: 'email', group: 1},
-          qux: {type: 'number', group: 1}
+        getSchema: function () {
+          return {
+            foo: {required: true, group: 0},
+            bar: {required: true, group: 1},
+            baz: {required: true, type: 'email', group: 1},
+            qux: {type: 'number', group: 1}
+          };
         },
         onSuccess: function (data) {
           didSubmit = data;
@@ -149,12 +195,12 @@ describe('CreateForm', function () {
 
     it('should make all fields dirty', function () {
       form.submitForm();
-      should.deepEqual(form.state.dirtyFields, {foo: true, bar: true, baz: true, qux: true});
+      should.deepEqual(form.state.__dirtyFields, {foo: true, bar: true, baz: true, qux: true});
     });
 
-    it('should make this.state.didSubmit true', function () {
+    it('should make this.state.__didSubmit true', function () {
       form.submitForm();
-      should.equal(form.state.didSubmit, true);
+      should.equal(form.state.__didSubmit, true);
     });
 
     it('should not call onSuccess if the form is invalid', function () {
@@ -174,17 +220,19 @@ describe('CreateForm', function () {
     var form;
     beforeEach(function () {
       var Form = Formation.CreateForm({
-        schema: {
-          foo: {label: 'Foo', required: true},
-          bar : {type: function (val) {
-            if (val > this.state.max) return false;
-            return 'Must be greater than ' + this.state.max;
-          }},
-          email: {required: true, type: 'email'},
-          name: {type: Formation.Validator.maxLength(10)},
-          lastName: {required: function () {
-            return this.state.name;
-          }}
+        getSchema: function () {
+          return {
+            foo: {label: 'Foo', required: true},
+            bar : {type: function (val) {
+              if (val > this.state.max) return false;
+              return 'Must be greater than ' + this.state.max;
+            }},
+            email: {required: true, type: 'email'},
+            name: {type: Formation.Validator.maxLength(10)},
+            lastName: {required: function () {
+              return this.state.name;
+            }}
+          };
         },
         onSuccess: function () {},
         render: function () {
@@ -232,9 +280,11 @@ describe('CreateForm', function () {
 
     beforeEach(function () {
       var Form = Formation.CreateForm({
-        schema: {
-          foo: {required: true, group: 0},
-          baz: {group: 1}
+        getSchema: function () {
+          return {
+            foo: {required: true, group: 0},
+            baz: {group: 1}
+          };
         },
         onSuccess: function () {},
         render: function () {
@@ -244,7 +294,7 @@ describe('CreateForm', function () {
       form = TestUtils.renderIntoDocument(<Form  />);
     });
 
-    it('should return this.state.didSubmit', function () {
+    it('should return this.state.__didSubmit', function () {
       should.equal(form.didSubmit(), false);
       form.submitForm();
       should.equal(form.didSubmit(), true);
