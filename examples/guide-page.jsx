@@ -21,7 +21,7 @@ module.exports = function(options) {
     },
     render: function () {
       return (<div className="docs">
-        <div className="markdown"><Markdown prism source={options.docs} /></div>
+        <div className="markdown"><Markdown prism source={options.docs} options={{html: true}}/></div>
         {options.example && options.code && this.renderExample()}
       </div>);
     }
