@@ -155,40 +155,50 @@ header.links {
   }
 
   // validation table styles
-  .validationTable code {
-    background-color: transparent;
-  }
-  .validationTable th {
-    border-bottom: none;
-    text-align: center;
-  }
-  .validationTable td:nth-child(1) > code {
-    display: block;
-    vertical-align: top;
-  }
-  .validationTable td:nth-child(1) {
-    vertical-align: top;
-    padding-top: 20px;
-  }
-  .validationTable td:nth-child(2), .validationTable td:nth-child(3) {
+  .validationTable {
     code {
+      background-color: transparent;
+    }
+    th {
+      border-bottom: none;
+      text-align: center;
+    }
+    tr {
+      height: 80px;
+    }
+    td:nth-child(1) {
+      vertical-align: top;
+      padding-top: 19px;
+      code {
+        display: block;
+        vertical-align: top;
+        color: #000;
+      }
+    }
+    td:nth-child(2), td:nth-child(3) {
+      vertical-align: top;
+      code {
+        display: block;
+        margin-bottom: 10px;
+        margin-top: 10px;
+        padding: 5px;
+        background-color: none;
+        vertical-align: top;
+      }
+    }
+    td:nth-child(2) code {
+      color: #517900;
+    }
+    td:nth-child(4) {
       display: block;
-      margin-bottom: 10px;
-      margin-top: 10px;
-      padding: 5px;
-      background-color: none;
+      width: 200px;
+      border: none;
+      border-top: 1px solid #DDD;
+      height: auto;
+      padding-top: 15px;
     }
   }
-  .validationTable td:nth-child(2) code {
-    color: #517900;
-  }
-  .validationTable td:nth-child(4) {
-    display: block;
-    width: 200px;
-    border: none;
-    border-top: 1px solid #DDD;
-    height: auto;
-  }
+
 }
 
 /*********************************************************

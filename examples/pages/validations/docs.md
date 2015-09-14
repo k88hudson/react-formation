@@ -40,7 +40,7 @@ Validation | Valid | Invalid | Description
 `max`|`5`|`42`|Check if number is below a given max
 `min`|`20`|`1`|Check if number is above a given min
 `maxLength`|`cat`|`elephant`|Check if string length is below a given max
-`minLength`|`elephant`|`cat`|Check if strin length is above a given min
+`minLength`|`elephant`|`cat`|Check if string length is above a given min
 `creditCard`|`4716461583322103` `4716-2210-5188-5662`|`5398228707871528` `foo`|Check is credit card number is valid
 `oneOf`|`foo`|`baz`|Check if string matches a given string
 `pattern`|`foo`|`bar`|Check if string matches

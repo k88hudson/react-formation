@@ -287,13 +287,21 @@ header.links a.active {
   border-bottom: none;
   text-align: center;
 }
-.docs .validationTable td:nth-child(1) > code {
-  display: block;
-  vertical-align: top;
+.docs .validationTable tr {
+  height: 80px;
 }
 .docs .validationTable td:nth-child(1) {
   vertical-align: top;
-  padding-top: 20px;
+  padding-top: 19px;
+}
+.docs .validationTable td:nth-child(1) code {
+  display: block;
+  vertical-align: top;
+  color: #000;
+}
+.docs .validationTable td:nth-child(2),
+.docs .validationTable td:nth-child(3) {
+  vertical-align: top;
 }
 .docs .validationTable td:nth-child(2) code,
 .docs .validationTable td:nth-child(3) code {
@@ -302,6 +310,7 @@ header.links a.active {
   margin-top: 10px;
   padding: 5px;
   background-color: none;
+  vertical-align: top;
 }
 .docs .validationTable td:nth-child(2) code {
   color: #517900;
@@ -312,6 +321,7 @@ header.links a.active {
   border: none;
   border-top: 1px solid #DDD;
   height: auto;
+  padding-top: 15px;
 }
 /*********************************************************
 * Home
