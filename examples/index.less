@@ -156,46 +156,31 @@ header.links {
 
   // validation table styles
   .validationTable {
-    code {
-      background-color: transparent;
+    tr:nth-child(1) {
+      td:nth-child(4) {
+        border-top: none;
+      }
     }
-    th {
-      border-bottom: none;
-      text-align: center;
-    }
-    tr {
-      height: 80px;
-    }
-    td:nth-child(1) {
+    td {
+      padding: 10px;
       vertical-align: top;
-      padding-top: 19px;
       code {
         display: block;
-        vertical-align: top;
+        background-color: transparent;
+        margin-bottom: 10px;
+      }
+      &:nth-child(1) code {
         color: #000;
       }
-    }
-    td:nth-child(2), td:nth-child(3) {
-      vertical-align: top;
-      code {
-        display: block;
-        margin-bottom: 10px;
-        margin-top: 10px;
-        padding: 5px;
-        background-color: none;
-        vertical-align: top;
+      &:nth-child(2) code {
+        color: #517900;
       }
-    }
-    td:nth-child(2) code {
-      color: #517900;
     }
     td:nth-child(4) {
       display: block;
       width: 200px;
       border: none;
       border-top: 1px solid #DDD;
-      height: auto;
-      padding-top: 15px;
     }
   }
 
