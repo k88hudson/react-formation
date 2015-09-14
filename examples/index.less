@@ -154,9 +154,12 @@ header.links {
     background: #F9F9F9;
   }
   .validationTable td:nth-child(1) > code {
-    text-align: center;
-    text-align: center;
     display: block;
+    vertical-align: top;
+  }
+  .validationTable td:nth-child(1) {
+    vertical-align: top;
+    padding-top: 20px;
   }
   .validationTable td:nth-child(2), .validationTable td:nth-child(3) {
     code {
@@ -164,8 +167,11 @@ header.links {
       margin-bottom: 10px;
       margin-top: 10px;
       padding: 5px;
-      text-align: center;
+      background-color: none;
     }
+  }
+  .validationTable td:nth-child(2) code {
+    color: green;
   }
   .validationTable td:nth-child(4) {
     display: block;
@@ -173,15 +179,15 @@ header.links {
     border: none;
     border-top: 1px solid #DDD;
     height: auto;
-    text-align: center;
   }
   .validationTable th {
     border-bottom: none;
     text-align: center;
   }
-  .validationTable > tr > td > code {
-    text-align: center;
+  .validationTable code {
+    background-color: transparent;
   }
+
 }
 
 /*********************************************************
