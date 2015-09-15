@@ -280,6 +280,9 @@ header.links a.active {
 .docs tr:nth-child(2n) {
   background: #F9F9F9;
 }
+.docs .validationTable {
+  text-align: left;
+}
 .docs .validationTable tr:nth-child(1) td:nth-child(4) {
   border-top: none;
 }
