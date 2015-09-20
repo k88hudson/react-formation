@@ -232,7 +232,8 @@ describe('CreateForm', function () {
             name: {validations: Formation.Validator.maxLength(10)},
             lastName: {required: function () {
               return this.state.name;
-            }}
+            }},
+            apples: {validations: Formation.Validator.min(10), messages: {min: 'Too few apples'}}
           };
         },
         onSuccess: function () {},
@@ -274,6 +275,7 @@ describe('CreateForm', function () {
       should.equal(form.validateField('email'), false);
       should.equal(form.validateField('name'), false);
     });
+
     it('should warn to use validations instead of type in schema', function () {
       var warn = console.warn;
       var didWarn;
@@ -285,6 +287,10 @@ describe('CreateForm', function () {
       should.equal(didWarn, true);
 
       console.warn = warn;
+    });
+    it('should use custom validation errors', function () {
+      form.setState({apples: 4});
+      should.deepEqual(form.validateField('apples'), ['Too few apples']);
     });
   });
 

@@ -2,7 +2,7 @@
 
 You can validate fields by adding a `Formation.Validator` object to the `validations` property of a schema definition:
 
-```jsx{5,8,11}
+```jsx{6,9,12}
 var Validator = require('react-formation').Validator;
 
 var getSchema = function () {
@@ -82,7 +82,23 @@ Validator.number().creditCard();
 
 ### Error messages
 
-Each built-in validation in React Formation ships with an error message. If you would like to override it, you can do so at the global level:
+Each built-in validation in React Formation ships with an error message. If you would like to override it, you can do so for each schema:
+
+```jsx{5-7}
+var getSchema = function () {
+  return {
+    email: {
+      type: Validator.email(),
+      messages: {
+        email: 'Not an email, sorry!'
+      }
+    }
+  };
+};
+```
+
+
+You can also do so at the global level:
 
 ```jsx
 var Validator = require('react-formation').Validator;
