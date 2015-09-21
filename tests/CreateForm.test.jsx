@@ -273,6 +273,11 @@ describe('CreateForm', function () {
       should.equal(form.validateField('email'), false);
       should.equal(form.validateField('name'), false);
     });
+    it('should throw if console.warn', function () {
+      should.throws(() => {
+        console.warn('Yikes, Pippin\s human is deprecated, be careful. ')
+      });
+    });
   });
 
   describe('#didSubmit', function () {
