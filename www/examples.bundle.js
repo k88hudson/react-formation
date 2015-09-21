@@ -17461,7 +17461,7 @@
 /* 147 */
 /***/ function(module, exports) {
 
-	module.exports = "# Get started\n\n## Install\n\nYou can install React Formation from npm by running `npm install react-formation`. If you are using common js, you can require it like this:\n\n```jsx\nvar Formation = require('react-formation');\n```\n\n## Create a Form\n\nFirst, let's define the structure of your form. You can do that by using `CreateForm` just like how you would use `React.createClass`, including a `render` function:\n\n```jsx{3}\nvar Formation = require('react-formation');\n\nvar Form = Formation.CreateForm({\n  render: function () {\n    return (<form>\n\n      <label>Name</label>\n      <input type=\"text\" name=\"name\" />\n\n      <label>Email</label>\n      <input type=\"text\" name=\"email\" />\n\n      <button>Submit</button>\n\n    </form>);\n  }\n});\n```\n\nNext, add **a `getSchema`** method that returns a schema defining all the fields in the form, and link corresponding inputs with `this.linkField`:\n\n```jsx{3-6,11,14}\nvar Form = Formation.CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {required: true}\n      email: {type: 'email'}\n    };\n  },\n\n  render: function () {\n    return (<form>\n\n      <label>Name</label>\n      <input type=\"text\" valueLink={this.linkField('name')} />\n\n      <label>Email</label>\n      <input type=\"text\" valueLink={this.linkField('email')} />\n\n      <button>Submit</button>\n\n    </form>);\n  }\n\n});\n```\n\nFinally, add **an onSuccess** callback that gets called on a successful submit, and add `this.submitForm` as a callback to any submit buttons.\n\n```jsx{8-10,21}\nvar Form = Formation.CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {required: true}\n      email: {type: 'email'}\n    };\n  },\n\n  onSuccess: function (data) {\n    console.log(data);\n  },\n\n  render: function () {\n    return (<form>\n\n      <label>Name</label>\n      <input type=\"text\" valueLink={this.linkField('name')} />\n\n      <label>Email</label>\n      <input type=\"text\" valueLink={this.linkField('email')} />\n\n      <button onClick={this.submitForm}>Submit</button>\n\n    </form>);\n  }\n\n});\n```\n\n## Rendering a Form\n\nYou can use your new `Form` class just like you would any other React element, including passing props. For example, if you wanted to render it directly into `document.body`:\n\n```jsx\nReact.render(<Form />, document.body);\n```\n"
+	module.exports = "# Get started\n\n## Install\n\nYou can install React Formation from npm by running `npm install react-formation`. If you are using common js, you can require it like this:\n\n```jsx\nvar Formation = require('react-formation');\n```\n\n## Create a Form\n\nFirst, let's define the structure of your form. You can do that by using `CreateForm` just like how you would use `React.createClass`, including a `render` function:\n\n```jsx{3}\nvar Formation = require('react-formation');\n\nvar Form = Formation.CreateForm({\n  render: function () {\n    return (<form>\n\n      <label>Name</label>\n      <input validations=\"text\" name=\"name\" />\n\n      <label>Email</label>\n      <input validations=\"text\" name=\"email\" />\n\n      <button>Submit</button>\n\n    </form>);\n  }\n});\n```\n\nNext, add **a `getSchema`** method that returns a schema defining all the fields in the form, and link corresponding inputs with `this.linkField`:\n\n```jsx{3-6,11,14}\nvar Form = Formation.CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {required: true}\n      email: {validations: 'email'}\n    };\n  },\n\n  render: function () {\n    return (<form>\n\n      <label>Name</label>\n      <input validations=\"text\" valueLink={this.linkField('name')} />\n\n      <label>Email</label>\n      <input validations=\"text\" valueLink={this.linkField('email')} />\n\n      <button>Submit</button>\n\n    </form>);\n  }\n\n});\n```\n\nFinally, add **an onSuccess** callback that gets called on a successful submit, and add `this.submitForm` as a callback to any submit buttons.\n\n```jsx{8-10,21}\nvar Form = Formation.CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {required: true}\n      email: {validations: 'email'}\n    };\n  },\n\n  onSuccess: function (data) {\n    console.log(data);\n  },\n\n  render: function () {\n    return (<form>\n\n      <label>Name</label>\n      <input validations=\"text\" valueLink={this.linkField('name')} />\n\n      <label>Email</label>\n      <input validations=\"text\" valueLink={this.linkField('email')} />\n\n      <button onClick={this.submitForm}>Submit</button>\n\n    </form>);\n  }\n\n});\n```\n\n## Rendering a Form\n\nYou can use your new `Form` class just like you would any other React element, including passing props. For example, if you wanted to render it directly into `document.body`:\n\n```jsx\nReact.render(<Form />, document.body);\n```\n"
 
 /***/ },
 /* 148 */
@@ -17479,11 +17479,11 @@
 	    return {
 	      name: {
 	        label: 'Name',
-	        type: 'string'
+	        validations: 'string'
 	      },
 	      email: {
 	        label: 'Email',
-	        type: 'string'
+	        validations: 'string'
 	      }
 	    };
 	  },
@@ -17494,7 +17494,7 @@
 	  },
 	
 	  render: function render() {
-	    return React.createElement("form", null, React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Name"), React.createElement("input", { type: "text", valueLink: this.linkField('name') })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Email"), React.createElement("input", { type: "text", valueLink: this.linkField('email') })), React.createElement("div", { className: "form-group" }, React.createElement("button", { onClick: this.submitForm }, "Submit")));
+	    return React.createElement("form", null, React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Name"), React.createElement("input", { validations: "text", valueLink: this.linkField('name') })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Email"), React.createElement("input", { validations: "text", valueLink: this.linkField('email') })), React.createElement("div", { className: "form-group" }, React.createElement("button", { onClick: this.submitForm }, "Submit")));
 	  }
 	});
 	
@@ -17681,19 +17681,24 @@
 	    var currentValue = this.state[key];
 	    var label = schema.label || key;
 	
+	    if (schema.type) {
+	      console.warn('Using "type" in your schema is deprecated. Please use "validations" instead.');
+	      schema.validations = schema.type;
+	    }
+	
 	    if (schema.required === true && !currentValue) errors.push(label + ' is required');
 	    if (typeof schema.required === 'function') {
 	      var isConditionallyRequred = schema.required.bind(this)();
 	      if (isConditionallyRequred && !currentValue) errors.push(label + ' is required');
 	    }
-	    if (currentValue && schema.type instanceof Validator) {
-	      var typeError = schema.type.assert(currentValue);
+	    if (currentValue && schema.validations instanceof Validator) {
+	      var typeError = schema.validations.assert(currentValue);
 	      if (typeError) errors = errors.concat(typeError);
-	    } else if (currentValue && typeof schema.type === 'string' && Validator[schema.type]) {
-	      var typeError = Validator[schema.type]().assert(currentValue);
+	    } else if (currentValue && typeof schema.validations === 'string' && Validator[schema.validations]) {
+	      var typeError = Validator[schema.validations]().assert(currentValue);
 	      if (typeError) errors = errors.concat(typeError);
-	    } else if (currentValue && typeof schema.type === 'function') {
-	      var typeError = schema.type.call(this, currentValue);
+	    } else if (currentValue && typeof schema.validations === 'function') {
+	      var typeError = schema.validations.call(this, currentValue);
 	      if (typeError) errors.push(typeError);
 	    }
 	
@@ -18917,7 +18922,7 @@
 	  },
 	  render: function render() {
 	    var props = assign({}, this.props, {
-	      type: 'radio',
+	      validations: 'radio',
 	      checked: this.props.value + '' === this.props.radioLink.value + '',
 	      onChange: this.onChange
 	    });
@@ -18931,7 +18936,7 @@
 /* 161 */
 /***/ function(module, exports) {
 
-	module.exports = "var React = require('react');\nvar CreateForm = require('../../../src/form').CreateForm;\n\nvar Form = CreateForm({\n\n  // This defines all the fields in the form\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        type: 'string'\n      },\n      email: {\n        label: 'Email',\n        type: 'string'\n      }\n    };\n  },\n\n  // This code is run when the form is valid and submitted\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n    return (<form>\n\n      <div className=\"form-group\">\n        <label>Name</label>\n        <input type=\"text\" valueLink={this.linkField('name')} />\n      </div>\n\n      <div className=\"form-group\">\n        <label>Email</label>\n        <input type=\"text\" valueLink={this.linkField('email')} />\n      </div>\n\n      <div className=\"form-group\">\n        <button onClick={this.submitForm}>Submit</button>\n      </div>\n\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n\n"
+	module.exports = "var React = require('react');\nvar CreateForm = require('../../../src/form').CreateForm;\n\nvar Form = CreateForm({\n\n  // This defines all the fields in the form\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        validations: 'string'\n      },\n      email: {\n        label: 'Email',\n        validations: 'string'\n      }\n    };\n  },\n\n  // This code is run when the form is valid and submitted\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n    return (<form>\n\n      <div className=\"form-group\">\n        <label>Name</label>\n        <input validations=\"text\" valueLink={this.linkField('name')} />\n      </div>\n\n      <div className=\"form-group\">\n        <label>Email</label>\n        <input validations=\"text\" valueLink={this.linkField('email')} />\n      </div>\n\n      <div className=\"form-group\">\n        <button onClick={this.submitForm}>Submit</button>\n      </div>\n\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n\n"
 
 /***/ },
 /* 162 */
@@ -18951,7 +18956,7 @@
 /* 163 */
 /***/ function(module, exports) {
 
-	module.exports = "# Adding inputs\n\n### Text inputs\n\nThe easiest way to link `text` inputs (as well as `number`, `password` and many other elements) to the form is with their build-in `valueLink` property. All you need to do is call `this.linkField(field)` with the name of the field as defined in your form's schema.\n\n```jsx\n<input valueLink={this.linkField('name')} />\n```\n\nSee [React's Docs on Two Way Binding Helpers](https://facebook.github.io/react/docs/two-way-binding-helpers.html) for more info about the `valueLink` property.\n\nKeep in mind if you are adding inputs to child components of the form, you will need to include the `FormMixin` bundled with react-formations.\n\n### Checkboxes\n\nCheckboxes work a little bit differently in React; instead of `valueLink`, used `checkedLink`:\n\n```jsx\n<input type=\"checkbox\" checkedLink={this.linkField('isHappy')} />\n```\n\n### Radio Buttons\n\nRadio buttons unfortunately do not support any form of two way binding out of the box; however, you can use the `<Radio />` component bundled with react-formations:\n\n```jsx\nvar Radio = require('react-formations').Radio;\nvar link = this.linkField('color');\n\n<Radio name=\"color\" value=\"blue\" radioLink={link} /> Blue\n<Radio name=\"color\" value=\"red\" radioLink={link} /> Red\n<Radio name=\"color\" value=\"green\" radioLink={link} /> Green\n```\n\nMake sure you use the same `name` property for all corresponding radio buttons.\n\n### Manually linking\n\nIf you want, you can always manually update/access values using `this.linkField`:\n\n```jsx\nvar link = this.linkField('foo');\n\n// Update the value. You could put this in an onChange handler\nlink.requestUpdate('new value');\n\n// Get the current value\nconsole.log(link.value);\n// => 'new value'\n```\n"
+	module.exports = "# Adding inputs\n\n### Text inputs\n\nThe easiest way to link `text` inputs (as well as `number`, `password` and many other elements) to the form is with their build-in `valueLink` property. All you need to do is call `this.linkField(field)` with the name of the field as defined in your form's schema.\n\n```jsx\n<input valueLink={this.linkField('name')} />\n```\n\nSee [React's Docs on Two Way Binding Helpers](https://facebook.github.io/react/docs/two-way-binding-helpers.html) for more info about the `valueLink` property.\n\nKeep in mind if you are adding inputs to child components of the form, you will need to include the `FormMixin` bundled with react-formations.\n\n### Checkboxes\n\nCheckboxes work a little bit differently in React; instead of `valueLink`, used `checkedLink`:\n\n```jsx\n<input validations=\"checkbox\" checkedLink={this.linkField('isHappy')} />\n```\n\n### Radio Buttons\n\nRadio buttons unfortunately do not support any form of two way binding out of the box; however, you can use the `<Radio />` component bundled with react-formations:\n\n```jsx\nvar Radio = require('react-formations').Radio;\nvar link = this.linkField('color');\n\n<Radio name=\"color\" value=\"blue\" radioLink={link} /> Blue\n<Radio name=\"color\" value=\"red\" radioLink={link} /> Red\n<Radio name=\"color\" value=\"green\" radioLink={link} /> Green\n```\n\nMake sure you use the same `name` property for all corresponding radio buttons.\n\n### Manually linking\n\nIf you want, you can always manually update/access values using `this.linkField`:\n\n```jsx\nvar link = this.linkField('foo');\n\n// Update the value. You could put this in an onChange handler\nlink.requestUpdate('new value');\n\n// Get the current value\nconsole.log(link.value);\n// => 'new value'\n```\n"
 
 /***/ },
 /* 164 */
@@ -18972,12 +18977,12 @@
 	    return {
 	      name: {
 	        label: 'Name',
-	        type: 'string',
+	        validations: 'string',
 	        required: true
 	      },
 	      color: {
 	        label: 'Favourite Color',
-	        type: 'string',
+	        validations: 'string',
 	        required: true
 	      }
 	    };
@@ -18989,7 +18994,7 @@
 	
 	  render: function render() {
 	    var colorLink = this.linkField('color');
-	    return React.createElement("form", null, React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Name"), React.createElement("input", { type: "text", name: "name", valueLink: this.linkField('name') }), React.createElement(ErrorMessage, { field: "name" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "What is your favourite colour?"), React.createElement("p", null, React.createElement(Radio, { name: "color", value: "blue", radioLink: colorLink }), " Blue"), React.createElement("p", null, React.createElement(Radio, { name: "color", value: "red", radioLink: colorLink }), " Red"), React.createElement("p", null, React.createElement(Radio, { name: "color", value: "green", radioLink: colorLink }), " Green")), React.createElement("p", null, React.createElement("button", { onClick: this.submitForm }, "Submit")));
+	    return React.createElement("form", null, React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Name"), React.createElement("input", { validations: "text", name: "name", valueLink: this.linkField('name') }), React.createElement(ErrorMessage, { field: "name" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "What is your favourite colour?"), React.createElement("p", null, React.createElement(Radio, { name: "color", value: "blue", radioLink: colorLink }), " Blue"), React.createElement("p", null, React.createElement(Radio, { name: "color", value: "red", radioLink: colorLink }), " Red"), React.createElement("p", null, React.createElement(Radio, { name: "color", value: "green", radioLink: colorLink }), " Green")), React.createElement("p", null, React.createElement("button", { onClick: this.submitForm }, "Submit")));
 	  }
 	});
 	
@@ -18999,7 +19004,7 @@
 /* 165 */
 /***/ function(module, exports) {
 
-	module.exports = "var React = require('react');\nvar Formation = require('../../../src/form');\n\nvar CreateForm = Formation.CreateForm;\nvar ErrorMessage = Formation.ErrorMessage;\nvar Radio = Formation.Radio;\n\nvar Form = CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        type: 'string',\n        required: true\n      },\n      color: {\n        label: 'Favourite Color',\n        type: 'string',\n        required: true\n      }\n    };\n  },\n\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n    var colorLink = this.linkField('color');\n    return (<form>\n\n      <div className=\"form-group\">\n        <label>Name</label>\n        <input type=\"text\" name=\"name\" valueLink={this.linkField('name')} />\n        <ErrorMessage field=\"name\" />\n      </div>\n\n      <div className=\"form-group\">\n        <label>What is your favourite colour?</label>\n        <p><Radio name=\"color\" value=\"blue\" radioLink={colorLink} /> Blue</p>\n        <p><Radio name=\"color\" value=\"red\" radioLink={colorLink} /> Red</p>\n        <p><Radio name=\"color\" value=\"green\" radioLink={colorLink} /> Green</p>\n      </div>\n\n      <p><button onClick={this.submitForm}>Submit</button></p>\n\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n\n"
+	module.exports = "var React = require('react');\nvar Formation = require('../../../src/form');\n\nvar CreateForm = Formation.CreateForm;\nvar ErrorMessage = Formation.ErrorMessage;\nvar Radio = Formation.Radio;\n\nvar Form = CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        validations: 'string',\n        required: true\n      },\n      color: {\n        label: 'Favourite Color',\n        validations: 'string',\n        required: true\n      }\n    };\n  },\n\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n    var colorLink = this.linkField('color');\n    return (<form>\n\n      <div className=\"form-group\">\n        <label>Name</label>\n        <input validations=\"text\" name=\"name\" valueLink={this.linkField('name')} />\n        <ErrorMessage field=\"name\" />\n      </div>\n\n      <div className=\"form-group\">\n        <label>What is your favourite colour?</label>\n        <p><Radio name=\"color\" value=\"blue\" radioLink={colorLink} /> Blue</p>\n        <p><Radio name=\"color\" value=\"red\" radioLink={colorLink} /> Red</p>\n        <p><Radio name=\"color\" value=\"green\" radioLink={colorLink} /> Green</p>\n      </div>\n\n      <p><button onClick={this.submitForm}>Submit</button></p>\n\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n\n"
 
 /***/ },
 /* 166 */
@@ -19019,7 +19024,7 @@
 /* 167 */
 /***/ function(module, exports) {
 
-	module.exports = "# Building modular UI\n\nOne of the key philosophies of React Formation is that **form frameworks should simplify internal data management without enforcing any particular UI patterns or structures**.\n\nThis allows you to optimize for a great user experience when making decisions about your UI while not having to worry about state bugs, validation, and data synchronization.\n\n## Child components\n\nAny methods available in the root form component, such as `this.linkField` or `this.submitForm`, can be added to any level of child component with `FormMixin`:\n\n```jsx{4}\nvar Formation = require('react-formation');\nvar Child = React.createClass({\n\n  mixins: [Formation.FormMixin],\n\n  render: function () {\n    return (<div>\n      <label>Name</label>\n      <input type=\"text\" name=\"name\" valueLink={this.linkField('name')} />\n      <ErrorMessage field=\"name\" />\n    </div>);\n  }\n});\n```\n"
+	module.exports = "# Building modular UI\n\nOne of the key philosophies of React Formation is that **form frameworks should simplify internal data management without enforcing any particular UI patterns or structures**.\n\nThis allows you to optimize for a great user experience when making decisions about your UI while not having to worry about state bugs, validation, and data synchronization.\n\n## Child components\n\nAny methods available in the root form component, such as `this.linkField` or `this.submitForm`, can be added to any level of child component with `FormMixin`:\n\n```jsx{4}\nvar Formation = require('react-formation');\nvar Child = React.createClass({\n\n  mixins: [Formation.FormMixin],\n\n  render: function () {\n    return (<div>\n      <label>Name</label>\n      <input validations=\"text\" name=\"name\" valueLink={this.linkField('name')} />\n      <ErrorMessage field=\"name\" />\n    </div>);\n  }\n});\n```\n"
 
 /***/ },
 /* 168 */
@@ -19044,7 +19049,7 @@
 	  mixins: [FormMixin],
 	
 	  render: function render() {
-	    return React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Enter your credit card number (try 4111111111111111):"), React.createElement("input", { type: "number", valueLink: this.linkField('cardNumber') }), React.createElement(ErrorMessage, { field: "cardNumber" }));
+	    return React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Enter your credit card number (try 4111111111111111):"), React.createElement("input", { validations: "number", valueLink: this.linkField('cardNumber') }), React.createElement(ErrorMessage, { field: "cardNumber" }));
 	  }
 	});
 	
@@ -19053,7 +19058,7 @@
 	  mixins: [FormMixin],
 	
 	  render: function render() {
-	    return React.createElement("div", null, React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Username"), React.createElement("input", { type: "text", name: "username", valueLink: this.linkField('username') }), React.createElement(ErrorMessage, { field: "username" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Email"), React.createElement("input", { type: "text", name: "email", valueLink: this.linkField('email') }), React.createElement(ErrorMessage, { field: "email" })));
+	    return React.createElement("div", null, React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Username"), React.createElement("input", { validations: "text", name: "username", valueLink: this.linkField('username') }), React.createElement(ErrorMessage, { field: "username" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Email"), React.createElement("input", { validations: "text", name: "email", valueLink: this.linkField('email') }), React.createElement(ErrorMessage, { field: "email" })));
 	  }
 	});
 	
@@ -19063,15 +19068,15 @@
 	      username: {
 	        required: true,
 	        label: 'Username',
-	        type: Validator.alpha()
+	        validations: Validator.alpha()
 	      },
 	      email: {
 	        required: true,
 	        label: 'Email',
-	        type: Validator.email()
+	        validations: Validator.email()
 	      },
 	      cardNumber: {
-	        type: Validator.creditCard(),
+	        validations: Validator.creditCard(),
 	        label: 'Credit card'
 	      }
 	    };
@@ -19090,7 +19095,7 @@
 /* 169 */
 /***/ function(module, exports) {
 
-	module.exports = "var React = require('react/addons');\nvar Formation = require('../../../src/form');\n\nvar CreateForm = Formation.CreateForm;\nvar SubmitButton = Formation.SubmitButton;\nvar ErrorMessage = Formation.ErrorMessage;\nvar Validator = Formation.Validator;\n\n// We need FormMixin so this child component\n// can have access to the global form API\nvar FormMixin = Formation.FormMixin;\n\nvar CreditCard = React.createClass({\n\n  mixins: [FormMixin],\n\n  render: function () {\n    return (<div className=\"form-group\">\n      <label>Enter your credit card number (try 4111111111111111):</label>\n      <input type=\"number\" valueLink={this.linkField('cardNumber')} />\n      <ErrorMessage field=\"cardNumber\" />\n    </div>);\n  }\n});\n\nvar PersonalInfo = React.createClass({\n\n  mixins: [FormMixin],\n\n  render: function () {\n    return (<div>\n      <div className=\"form-group\">\n        <label>Username</label>\n        <input type=\"text\" name=\"username\" valueLink={this.linkField('username')} />\n        <ErrorMessage field=\"username\" />\n      </div>\n      <div className=\"form-group\">\n        <label>Email</label>\n        <input type=\"text\" name=\"email\" valueLink={this.linkField('email')} />\n        <ErrorMessage field=\"email\" />\n      </div>\n    </div>);\n  }\n});\n\nvar Form = CreateForm({\n  getSchema: function () {\n    return {\n      username: {\n        required: true,\n        label: 'Username',\n        type: Validator.alpha()\n      },\n      email: {\n        required: true,\n        label: 'Email',\n        type: Validator.email()\n      },\n      cardNumber: {\n        type: Validator.creditCard(),\n        label: 'Credit card'\n      }\n    };\n  },\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n  render: function () {\n    return (<form>\n      <PersonalInfo />\n      <CreditCard />\n      <p><SubmitButton /></p>\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n"
+	module.exports = "var React = require('react/addons');\nvar Formation = require('../../../src/form');\n\nvar CreateForm = Formation.CreateForm;\nvar SubmitButton = Formation.SubmitButton;\nvar ErrorMessage = Formation.ErrorMessage;\nvar Validator = Formation.Validator;\n\n// We need FormMixin so this child component\n// can have access to the global form API\nvar FormMixin = Formation.FormMixin;\n\nvar CreditCard = React.createClass({\n\n  mixins: [FormMixin],\n\n  render: function () {\n    return (<div className=\"form-group\">\n      <label>Enter your credit card number (try 4111111111111111):</label>\n      <input validations=\"number\" valueLink={this.linkField('cardNumber')} />\n      <ErrorMessage field=\"cardNumber\" />\n    </div>);\n  }\n});\n\nvar PersonalInfo = React.createClass({\n\n  mixins: [FormMixin],\n\n  render: function () {\n    return (<div>\n      <div className=\"form-group\">\n        <label>Username</label>\n        <input validations=\"text\" name=\"username\" valueLink={this.linkField('username')} />\n        <ErrorMessage field=\"username\" />\n      </div>\n      <div className=\"form-group\">\n        <label>Email</label>\n        <input validations=\"text\" name=\"email\" valueLink={this.linkField('email')} />\n        <ErrorMessage field=\"email\" />\n      </div>\n    </div>);\n  }\n});\n\nvar Form = CreateForm({\n  getSchema: function () {\n    return {\n      username: {\n        required: true,\n        label: 'Username',\n        validations: Validator.alpha()\n      },\n      email: {\n        required: true,\n        label: 'Email',\n        validations: Validator.email()\n      },\n      cardNumber: {\n        validations: Validator.creditCard(),\n        label: 'Credit card'\n      }\n    };\n  },\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n  render: function () {\n    return (<form>\n      <PersonalInfo />\n      <CreditCard />\n      <p><SubmitButton /></p>\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n"
 
 /***/ },
 /* 170 */
@@ -19108,7 +19113,7 @@
 /* 171 */
 /***/ function(module, exports) {
 
-	module.exports = "# Validation\n\nYou can validate fields by adding a `Formation.Validator` object to the `type` property of a schema definition:\n\n```jsx{5,8,11}\nvar Validator = require('react-formation').Validator;\n\nvar getSchema = function () {\n  return {\n    email: {\n      type: Validator.email()\n    },\n    creditCard: {\n      type: Validator.creditCard()\n    },\n    numberOfApples: {\n      type: Validator.number().min(1).max(10)\n    }\n  };\n};\n```\n\n## Built-in validations\n\nReact Formation includes several built-in validations from [chriso's validator.js](http://github.com/chriso/validator.js).\n\nHere's what you can expect from each form validation:\n\n<div class=\"validationTable\">\n\nValidation | Valid | Invalid | Description\n-----------|-------|---------|-------------\n`email`|`foo@bar.com` `test123@m端ller.com` `gm..ignores..dots..@gmail.com`|`foo@bar.com.` `z@co.c` `@invalid.com`|Checks if valid email\n`url`|`http://www.foobar.com/` `http://189.123.14.13/`|`http://www.xn--.com/` `http://lol @foobar.com/`|Check if valid URL\n`date`|`2011-08-04` `04. 08. 2011.` `08/04/2011`|`foo` `2011-foo-04` `GMT`|Check if valid date\n`before`|`2010-07-02` `new Date(0)`|`08/04/2011` `new Date(2011, 9, 10)`|Check if date is before\n`after`|`2011-08-04` `new Date(2011, 8, 10)`|`2010-07-02` `new Date(0)`|Check if date is after\n`number`|`8` `2012`|`j32h` `j`|Checks if valid number\n`alpha`|`abc` `ABC`|`f o` `foo1`|Check if string is only letters\n`max`|`5`|`42`|Check if number is below a given max\n`min`|`20`|`1`|Check if number is above a given min\n`maxLength`|`cat`|`elephant`|Check if string length is below a given max\n`minLength`|`elephant`|`cat`|Check if string length is above a given min\n`creditCard`|`4716461583322103` `4716-2210-5188-5662`|`5398228707871528` `foo`|Check is credit card number is valid\n`oneOf`|`foo`|`baz`|Check if string matches a given string\n`pattern`|`foo`|`bar`|Check if string matches\n`currency`|`42.42` `2897.99` `2829873`|`42..42` `..38` `32.3`|Check if valid currency value\n`hexColor`|`1f1f1F`|`030k93l`|Check if valid hexadecimal color value\n\n</div>\n\n\nAll built in validations are functions and can be called like this:\n\n```jsx\nValidator.creditCard();\n```\n\nAs a short form, you can specify them in a schema with a string:\n\n```jsx\nemail: {\n  type: 'creditCard' // this is equivalent to Validator.creditCard();\n}\n```\n\nSome validations take arguments, such as the `min`, `max`, and `oneOf` validations:\n\n```jsx\nValidator.min(0);\nValidator.max(100);\nValidator.oneOf(['foo', 'bar', 'baz'])\n```\n\nYou can also chain multiple validations together like this:\n\n```jsx\nValidator.number().creditCard();\n```\n\n## Customization\n\n### Error messages\n\nEach built-in validation in React Formation ships with an error message. If you would like to override it, you can do so at the global level:\n\n```jsx\nvar Validator = require('react-formation').Validator;\n\nValidator.messages.creditCard = 'NO FOOLING'\n\n// Now any invalid fields with this validation\n// will return NO FOOLING as the error message\n```\n\nor at the instance level:\n\n```jsx\nvar Validator = require('react-formation').Validator;\n\nvar v = Validator().creditCard();\nv.messages.creditCard = 'NO FOOLING'\n\n// Now only fields validated with this instance\n// will use NO FOOLING as the error message\n```\n\n### Validations\n\nThe simplest way to create a custom validation is to pass a function to the `type` property instead of a `Validator` object.\n\nMake sure the function returns `false` if the input is valid, or else an error string if it is invalid.\n\n```jsx\nfunction isBob(value) {\n  if (value === 'Bob') {\n    return false;\n  } else {\n    return 'Your name is not Bob.'\n  }\n}\n\nvar getSchema = function () {\n  return {\n    name: {type: isBob}\n  };\n};\n```\n\nCustom validation functions are called with the **Formation instance context**, so you can access other properties and methods with `this`:\n\n```jsx\nfunction sameAsPassword(value) {\n  if (value === this.linkField('password').value) {\n    return false;\n  } else {\n    return 'Not the same as your password.'\n  }\n}\n\nvar getSchema = function () {\n  return {\n    password: {required: true},\n    name: {type: sameAsPassword}\n  };\n};\n```\n\n\n"
+	module.exports = "# Validation\n\nYou can validate fields by adding a `Formation.Validator` object to the `validations` property of a schema definition:\n\n```jsx{5,8,11}\nvar Validator = require('react-formation').Validator;\n\nvar getSchema = function () {\n  return {\n    email: {\n      validations: Validator.email()\n    },\n    creditCard: {\n      validations: Validator.creditCard()\n    },\n    numberOfApples: {\n      validations: Validator.number().min(1).max(10)\n    }\n  };\n};\n```\n\n## Built-in validations\n\nReact Formation includes several built-in validations from [chriso's validator.js](http://github.com/chriso/validator.js).\n\nHere's what you can expect from each form validation:\n\n<div class=\"validationTable\">\n\nValidation | Valid | Invalid | Description\n-----------|-------|---------|-------------\n`email`|`foo@bar.com` `test123@m端ller.com` `gm..ignores..dots..@gmail.com`|`foo@bar.com.` `z@co.c` `@invalid.com`|Checks if valid email\n`url`|`http://www.foobar.com/` `http://189.123.14.13/`|`http://www.xn--.com/` `http://lol @foobar.com/`|Check if valid URL\n`date`|`2011-08-04` `04. 08. 2011.` `08/04/2011`|`foo` `2011-foo-04` `GMT`|Check if valid date\n`before`|`2010-07-02` `new Date(0)`|`08/04/2011` `new Date(2011, 9, 10)`|Check if date is before\n`after`|`2011-08-04` `new Date(2011, 8, 10)`|`2010-07-02` `new Date(0)`|Check if date is after\n`number`|`8` `2012`|`j32h` `j`|Checks if valid number\n`alpha`|`abc` `ABC`|`f o` `foo1`|Check if string is only letters\n`max`|`5`|`42`|Check if number is below a given max\n`min`|`20`|`1`|Check if number is above a given min\n`maxLength`|`cat`|`elephant`|Check if string length is below a given max\n`minLength`|`elephant`|`cat`|Check if string length is above a given min\n`creditCard`|`4716461583322103` `4716-2210-5188-5662`|`5398228707871528` `foo`|Check is credit card number is valid\n`oneOf`|`foo`|`baz`|Check if string matches a given string\n`pattern`|`foo`|`bar`|Check if string matches\n`currency`|`42.42` `2897.99` `2829873`|`42..42` `..38` `32.3`|Check if valid currency value\n`hexColor`|`1f1f1F`|`030k93l`|Check if valid hexadecimal color value\n\n</div>\n\n\nAll built in validations are functions and can be called like this:\n\n```jsx\nValidator.creditCard();\n```\n\nAs a short form, you can specify them in a schema with a string:\n\n```jsx\nemail: {\n  validations: 'creditCard' // this is equivalent to Validator.creditCard();\n}\n```\n\nSome validations take arguments, such as the `min`, `max`, and `oneOf` validations:\n\n```jsx\nValidator.min(0);\nValidator.max(100);\nValidator.oneOf(['foo', 'bar', 'baz'])\n```\n\nYou can also chain multiple validations together like this:\n\n```jsx\nValidator.number().creditCard();\n```\n\n## Customization\n\n### Error messages\n\nEach built-in validation in React Formation ships with an error message. If you would like to override it, you can do so at the global level:\n\n```jsx\nvar Validator = require('react-formation').Validator;\n\nValidator.messages.creditCard = 'NO FOOLING'\n\n// Now any invalid fields with this validation\n// will return NO FOOLING as the error message\n```\n\nor at the instance level:\n\n```jsx\nvar Validator = require('react-formation').Validator;\n\nvar v = Validator().creditCard();\nv.messages.creditCard = 'NO FOOLING'\n\n// Now only fields validated with this instance\n// will use NO FOOLING as the error message\n```\n\n### Validations\n\nThe simplest way to create a custom validation is to pass a function to the `validations` property instead of a `Validator` object.\n\nMake sure the function returns `false` if the input is valid, or else an error string if it is invalid.\n\n```jsx\nfunction isBob(value) {\n  if (value === 'Bob') {\n    return false;\n  } else {\n    return 'Your name is not Bob.'\n  }\n}\n\nvar getSchema = function () {\n  return {\n    name: {validations: isBob}\n  };\n};\n```\n\nCustom validation functions are called with the **Formation instance context**, so you can access other properties and methods with `this`:\n\n```jsx\nfunction sameAsPassword(value) {\n  if (value === this.linkField('password').value) {\n    return false;\n  } else {\n    return 'Not the same as your password.'\n  }\n}\n\nvar getSchema = function () {\n  return {\n    password: {required: true},\n    name: {validations: sameAsPassword}\n  };\n};\n```\n\n\n"
 
 /***/ },
 /* 172 */
@@ -19148,12 +19153,12 @@
 	    return {
 	      name: {
 	        label: 'Name',
-	        type: 'string',
+	        validations: 'string',
 	        required: true
 	      },
 	      email: {
 	        label: 'Email',
-	        type: 'email',
+	        validations: 'email',
 	        required: true
 	      }
 	    };
@@ -19164,7 +19169,7 @@
 	  },
 	
 	  render: function render() {
-	    return React.createElement("form", null, React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Name (error is shown after submit attempt)"), React.createElement("input", { type: "text", name: "name", valueLink: this.linkField('name') }), React.createElement(ErrorMessage, { field: "name" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Email (error is shown immediately)"), React.createElement("input", { type: "text", name: "email", valueLink: this.linkField('email') }), React.createElement(ErrorMessage, { show: true, field: "email" })), React.createElement("p", null, React.createElement("button", { onClick: this.submitForm }, "Submit")));
+	    return React.createElement("form", null, React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Name (error is shown after submit attempt)"), React.createElement("input", { validations: "text", name: "name", valueLink: this.linkField('name') }), React.createElement(ErrorMessage, { field: "name" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Email (error is shown immediately)"), React.createElement("input", { validations: "text", name: "email", valueLink: this.linkField('email') }), React.createElement(ErrorMessage, { show: true, field: "email" })), React.createElement("p", null, React.createElement("button", { onClick: this.submitForm }, "Submit")));
 	  }
 	});
 	
@@ -19174,7 +19179,7 @@
 /* 175 */
 /***/ function(module, exports) {
 
-	module.exports = "var React = require('react');\nvar Formation = require('../../../src/form');\n\nvar CreateForm = Formation.CreateForm;\nvar ErrorMessage = Formation.ErrorMessage;\n\nvar Form = CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        type: 'string',\n        required: true\n      },\n      email: {\n        label: 'Email',\n        type: 'email',\n        required: true\n      }\n    };\n  },\n\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n    return (<form>\n\n      <div className=\"form-group\">\n        <label>Name (error is shown after submit attempt)</label>\n        <input type=\"text\" name=\"name\" valueLink={this.linkField('name')} />\n        <ErrorMessage field=\"name\" />\n      </div>\n\n      <div className=\"form-group\">\n        <label>Email (error is shown immediately)</label>\n        <input type=\"text\" name=\"email\" valueLink={this.linkField('email')} />\n        <ErrorMessage show={true} field=\"email\" />\n      </div>\n\n      <p><button onClick={this.submitForm}>Submit</button></p>\n\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n\n"
+	module.exports = "var React = require('react');\nvar Formation = require('../../../src/form');\n\nvar CreateForm = Formation.CreateForm;\nvar ErrorMessage = Formation.ErrorMessage;\n\nvar Form = CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        validations: 'string',\n        required: true\n      },\n      email: {\n        label: 'Email',\n        validations: 'email',\n        required: true\n      }\n    };\n  },\n\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n    return (<form>\n\n      <div className=\"form-group\">\n        <label>Name (error is shown after submit attempt)</label>\n        <input validations=\"text\" name=\"name\" valueLink={this.linkField('name')} />\n        <ErrorMessage field=\"name\" />\n      </div>\n\n      <div className=\"form-group\">\n        <label>Email (error is shown immediately)</label>\n        <input validations=\"text\" name=\"email\" valueLink={this.linkField('email')} />\n        <ErrorMessage show={true} field=\"email\" />\n      </div>\n\n      <p><button onClick={this.submitForm}>Submit</button></p>\n\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n\n"
 
 /***/ },
 /* 176 */
@@ -19215,11 +19220,11 @@
 	    return {
 	      name: {
 	        label: 'Name',
-	        type: 'string'
+	        validations: 'string'
 	      },
 	      email: {
 	        label: 'Email',
-	        type: 'string'
+	        validations: 'string'
 	      }
 	    };
 	  },
@@ -19229,7 +19234,7 @@
 	  },
 	
 	  render: function render() {
-	    return React.createElement("form", null, React.createElement("p", null, React.createElement("label", null, "Name"), React.createElement("input", { type: "text", valueLink: this.linkField('name') })), React.createElement("p", null, React.createElement("label", null, "Email"), React.createElement("input", { type: "text", valueLink: this.linkField('email') })), React.createElement("p", null, React.createElement(SubmitButton, null)), React.createElement("p", null, React.createElement("button", { onClick: this.submitForm }, "This will also submit")));
+	    return React.createElement("form", null, React.createElement("p", null, React.createElement("label", null, "Name"), React.createElement("input", { validations: "text", valueLink: this.linkField('name') })), React.createElement("p", null, React.createElement("label", null, "Email"), React.createElement("input", { validations: "text", valueLink: this.linkField('email') })), React.createElement("p", null, React.createElement(SubmitButton, null)), React.createElement("p", null, React.createElement("button", { onClick: this.submitForm }, "This will also submit")));
 	  }
 	});
 	
@@ -19239,7 +19244,7 @@
 /* 179 */
 /***/ function(module, exports) {
 
-	module.exports = "var React = require('react');\nvar {CreateForm, SubmitButton} = require('../../../src/form');\n\nvar Form = CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        type: 'string'\n      },\n      email: {\n        label: 'Email',\n        type: 'string'\n      }\n    }\n  },\n\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n    return (<form>\n\n      <p>\n        <label>Name</label>\n        <input type=\"text\" valueLink={this.linkField('name')} />\n      </p>\n\n      <p>\n        <label>Email</label>\n        <input type=\"text\" valueLink={this.linkField('email')} />\n      </p>\n\n      <p><SubmitButton /></p>\n      <p><button onClick={this.submitForm}>This will also submit</button></p>\n\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n\n"
+	module.exports = "var React = require('react');\nvar {CreateForm, SubmitButton} = require('../../../src/form');\n\nvar Form = CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        validations: 'string'\n      },\n      email: {\n        label: 'Email',\n        validations: 'string'\n      }\n    }\n  },\n\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n    return (<form>\n\n      <p>\n        <label>Name</label>\n        <input validations=\"text\" valueLink={this.linkField('name')} />\n      </p>\n\n      <p>\n        <label>Email</label>\n        <input validations=\"text\" valueLink={this.linkField('email')} />\n      </p>\n\n      <p><SubmitButton /></p>\n      <p><button onClick={this.submitForm}>This will also submit</button></p>\n\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n\n"
 
 /***/ },
 /* 180 */
@@ -19259,7 +19264,7 @@
 /* 181 */
 /***/ function(module, exports) {
 
-	module.exports = "# Schema\n\nA schema should be an object returned by the method `getSchema, where each key represents a unique field. Each key's value is an object which can contain:\n\nProperty | Default | Description\n---------|---------|-------------\n`initial`| | The initial value the form field starts with (optional).\n`required`| `false` | Can be true, false or a function that returns true or false. The function is evaluated in the context of the form component instance.\n`type`| | A string (currently implemented types include `number` and `email`) or a custom function. The function should return `false` if the value is valid, or else a string representing the error message.\n`label`| | This will be used in some error messages.\n\n```js\ngetSchema: function () {\n  return {\n    name: {\n      initial: 'Bob Jones',\n      required: true,\n      label: 'Name'\n    },\n    email: {\n      required: true,\n      label: 'Email',\n      type: 'email'\n    },\n    cardNumber: {\n      type: 'number',\n      label: 'Credit card number'\n    }\n  };\n}\n```\n\nTODO: validation, conditional required\n"
+	module.exports = "# Schema\n\nA schema should be an object returned by the method `getSchema, where each key represents a unique field. Each key's value is an object which can contain:\n\nProperty | Default | Description\n---------|---------|-------------\n`initial`| | The initial value the form field starts with (optional).\n`required`| `false` | Can be true, false or a function that returns true or false. The function is evaluated in the context of the form component instance.\n`validations`| | A string (currently implemented validations include `number` and `email`) or a custom function. The function should return `false` if the value is valid, or else a string representing the error message.\n`label`| | This will be used in some error messages.\n\n```js\ngetSchema: function () {\n  return {\n    name: {\n      initial: 'Bob Jones',\n      required: true,\n      label: 'Name'\n    },\n    email: {\n      required: true,\n      label: 'Email',\n      validations: 'email'\n    },\n    cardNumber: {\n      validations: 'number',\n      label: 'Credit card number'\n    }\n  };\n}\n```\n\nTODO: validation, conditional required\n"
 
 /***/ },
 /* 182 */
@@ -19277,11 +19282,11 @@
 	    return {
 	      name: {
 	        label: 'Name',
-	        type: 'string'
+	        validations: 'string'
 	      },
 	      email: {
 	        label: 'Email',
-	        type: 'string'
+	        validations: 'string'
 	      }
 	    };
 	  },
@@ -19292,7 +19297,7 @@
 	  },
 	
 	  render: function render() {
-	    return React.createElement("form", null, React.createElement("p", null, React.createElement("label", null, "Name"), React.createElement("input", { type: "text", valueLink: this.linkField('name') })), React.createElement("p", null, React.createElement("label", null, "Email"), React.createElement("input", { type: "text", valueLink: this.linkField('email') })), React.createElement("p", null, React.createElement("button", { onClick: this.submitForm }, "Submit")));
+	    return React.createElement("form", null, React.createElement("p", null, React.createElement("label", null, "Name"), React.createElement("input", { validations: "text", valueLink: this.linkField('name') })), React.createElement("p", null, React.createElement("label", null, "Email"), React.createElement("input", { validations: "text", valueLink: this.linkField('email') })), React.createElement("p", null, React.createElement("button", { onClick: this.submitForm }, "Submit")));
 	  }
 	});
 	
@@ -19302,7 +19307,7 @@
 /* 183 */
 /***/ function(module, exports) {
 
-	module.exports = "var React = require('react');\nvar CreateForm = require('../../../src/form').CreateForm;\n\nvar Form = CreateForm({\n\n  // This defines all the fields in the form\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        type: 'string'\n      },\n      email: {\n        label: 'Email',\n        type: 'string'\n      }\n    };\n  },\n\n  // This code is run when the form is valid and submitted\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n    return (<form>\n\n      <p>\n        <label>Name</label>\n        <input type=\"text\" valueLink={this.linkField('name')} />\n      </p>\n\n      <p>\n        <label>Email</label>\n        <input type=\"text\" valueLink={this.linkField('email')} />\n      </p>\n\n      <p><button onClick={this.submitForm}>Submit</button></p>\n\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n\n"
+	module.exports = "var React = require('react');\nvar CreateForm = require('../../../src/form').CreateForm;\n\nvar Form = CreateForm({\n\n  // This defines all the fields in the form\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        validations: 'string'\n      },\n      email: {\n        label: 'Email',\n        validations: 'string'\n      }\n    };\n  },\n\n  // This code is run when the form is valid and submitted\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n    return (<form>\n\n      <p>\n        <label>Name</label>\n        <input validations=\"text\" valueLink={this.linkField('name')} />\n      </p>\n\n      <p>\n        <label>Email</label>\n        <input validations=\"text\" valueLink={this.linkField('email')} />\n      </p>\n\n      <p><button onClick={this.submitForm}>Submit</button></p>\n\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n\n"
 
 /***/ },
 /* 184 */
@@ -19322,7 +19327,7 @@
 /* 185 */
 /***/ function(module, exports) {
 
-	module.exports = "# Multi-part forms\n\nreact-formation also has support for form \"groups\", that will allow you to manage validation and submitting within each group.\n\n### Creating the schema\n\nInstead of returning an object from the getSchema method to the form configuration, return an **array of objects** representing groups of fields. Groups will be named after their index.\n\n```js\ngetSchema: function ()  {\n  return [\n    // This is group 0\n    {\n      amount: {\n        type: 'number'\n      }\n    },\n    // This is group 1\n    {\n      paymentType: {\n        type: 'string'\n      },\n      cardNumber: {\n        type: 'number'\n      }\n    }\n  ];\n}\n```\n\nAlternatively, you can include a `group` property with each field.\n\n```js\ngetSchema: function ()  {\n  return {\n    amount: {\n      type: 'number',\n      group: 0\n    }\n    paymentType: {\n      type: 'string',\n      group: 1\n    },\n    cardNumber: {\n      type: 'number',\n      group: 1\n    }\n  };\n}\n```\n\n### Validating/submitting groups\n\nYou can trigger a \"submit\" attempt on a group by calling `this.submitGroup`:\n\n```js\nthis.submitGroup(groupName, onSuccess, onFailure);\n```\n\nYou may also use the `SubmitGroupButton` component:\n\n```html\n<SubmitGroupButton group={groupName} onSuccess={onSuccess} onFailure={onFailure} />\n```\n\nNote that the `onSuccess` and `onFailure` callbacks are optional.\n\n#### Why submit a group?\n\nYou might want to trigger a submit on a group in order to:\n\n* show `ErrorMessage` components for fields in that group\n* trigger going to the next page in a multi-page form on `onSuccess`\n\n#### Checking submit status\n\nYou can also check the \"submit status\" of any field manually with `this.didSubmit`:\n\n```js\nthis.didSubmit('banana');\n// Returns true if the group in which banana exists was submitted with submitGroup,\n// or if the whole form was submitted.\n```\n\n\n\n"
+	module.exports = "# Multi-part forms\n\nreact-formation also has support for form \"groups\", that will allow you to manage validation and submitting within each group.\n\n### Creating the schema\n\nInstead of returning an object from the getSchema method to the form configuration, return an **array of objects** representing groups of fields. Groups will be named after their index.\n\n```js\ngetSchema: function ()  {\n  return [\n    // This is group 0\n    {\n      amount: {\n        validations: 'number'\n      }\n    },\n    // This is group 1\n    {\n      paymentType: {\n        validations: 'string'\n      },\n      cardNumber: {\n        validations: 'number'\n      }\n    }\n  ];\n}\n```\n\nAlternatively, you can include a `group` property with each field.\n\n```js\ngetSchema: function ()  {\n  return {\n    amount: {\n      validations: 'number',\n      group: 0\n    }\n    paymentType: {\n      validations: 'string',\n      group: 1\n    },\n    cardNumber: {\n      validations: 'number',\n      group: 1\n    }\n  };\n}\n```\n\n### Validating/submitting groups\n\nYou can trigger a \"submit\" attempt on a group by calling `this.submitGroup`:\n\n```js\nthis.submitGroup(groupName, onSuccess, onFailure);\n```\n\nYou may also use the `SubmitGroupButton` component:\n\n```html\n<SubmitGroupButton group={groupName} onSuccess={onSuccess} onFailure={onFailure} />\n```\n\nNote that the `onSuccess` and `onFailure` callbacks are optional.\n\n#### Why submit a group?\n\nYou might want to trigger a submit on a group in order to:\n\n* show `ErrorMessage` components for fields in that group\n* trigger going to the next page in a multi-page form on `onSuccess`\n\n#### Checking submit status\n\nYou can also check the \"submit status\" of any field manually with `this.didSubmit`:\n\n```js\nthis.didSubmit('banana');\n// Returns true if the group in which banana exists was submitted with submitGroup,\n// or if the whole form was submitted.\n```\n\n\n\n"
 
 /***/ },
 /* 186 */
@@ -19379,7 +19384,7 @@
 	  mixins: [FormMixin, StepMixin],
 	
 	  render: function render() {
-	    return React.createElement("div", React.__spread({ className: "form-group" }, this.props), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Enter your credit card number:"), React.createElement("input", { type: "number", valueLink: this.linkField('cardNumber') }), React.createElement(ErrorMessage, { field: "cardNumber" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Expiry"), React.createElement("input", { placeholder: "MM", className: "small", type: "text", valueLink: this.linkField('cardExpiryM') }), " /", React.createElement("input", { placeholder: "YY", className: "small", type: "text", valueLink: this.linkField('cardExpiryY') }), React.createElement("input", { placeholder: "CVC", className: "small", type: "text", valueLink: this.linkField('cardCVC') }), React.createElement(ErrorMessage, { field: "cardExpiryM" }), React.createElement(ErrorMessage, { field: "cardExpiryY" }), React.createElement(ErrorMessage, { field: "cardCVC" })));
+	    return React.createElement("div", React.__spread({ className: "form-group" }, this.props), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Enter your credit card number:"), React.createElement("input", { validations: "number", valueLink: this.linkField('cardNumber') }), React.createElement(ErrorMessage, { field: "cardNumber" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Expiry"), React.createElement("input", { placeholder: "MM", className: "small", validations: "text", valueLink: this.linkField('cardExpiryM') }), " /", React.createElement("input", { placeholder: "YY", className: "small", validations: "text", valueLink: this.linkField('cardExpiryY') }), React.createElement("input", { placeholder: "CVC", className: "small", validations: "text", valueLink: this.linkField('cardCVC') }), React.createElement(ErrorMessage, { field: "cardExpiryM" }), React.createElement(ErrorMessage, { field: "cardExpiryY" }), React.createElement(ErrorMessage, { field: "cardCVC" })));
 	  }
 	});
 	
@@ -19405,7 +19410,7 @@
 	
 	  render: function render() {
 	    var provinces = PROVINCES[this.linkField('country').value];
-	    return React.createElement("div", null, React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Name"), React.createElement("input", { type: "text", name: "name", valueLink: this.linkField('name') }), React.createElement(ErrorMessage, { field: "name" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Email"), React.createElement("input", { type: "text", name: "email", valueLink: this.linkField('email') }), React.createElement(ErrorMessage, { field: "email" })), React.createElement("label", null, "Enter your country"), React.createElement("select", { valueLink: this.linkField('country') }, React.createElement("option", { value: "" }), COUNTRY.map(function (country) {
+	    return React.createElement("div", null, React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Name"), React.createElement("input", { validations: "text", name: "name", valueLink: this.linkField('name') }), React.createElement(ErrorMessage, { field: "name" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Email"), React.createElement("input", { validations: "text", name: "email", valueLink: this.linkField('email') }), React.createElement(ErrorMessage, { field: "email" })), React.createElement("label", null, "Enter your country"), React.createElement("select", { valueLink: this.linkField('country') }, React.createElement("option", { value: "" }), COUNTRY.map(function (country) {
 	      return React.createElement("option", { value: country, key: country }, country);
 	    })), React.createElement(ErrorMessage, { field: "country" }), React.createElement("div", { hidden: !provinces }, React.createElement("label", null, "Enter your province"), React.createElement("select", { valueLink: this.linkField('province') }, React.createElement("option", { value: "" }), provinces && provinces.map(function (province) {
 	      return React.createElement("option", { value: province, key: province }, province);
@@ -19431,52 +19436,52 @@
 	      amount: {
 	        required: true,
 	        label: 'Amount',
-	        type: 'number'
+	        validations: 'number'
 	      },
 	      isMonthly: {
 	        initial: false,
-	        type: 'boolean'
+	        validations: 'boolean'
 	      }
 	    }, {
 	      paymentType: {
-	        type: 'string',
+	        validations: 'string',
 	        label: 'Payment type',
 	        required: true
 	      },
 	      cardNumber: {
 	        required: requiredIfCreditCard,
-	        type: 'number',
+	        validations: 'number',
 	        label: 'Credit card number'
 	      },
 	      cardExpiryM: {
 	        required: requiredIfCreditCard,
-	        type: 'number',
+	        validations: 'number',
 	        label: 'Expiry Month'
 	      },
 	      cardExpiryY: {
 	        required: requiredIfCreditCard,
-	        type: 'number',
+	        validations: 'number',
 	        label: 'Expiry Year'
 	      },
 	      cardCVC: {
 	        required: requiredIfCreditCard,
-	        type: 'string',
+	        validations: 'string',
 	        label: 'Credit card CVC'
 	      }
 	    }, {
 	      name: {
 	        required: true,
 	        label: 'Name',
-	        type: 'string'
+	        validations: 'string'
 	      },
 	      email: {
 	        required: true,
 	        label: 'Email',
-	        type: 'email'
+	        validations: 'email'
 	      },
 	      country: {
 	        required: true,
-	        type: 'string',
+	        validations: 'string',
 	        label: 'Country'
 	      },
 	      province: {
@@ -19484,7 +19489,7 @@
 	          if (this.state.paymentType !== 'creditCard') return false;
 	          if (PROVINCES[this.state.country]) return true;
 	        },
-	        type: 'string',
+	        validations: 'string',
 	        label: 'Province'
 	      }
 	    }];
@@ -19587,7 +19592,7 @@
 /* 188 */
 /***/ function(module, exports) {
 
-	module.exports = "var React = require('react/addons');\nvar {\n  CreateForm,\n  SubmitButton,\n  SubmitGroupButton,\n  ErrorMessage,\n  FormMixin,\n  Radio\n} = require('../../../src/form');\nvar {StepByStep, NextButton, StepMixin} = require('../../lib/step.jsx');\n\nvar COUNTRY = ['Canada', 'US', 'Mexico'];\nvar PROVINCES = {\n  Canada: ['Ontario', 'Quebec'],\n  US: ['New York', 'Washington']\n};\n\nvar Amount = React.createClass({\n  mixins: [FormMixin, StepMixin],\n  getInitialState: function () {\n    return {\n      customValue: null\n    };\n  },\n  onCustomChange: function (e) {\n    var val = e.target.value;\n    this.setState({\n      customValue: val\n    });\n    this.linkField('amount').requestChange(val);\n  },\n  render: function () {\n    var linkField = this.linkField('amount');\n    var monthlyLink = this.linkField('isMonthly')\n    return (<div>\n      <label>Amount:</label>\n      <ul className=\"radio-group\">\n        <li><Radio name=\"amount\" value={20} radioLink={linkField} /> $20</li>\n        <li><Radio name=\"amount\" value={10} radioLink={linkField} /> $10</li>\n        <li><Radio name=\"amount\" value={5} radioLink={linkField} /> $5</li>\n        <li><Radio name=\"amount\" value={3} radioLink={linkField} /> $3</li>\n        <li><Radio name=\"amount\" value={this.state.customValue || 0} radioLink={linkField}/> <input placeholder=\"Other amount\" value={this.state.customValue} onChange={this.onCustomChange}/></li>\n      </ul>\n      <ErrorMessage field=\"amount\" />\n\n      <ul className=\"radio-group\">\n        <li><Radio name=\"isMonthly\" value={true} radioLink={monthlyLink} /> Monthly</li>\n        <li><Radio name=\"isMonthly\" value={false} radioLink={monthlyLink} /> One time</li>\n      </ul>\n\n      <p><SubmitGroupButton group={this.props.index} onSuccess={this.goNext}>Next</SubmitGroupButton></p>\n    </div>);\n  }\n});\n\nvar CreditCard = React.createClass({\n\n  mixins: [FormMixin, StepMixin],\n\n  render: function () {\n    return (<div className=\"form-group\" {...this.props}>\n\n      <div className=\"form-group\">\n        <label>Enter your credit card number:</label>\n        <input type=\"number\" valueLink={this.linkField('cardNumber')} />\n        <ErrorMessage field=\"cardNumber\" />\n      </div>\n\n      <div className=\"form-group\">\n        <label>Expiry</label>\n        <input placeholder=\"MM\" className=\"small\" type=\"text\" valueLink={this.linkField('cardExpiryM')} /> /\n        <input placeholder=\"YY\" className=\"small\" type=\"text\" valueLink={this.linkField('cardExpiryY')} />\n        <input placeholder=\"CVC\" className=\"small\" type=\"text\" valueLink={this.linkField('cardCVC')} />\n        <ErrorMessage field=\"cardExpiryM\" />\n        <ErrorMessage field=\"cardExpiryY\" />\n        <ErrorMessage field=\"cardCVC\" />\n      </div>\n\n    </div>);\n  }\n});\n\nvar Payment = React.createClass({\n\n  getInitialState: function () {\n    return {\n      didSubmit: false\n    };\n  },\n\n  mixins: [FormMixin, StepMixin],\n\n  render: function () {\n    var paymentTypeLink = this.linkField('paymentType');\n    return (<div>\n      <ul className=\"radio-group\">\n        <li>\n          <Radio name=\"paymentType\" value=\"creditCard\" radioLink={paymentTypeLink} />\n          Credit Card\n        </li>\n        <li>\n          <Radio name=\"paymentType\" value=\"paypal\" radioLink={paymentTypeLink} />\n          Paypal\n        </li>\n      </ul>\n      <ErrorMessage field=\"paymentType\" />\n      <CreditCard hidden={paymentTypeLink.value !== 'creditCard'} />\n      <p><SubmitGroupButton group={this.props.index} onSuccess={this.goNext} /></p>\n    </div>);\n  }\n});\n\nvar PersonalInfo = React.createClass({\n\n  mixins: [FormMixin],\n\n  render: function () {\n    var provinces = PROVINCES[this.linkField('country').value];\n    return (<div>\n      <div className=\"form-group\">\n        <label>Name</label>\n        <input type=\"text\" name=\"name\" valueLink={this.linkField('name')} />\n        <ErrorMessage field=\"name\" />\n      </div>\n      <div className=\"form-group\">\n        <label>Email</label>\n        <input type=\"text\" name=\"email\" valueLink={this.linkField('email')} />\n        <ErrorMessage field=\"email\" />\n      </div>\n\n      <label>Enter your country</label>\n      <select valueLink={this.linkField('country')}>\n        <option value=\"\" />\n        {COUNTRY.map(country => <option value={country} key={country}>{country}</option>)}\n      </select>\n      <ErrorMessage field=\"country\" />\n\n      <div hidden={!provinces}>\n        <label>Enter your province</label>\n        <select valueLink={this.linkField('province')}>\n          <option value=\"\" />\n          {provinces && provinces.map(province => <option value={province} key={province}>{province}</option>)}\n        </select>\n      </div>\n      <ErrorMessage field=\"province\" />\n\n      <p><SubmitButton /></p>\n    </div>);\n  }\n});\n\nvar ThankYou = React.createClass({\n  render: function () {\n    return (<div>\n      <h1>Thank you!!</h1>\n    </div>);\n  }\n});\n\nfunction requiredIfCreditCard() {\n  if (this.state.paymentType === 'creditCard') {\n    return true;\n  }\n}\n\nvar Form = CreateForm({\n  getSchema: function () {\n    return [\n      {\n        amount: {\n          required: true,\n          label: 'Amount',\n          type: 'number'\n        },\n        isMonthly: {\n          initial: false,\n          type: 'boolean'\n        }\n      },\n      {\n        paymentType: {\n          type: 'string',\n          label: 'Payment type',\n          required: true\n        },\n        cardNumber: {\n          required: requiredIfCreditCard,\n          type: 'number',\n          label: 'Credit card number'\n        },\n        cardExpiryM: {\n          required: requiredIfCreditCard,\n          type: 'number',\n          label: 'Expiry Month'\n        },\n        cardExpiryY: {\n          required: requiredIfCreditCard,\n          type: 'number',\n          label: 'Expiry Year'\n        },\n        cardCVC: {\n          required: requiredIfCreditCard,\n          type: 'string',\n          label: 'Credit card CVC'\n        }\n      },\n      {\n        name: {\n          required: true,\n          label: 'Name',\n          type: 'string'\n        },\n        email: {\n          required: true,\n          label: 'Email',\n          type: 'email'\n        },\n        country: {\n          required: true,\n          type: 'string',\n          label: 'Country'\n        },\n        province: {\n          required: function () {\n            if (this.state.paymentType !== 'creditCard') return false;\n            if (PROVINCES[this.state.country]) return true;\n          },\n          type: 'string',\n          label: 'Province'\n        }\n      }\n    ];\n  },\n  onSuccess: function (data) {\n    this.refs.sequence.goNext();\n  },\n  render: function () {\n    return (<form>\n      <StepByStep interactiveNav={false} ref=\"sequence\">\n        <Amount index={0} title=\"Amount\" />\n        <Payment index={1} title=\"Payment\" />\n        <PersonalInfo index={2} title=\"Info\" />\n        <ThankYou index={3} title=\"Thanks\" />\n      </StepByStep>\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n"
+	module.exports = "var React = require('react/addons');\nvar {\n  CreateForm,\n  SubmitButton,\n  SubmitGroupButton,\n  ErrorMessage,\n  FormMixin,\n  Radio\n} = require('../../../src/form');\nvar {StepByStep, NextButton, StepMixin} = require('../../lib/step.jsx');\n\nvar COUNTRY = ['Canada', 'US', 'Mexico'];\nvar PROVINCES = {\n  Canada: ['Ontario', 'Quebec'],\n  US: ['New York', 'Washington']\n};\n\nvar Amount = React.createClass({\n  mixins: [FormMixin, StepMixin],\n  getInitialState: function () {\n    return {\n      customValue: null\n    };\n  },\n  onCustomChange: function (e) {\n    var val = e.target.value;\n    this.setState({\n      customValue: val\n    });\n    this.linkField('amount').requestChange(val);\n  },\n  render: function () {\n    var linkField = this.linkField('amount');\n    var monthlyLink = this.linkField('isMonthly')\n    return (<div>\n      <label>Amount:</label>\n      <ul className=\"radio-group\">\n        <li><Radio name=\"amount\" value={20} radioLink={linkField} /> $20</li>\n        <li><Radio name=\"amount\" value={10} radioLink={linkField} /> $10</li>\n        <li><Radio name=\"amount\" value={5} radioLink={linkField} /> $5</li>\n        <li><Radio name=\"amount\" value={3} radioLink={linkField} /> $3</li>\n        <li><Radio name=\"amount\" value={this.state.customValue || 0} radioLink={linkField}/> <input placeholder=\"Other amount\" value={this.state.customValue} onChange={this.onCustomChange}/></li>\n      </ul>\n      <ErrorMessage field=\"amount\" />\n\n      <ul className=\"radio-group\">\n        <li><Radio name=\"isMonthly\" value={true} radioLink={monthlyLink} /> Monthly</li>\n        <li><Radio name=\"isMonthly\" value={false} radioLink={monthlyLink} /> One time</li>\n      </ul>\n\n      <p><SubmitGroupButton group={this.props.index} onSuccess={this.goNext}>Next</SubmitGroupButton></p>\n    </div>);\n  }\n});\n\nvar CreditCard = React.createClass({\n\n  mixins: [FormMixin, StepMixin],\n\n  render: function () {\n    return (<div className=\"form-group\" {...this.props}>\n\n      <div className=\"form-group\">\n        <label>Enter your credit card number:</label>\n        <input validations=\"number\" valueLink={this.linkField('cardNumber')} />\n        <ErrorMessage field=\"cardNumber\" />\n      </div>\n\n      <div className=\"form-group\">\n        <label>Expiry</label>\n        <input placeholder=\"MM\" className=\"small\" validations=\"text\" valueLink={this.linkField('cardExpiryM')} /> /\n        <input placeholder=\"YY\" className=\"small\" validations=\"text\" valueLink={this.linkField('cardExpiryY')} />\n        <input placeholder=\"CVC\" className=\"small\" validations=\"text\" valueLink={this.linkField('cardCVC')} />\n        <ErrorMessage field=\"cardExpiryM\" />\n        <ErrorMessage field=\"cardExpiryY\" />\n        <ErrorMessage field=\"cardCVC\" />\n      </div>\n\n    </div>);\n  }\n});\n\nvar Payment = React.createClass({\n\n  getInitialState: function () {\n    return {\n      didSubmit: false\n    };\n  },\n\n  mixins: [FormMixin, StepMixin],\n\n  render: function () {\n    var paymentTypeLink = this.linkField('paymentType');\n    return (<div>\n      <ul className=\"radio-group\">\n        <li>\n          <Radio name=\"paymentType\" value=\"creditCard\" radioLink={paymentTypeLink} />\n          Credit Card\n        </li>\n        <li>\n          <Radio name=\"paymentType\" value=\"paypal\" radioLink={paymentTypeLink} />\n          Paypal\n        </li>\n      </ul>\n      <ErrorMessage field=\"paymentType\" />\n      <CreditCard hidden={paymentTypeLink.value !== 'creditCard'} />\n      <p><SubmitGroupButton group={this.props.index} onSuccess={this.goNext} /></p>\n    </div>);\n  }\n});\n\nvar PersonalInfo = React.createClass({\n\n  mixins: [FormMixin],\n\n  render: function () {\n    var provinces = PROVINCES[this.linkField('country').value];\n    return (<div>\n      <div className=\"form-group\">\n        <label>Name</label>\n        <input validations=\"text\" name=\"name\" valueLink={this.linkField('name')} />\n        <ErrorMessage field=\"name\" />\n      </div>\n      <div className=\"form-group\">\n        <label>Email</label>\n        <input validations=\"text\" name=\"email\" valueLink={this.linkField('email')} />\n        <ErrorMessage field=\"email\" />\n      </div>\n\n      <label>Enter your country</label>\n      <select valueLink={this.linkField('country')}>\n        <option value=\"\" />\n        {COUNTRY.map(country => <option value={country} key={country}>{country}</option>)}\n      </select>\n      <ErrorMessage field=\"country\" />\n\n      <div hidden={!provinces}>\n        <label>Enter your province</label>\n        <select valueLink={this.linkField('province')}>\n          <option value=\"\" />\n          {provinces && provinces.map(province => <option value={province} key={province}>{province}</option>)}\n        </select>\n      </div>\n      <ErrorMessage field=\"province\" />\n\n      <p><SubmitButton /></p>\n    </div>);\n  }\n});\n\nvar ThankYou = React.createClass({\n  render: function () {\n    return (<div>\n      <h1>Thank you!!</h1>\n    </div>);\n  }\n});\n\nfunction requiredIfCreditCard() {\n  if (this.state.paymentType === 'creditCard') {\n    return true;\n  }\n}\n\nvar Form = CreateForm({\n  getSchema: function () {\n    return [\n      {\n        amount: {\n          required: true,\n          label: 'Amount',\n          validations: 'number'\n        },\n        isMonthly: {\n          initial: false,\n          validations: 'boolean'\n        }\n      },\n      {\n        paymentType: {\n          validations: 'string',\n          label: 'Payment type',\n          required: true\n        },\n        cardNumber: {\n          required: requiredIfCreditCard,\n          validations: 'number',\n          label: 'Credit card number'\n        },\n        cardExpiryM: {\n          required: requiredIfCreditCard,\n          validations: 'number',\n          label: 'Expiry Month'\n        },\n        cardExpiryY: {\n          required: requiredIfCreditCard,\n          validations: 'number',\n          label: 'Expiry Year'\n        },\n        cardCVC: {\n          required: requiredIfCreditCard,\n          validations: 'string',\n          label: 'Credit card CVC'\n        }\n      },\n      {\n        name: {\n          required: true,\n          label: 'Name',\n          validations: 'string'\n        },\n        email: {\n          required: true,\n          label: 'Email',\n          validations: 'email'\n        },\n        country: {\n          required: true,\n          validations: 'string',\n          label: 'Country'\n        },\n        province: {\n          required: function () {\n            if (this.state.paymentType !== 'creditCard') return false;\n            if (PROVINCES[this.state.country]) return true;\n          },\n          validations: 'string',\n          label: 'Province'\n        }\n      }\n    ];\n  },\n  onSuccess: function (data) {\n    this.refs.sequence.goNext();\n  },\n  render: function () {\n    return (<form>\n      <StepByStep interactiveNav={false} ref=\"sequence\">\n        <Amount index={0} title=\"Amount\" />\n        <Payment index={1} title=\"Payment\" />\n        <PersonalInfo index={2} title=\"Info\" />\n        <ThankYou index={3} title=\"Thanks\" />\n      </StepByStep>\n    </form>);\n  }\n});\n\nmodule.exports = Form;\n"
 
 /***/ },
 /* 189 */
@@ -19627,12 +19632,12 @@
 	    return {
 	      name: {
 	        label: 'Name',
-	        type: 'string',
+	        validations: 'string',
 	        required: true
 	      },
 	      email: {
 	        label: 'Email',
-	        type: 'email',
+	        validations: 'email',
 	        required: true
 	      }
 	    };
@@ -19644,7 +19649,7 @@
 	
 	  render: function render() {
 	
-	    var inputs = [React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Name"), React.createElement("input", { type: "text", name: "name", valueLink: this.linkField('name') }), React.createElement(ErrorMessage, { field: "name" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Email"), React.createElement("input", { type: "text", name: "email", valueLink: this.linkField('email') }), React.createElement(ErrorMessage, { field: "email" }))];
+	    var inputs = [React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Name"), React.createElement("input", { validations: "text", name: "name", valueLink: this.linkField('name') }), React.createElement(ErrorMessage, { field: "name" })), React.createElement("div", { className: "form-group" }, React.createElement("label", null, "Email"), React.createElement("input", { validations: "text", name: "email", valueLink: this.linkField('email') }), React.createElement(ErrorMessage, { field: "email" }))];
 	
 	    if (this.props.emailFirst) inputs.reverse();
 	
@@ -19669,7 +19674,7 @@
 /* 192 */
 /***/ function(module, exports) {
 
-	module.exports = "var React = require('react');\nvar Formation = require('../../../src/form');\n\nvar CreateForm = Formation.CreateForm;\nvar ErrorMessage = Formation.ErrorMessage;\n\nvar PersonalInfo = CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        type: 'string',\n        required: true\n      },\n      email: {\n        label: 'Email',\n        type: 'email',\n        required: true\n      }\n    }\n  },\n\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n\n    var inputs = [\n      <div className=\"form-group\">\n        <label>Name</label>\n        <input type=\"text\" name=\"name\" valueLink={this.linkField('name')} />\n        <ErrorMessage field=\"name\" />\n      </div>,\n\n      <div className=\"form-group\">\n        <label>Email</label>\n        <input type=\"text\" name=\"email\" valueLink={this.linkField('email')} />\n        <ErrorMessage field=\"email\" />\n      </div>\n    ];\n\n    if (this.props.emailFirst) inputs.reverse();\n\n    var style = {\n      padding: 20,\n      backgroundColor: this.props.backgroundColor\n    };\n\n    return (<form style={style}>\n      {inputs}\n      <p><button onClick={this.submitForm}>Submit</button></p>\n    </form>);\n  }\n});\n\n\nvar Form = React.createClass({\n  render: function () {\n    return (<div>\n      <h3>White background</h3>\n      <PersonalInfo />\n\n      <h3>Yellow background, email first</h3>\n      <PersonalInfo emailFirst backgroundColor=\"#FFEEBC\" />\n    </div>);\n  }\n});\n\nmodule.exports = Form;\n\n"
+	module.exports = "var React = require('react');\nvar Formation = require('../../../src/form');\n\nvar CreateForm = Formation.CreateForm;\nvar ErrorMessage = Formation.ErrorMessage;\n\nvar PersonalInfo = CreateForm({\n\n  getSchema: function () {\n    return {\n      name: {\n        label: 'Name',\n        validations: 'string',\n        required: true\n      },\n      email: {\n        label: 'Email',\n        validations: 'email',\n        required: true\n      }\n    }\n  },\n\n  onSuccess: function (data) {\n    alert(JSON.stringify(data));\n  },\n\n  render: function () {\n\n    var inputs = [\n      <div className=\"form-group\">\n        <label>Name</label>\n        <input validations=\"text\" name=\"name\" valueLink={this.linkField('name')} />\n        <ErrorMessage field=\"name\" />\n      </div>,\n\n      <div className=\"form-group\">\n        <label>Email</label>\n        <input validations=\"text\" name=\"email\" valueLink={this.linkField('email')} />\n        <ErrorMessage field=\"email\" />\n      </div>\n    ];\n\n    if (this.props.emailFirst) inputs.reverse();\n\n    var style = {\n      padding: 20,\n      backgroundColor: this.props.backgroundColor\n    };\n\n    return (<form style={style}>\n      {inputs}\n      <p><button onClick={this.submitForm}>Submit</button></p>\n    </form>);\n  }\n});\n\n\nvar Form = React.createClass({\n  render: function () {\n    return (<div>\n      <h3>White background</h3>\n      <PersonalInfo />\n\n      <h3>Yellow background, email first</h3>\n      <PersonalInfo emailFirst backgroundColor=\"#FFEEBC\" />\n    </div>);\n  }\n});\n\nmodule.exports = Form;\n\n"
 
 /***/ },
 /* 193 */
@@ -19693,14 +19698,14 @@
 	var InputEg = React.createClass({ displayName: "InputEg",
 	  mixins: [FormMixin],
 	  render: function render() {
-	    return React.createElement("div", null, React.createElement("div", { className: "form-group" }, React.createElement("h4", null, "Text input"), React.createElement("label", null, "Name"), React.createElement("input", { type: "text", valueLink: this.linkField('name') }), React.createElement(ErrorMessage, { field: "name" })), React.createElement(Highlight, { className: hljsClass }, '<input type="text" valueLink={this.linkField(\'name\')} />'), React.createElement("div", { className: "form-group" }, React.createElement("h4", null, "Number input"), React.createElement("label", null, "Age"), React.createElement("input", { type: "number", valueLink: this.linkField('age') }), React.createElement(ErrorMessage, { field: "age" })), React.createElement(Highlight, { className: hljsClass }, '<input type="number" valueLink={this.linkField(\'age\')} />'));
+	    return React.createElement("div", null, React.createElement("div", { className: "form-group" }, React.createElement("h4", null, "Text input"), React.createElement("label", null, "Name"), React.createElement("input", { validations: "text", valueLink: this.linkField('name') }), React.createElement(ErrorMessage, { field: "name" })), React.createElement(Highlight, { className: hljsClass }, '<input validations="text" valueLink={this.linkField(\'name\')} />'), React.createElement("div", { className: "form-group" }, React.createElement("h4", null, "Number input"), React.createElement("label", null, "Age"), React.createElement("input", { validations: "number", valueLink: this.linkField('age') }), React.createElement(ErrorMessage, { field: "age" })), React.createElement(Highlight, { className: hljsClass }, '<input validations="number" valueLink={this.linkField(\'age\')} />'));
 	  }
 	});
 	
 	var CheckboxEg = React.createClass({ displayName: "CheckboxEg",
 	  mixins: [FormMixin],
 	  render: function render() {
-	    return React.createElement("div", null, React.createElement("h4", null, "Checkbox"), React.createElement("label", null, React.createElement("input", { type: "checkbox", checkedLink: this.linkField('likeDogs') }), " Do you like dogs?"), React.createElement(Highlight, { className: hljsClass }, '<label>\n  <input type="checkbox" checkedLink={this.linkField(\'likeDogs\')} />\n  Do you like dogs?\n</label>'));
+	    return React.createElement("div", null, React.createElement("h4", null, "Checkbox"), React.createElement("label", null, React.createElement("input", { validations: "checkbox", checkedLink: this.linkField('likeDogs') }), " Do you like dogs?"), React.createElement(Highlight, { className: hljsClass }, '<label>\n  <input validations="checkbox" checkedLink={this.linkField(\'likeDogs\')} />\n  Do you like dogs?\n</label>'));
 	  }
 	});
 	
@@ -19723,21 +19728,21 @@
 	    return {
 	      name: {
 	        label: 'Name',
-	        type: 'string'
+	        validations: 'string'
 	      },
 	      age: {
 	        label: 'Age',
-	        type: 'number'
+	        validations: 'number'
 	      },
 	      likeDogs: {
 	        label: 'Do you like dogs',
-	        type: 'boolean'
+	        validations: 'boolean'
 	      },
 	      color: {
-	        type: 'string'
+	        validations: 'string'
 	      },
 	      country: {
-	        type: 'string'
+	        validations: 'string'
 	      }
 	    };
 	  },
@@ -19793,7 +19798,7 @@
 	      valid: this.didSubmit() && !errors,
 	      invalid: this.didSubmit() && errors
 	    });
-	    return React.createElement("div", { className: "form-group" }, React.createElement(ErrorMessage, { className: "helper-error", field: this.props.field }), React.createElement("input", { className: inputClass, type: this.props.type || 'text', placeholder: this.props.label, valueLink: this.linkField(this.props.field) }));
+	    return React.createElement("div", { className: "form-group" }, React.createElement(ErrorMessage, { className: "helper-error", field: this.props.field }), React.createElement("input", { className: inputClass, validations: this.props.validations || 'text', placeholder: this.props.label, valueLink: this.linkField(this.props.field) }));
 	  }
 	});
 	
@@ -19803,23 +19808,23 @@
 	    return {
 	      firstName: {
 	        required: true,
-	        type: Validator.maxLength(5),
+	        validations: Validator.maxLength(5),
 	        label: 'First name'
 	      },
 	      lastName: {
 	        required: true,
 	        label: 'Last name',
-	        type: 'string'
+	        validations: 'string'
 	      },
 	      email: {
 	        label: 'Email',
 	        required: true,
-	        type: 'email'
+	        validations: 'email'
 	      },
 	      password: {
 	        required: true,
 	        label: 'Password',
-	        type: function type(val) {
+	        validations: function validations(val) {
 	          if (val.length >= 5) return false;
 	          return 'Password must be at least 5 characters. Please try again';
 	        }
@@ -19834,7 +19839,7 @@
 	        required: true
 	      },
 	      mailingList: {
-	        type: 'boolean'
+	        validations: 'boolean'
 	      }
 	    };
 	  },
@@ -19842,13 +19847,13 @@
 	    alert(JSON.stringify(data));
 	  },
 	  render: function render() {
-	    return React.createElement("div", { className: "airbnb-eg" }, React.createElement("form", null, React.createElement(Input, { label: "First name", field: "firstName" }), React.createElement(Input, { label: "Last name", field: "lastName" }), React.createElement(Input, { label: "Email", field: "email" }), React.createElement(Input, { label: "Password", field: "password", type: "password" }), React.createElement("label", null, React.createElement(FormattedMessage, { message: this.getIntlMessage('birthday') })), React.createElement("div", { className: "helper-error", hidden: !this.didSubmit() || !this.validateField('birthdayMonth') && !this.validateField('birthdayDay') && !this.validateField('birthdayYear') }, "Select your birth date to continue"), React.createElement("select", { valueLink: this.linkField('birthdayMonth') }, React.createElement("option", { value: "" }, "Month"), dateData.months.map(function (month) {
+	    return React.createElement("div", { className: "airbnb-eg" }, React.createElement("form", null, React.createElement(Input, { label: "First name", field: "firstName" }), React.createElement(Input, { label: "Last name", field: "lastName" }), React.createElement(Input, { label: "Email", field: "email" }), React.createElement(Input, { label: "Password", field: "password", validations: "password" }), React.createElement("label", null, React.createElement(FormattedMessage, { message: this.getIntlMessage('birthday') })), React.createElement("div", { className: "helper-error", hidden: !this.didSubmit() || !this.validateField('birthdayMonth') && !this.validateField('birthdayDay') && !this.validateField('birthdayYear') }, "Select your birth date to continue"), React.createElement("select", { valueLink: this.linkField('birthdayMonth') }, React.createElement("option", { value: "" }, "Month"), dateData.months.map(function (month) {
 	      return React.createElement("option", { value: month }, month);
 	    })), React.createElement("select", { valueLink: this.linkField('birthdayDay') }, React.createElement("option", { value: "" }, "Day"), dateData.days.map(function (day) {
 	      return React.createElement("option", { value: day }, day);
 	    })), React.createElement("select", { valueLink: this.linkField('birthdayYear') }, React.createElement("option", { value: "" }, "Year"), dateData.years.map(function (year) {
 	      return React.createElement("option", { value: year }, year);
-	    })), React.createElement("label", { className: "checkbox" }, React.createElement("input", { type: "checkbox", checkedLink: this.linkField('mailingList') }), "I'd like to receive coupons and inspiration"), React.createElement("p", { className: "terms" }, "By signing up, I agree to Airbnb's Terms of Service, Privacy Policy, Guest Refund Policy, and Host Guarantee Terms."), React.createElement("div", { className: "submit-footer" }, React.createElement(SubmitButton, null, "Sign up"))));
+	    })), React.createElement("label", { className: "checkbox" }, React.createElement("input", { validations: "checkbox", checkedLink: this.linkField('mailingList') }), "I'd like to receive coupons and inspiration"), React.createElement("p", { className: "terms" }, "By signing up, I agree to Airbnb's Terms of Service, Privacy Policy, Guest Refund Policy, and Host Guarantee Terms."), React.createElement("div", { className: "submit-footer" }, React.createElement(SubmitButton, null, "Sign up"))));
 	  }
 	});
 	
@@ -19996,7 +20001,7 @@
 	      username: {
 	        required: true,
 	        label: 'Username',
-	        type: function type(val) {
+	        validations: function validations(val) {
 	          if (/^[a-zA-Z0-9\-]{1,20}$/.test(val)) return false;
 	          return 'Must be 1-20 characters long and use only "-" and alphanumeric symbols';
 	        }
@@ -20004,18 +20009,18 @@
 	      email: {
 	        required: true,
 	        label: 'Email',
-	        type: 'email'
+	        validations: 'email'
 	      },
 	      password: {
 	        required: true,
 	        label: 'Password',
-	        type: function type(val) {
+	        validations: function validations(val) {
 	          if (val && zxcvbn(val).score > 0) return false;
 	          return 'Password is not strong enough';
 	        }
 	      },
 	      subscribe: {
-	        type: 'boolean'
+	        validations: 'boolean'
 	      }
 	    };
 	  },
@@ -20044,7 +20049,7 @@
 	
 	  render: function render() {
 	    var passStrength = this.getPassStrength();
-	    return React.createElement("form", { className: "login-eg animated fadeInUp" }, React.createElement("div", { className: "body" }, React.createElement("div", { className: "form-group" }, React.createElement("label", { hidden: !this.props.showLabels }, "Username"), React.createElement("input", { placeholder: this.props.showLabels ? '' : 'Username', type: "text", onBlur: this.onBlur('username'), valueLink: this.linkField('username') }), React.createElement(ErrorMessage, { show: this.state.blurred.username, field: "username" })), React.createElement("div", { className: "form-group" }, React.createElement("label", { hidden: !this.props.showLabels }, "Email"), React.createElement("input", { placeholder: this.props.showLabels ? '' : 'Email', type: "text", onBlur: this.onBlur('email'), valueLink: this.linkField('email') }), React.createElement(ErrorMessage, { show: this.state.blurred.email, field: "email" })), React.createElement("div", { className: "form-group" }, React.createElement("label", { hidden: !this.props.showLabels }, "Password"), React.createElement("input", { placeholder: this.props.showLabels ? '' : 'Password', type: "password", name: "password", onBlur: this.onBlur('password'), valueLink: this.linkField('password') }), React.createElement("div", { className: 'password-strength strength-' + passStrength }, passStrength >= 0 && this.passStrengthStrings[passStrength], React.createElement("span", { className: "indicator", style: { width: (passStrength + 1) * 20 + '%' } })), React.createElement(ErrorMessage, { show: this.state.blurred.password, field: "password" }))), React.createElement("div", { className: "submit-footer" }, React.createElement(SubmitButton, { style: { backgroundColor: this.props.buttonColor } }, this.props.signUpMessage || 'Sign Up')));
+	    return React.createElement("form", { className: "login-eg animated fadeInUp" }, React.createElement("div", { className: "body" }, React.createElement("div", { className: "form-group" }, React.createElement("label", { hidden: !this.props.showLabels }, "Username"), React.createElement("input", { placeholder: this.props.showLabels ? '' : 'Username', validations: "text", onBlur: this.onBlur('username'), valueLink: this.linkField('username') }), React.createElement(ErrorMessage, { show: this.state.blurred.username, field: "username" })), React.createElement("div", { className: "form-group" }, React.createElement("label", { hidden: !this.props.showLabels }, "Email"), React.createElement("input", { placeholder: this.props.showLabels ? '' : 'Email', validations: "text", onBlur: this.onBlur('email'), valueLink: this.linkField('email') }), React.createElement(ErrorMessage, { show: this.state.blurred.email, field: "email" })), React.createElement("div", { className: "form-group" }, React.createElement("label", { hidden: !this.props.showLabels }, "Password"), React.createElement("input", { placeholder: this.props.showLabels ? '' : 'Password', validations: "password", name: "password", onBlur: this.onBlur('password'), valueLink: this.linkField('password') }), React.createElement("div", { className: 'password-strength strength-' + passStrength }, passStrength >= 0 && this.passStrengthStrings[passStrength], React.createElement("span", { className: "indicator", style: { width: (passStrength + 1) * 20 + '%' } })), React.createElement(ErrorMessage, { show: this.state.blurred.password, field: "password" }))), React.createElement("div", { className: "submit-footer" }, React.createElement(SubmitButton, { style: { backgroundColor: this.props.buttonColor } }, this.props.signUpMessage || 'Sign Up')));
 	  }
 	});
 	

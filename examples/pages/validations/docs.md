@@ -1,6 +1,6 @@
 # Validation
 
-You can validate fields by adding a `Formation.Validator` object to the `type` property of a schema definition:
+You can validate fields by adding a `Formation.Validator` object to the `validations` property of a schema definition:
 
 ```jsx{5,8,11}
 var Validator = require('react-formation').Validator;
@@ -8,13 +8,13 @@ var Validator = require('react-formation').Validator;
 var getSchema = function () {
   return {
     email: {
-      type: Validator.email()
+      validations: Validator.email()
     },
     creditCard: {
-      type: Validator.creditCard()
+      validations: Validator.creditCard()
     },
     numberOfApples: {
-      type: Validator.number().min(1).max(10)
+      validations: Validator.number().min(1).max(10)
     }
   };
 };
@@ -60,7 +60,7 @@ As a short form, you can specify them in a schema with a string:
 
 ```jsx
 email: {
-  type: 'creditCard' // this is equivalent to Validator.creditCard();
+  validations: 'creditCard' // this is equivalent to Validator.creditCard();
 }
 ```
 
@@ -107,7 +107,7 @@ v.messages.creditCard = 'NO FOOLING'
 
 ### Validations
 
-The simplest way to create a custom validation is to pass a function to the `type` property instead of a `Validator` object.
+The simplest way to create a custom validation is to pass a function to the `validations` property instead of a `Validator` object.
 
 Make sure the function returns `false` if the input is valid, or else an error string if it is invalid.
 
@@ -122,7 +122,7 @@ function isBob(value) {
 
 var getSchema = function () {
   return {
-    name: {type: isBob}
+    name: {validations: isBob}
   };
 };
 ```
@@ -141,7 +141,7 @@ function sameAsPassword(value) {
 var getSchema = function () {
   return {
     password: {required: true},
-    name: {type: sameAsPassword}
+    name: {validations: sameAsPassword}
   };
 };
 ```

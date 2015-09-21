@@ -74,19 +74,24 @@ module.exports = {
     var currentValue = this.state[key];
     var label = schema.label || key;
 
+    if (schema.type) {
+      console.warn('Using "type" in your schema is deprecated. Please use "validations" instead.');
+      schema.validations = schema.type;
+    }
+
     if (schema.required === true && !currentValue) errors.push(label + ' is required');
     if (typeof schema.required === 'function') {
       var isConditionallyRequred = schema.required.bind(this)();
       if (isConditionallyRequred && !currentValue) errors.push(label + ' is required');
     }
-    if (currentValue && schema.type instanceof Validator) {
-      var typeError = schema.type.assert(currentValue);
+    if (currentValue && schema.validations instanceof Validator) {
+      var typeError = schema.validations.assert(currentValue);
       if (typeError) errors = errors.concat(typeError);
-    } else if (currentValue && typeof schema.type === 'string' && Validator[schema.type]) {
-      var typeError = Validator[schema.type]().assert(currentValue);
+    } else if (currentValue && typeof schema.validations === 'string' && Validator[schema.validations]) {
+      var typeError = Validator[schema.validations]().assert(currentValue);
       if (typeError) errors = errors.concat(typeError);
-    } else if (currentValue && typeof schema.type === 'function') {
-      var typeError = schema.type.call(this, currentValue);
+    } else if (currentValue && typeof schema.validations === 'function') {
+      var typeError = schema.validations.call(this, currentValue);
       if (typeError) errors.push(typeError);
     }
 

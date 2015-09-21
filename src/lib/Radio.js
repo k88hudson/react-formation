@@ -9,7 +9,7 @@ var Radio = React.createClass({
   },
   render: function () {
     var props = assign({}, this.props, {
-      type: 'radio',
+      validations: 'radio',
       checked: this.props.value + '' === this.props.radioLink.value + '',
       onChange: this.onChange
     });

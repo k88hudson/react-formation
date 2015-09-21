@@ -12,16 +12,16 @@ getSchema: function ()  {
     // This is group 0
     {
       amount: {
-        type: 'number'
+        validations: 'number'
       }
     },
     // This is group 1
     {
       paymentType: {
-        type: 'string'
+        validations: 'string'
       },
       cardNumber: {
-        type: 'number'
+        validations: 'number'
       }
     }
   ];
@@ -34,15 +34,15 @@ Alternatively, you can include a `group` property with each field.
 getSchema: function ()  {
   return {
     amount: {
-      type: 'number',
+      validations: 'number',
       group: 0
     }
     paymentType: {
-      type: 'string',
+      validations: 'string',
       group: 1
     },
     cardNumber: {
-      type: 'number',
+      validations: 'number',
       group: 1
     }
   };

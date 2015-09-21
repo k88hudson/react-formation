@@ -12,23 +12,23 @@ var InputEg = React.createClass({
       <div className="form-group">
         <h4>Text input</h4>
         <label>Name</label>
-        <input type="text" valueLink={this.linkField('name')} />
+        <input validations="text" valueLink={this.linkField('name')} />
         <ErrorMessage field="name" />
       </div>
 
       <Highlight className={hljsClass}>
-        {`<input type="text" valueLink={this.linkField('name')} />`}
+        {`<input validations="text" valueLink={this.linkField('name')} />`}
       </Highlight>
 
       <div className="form-group">
         <h4>Number input</h4>
         <label>Age</label>
-        <input type="number" valueLink={this.linkField('age')} />
+        <input validations="number" valueLink={this.linkField('age')} />
         <ErrorMessage field="age" />
       </div>
 
       <Highlight className={hljsClass}>
-        {`<input type="number" valueLink={this.linkField('age')} />`}
+        {`<input validations="number" valueLink={this.linkField('age')} />`}
       </Highlight>
 
     </div>);
@@ -40,11 +40,11 @@ var CheckboxEg = React.createClass({
   render: function () {
     return (<div>
       <h4>Checkbox</h4>
-      <label><input type="checkbox" checkedLink={this.linkField('likeDogs')} /> Do you like dogs?</label>
+      <label><input validations="checkbox" checkedLink={this.linkField('likeDogs')} /> Do you like dogs?</label>
 
       <Highlight className={hljsClass}>
         {`<label>
-  <input type="checkbox" checkedLink={this.linkField('likeDogs')} />
+  <input validations="checkbox" checkedLink={this.linkField('likeDogs')} />
   Do you like dogs?
 </label>`}
       </Highlight>
@@ -91,21 +91,21 @@ var Form = CreateForm({
     return {
       name: {
         label: 'Name',
-        type: 'string'
+        validations: 'string'
       },
       age: {
         label: 'Age',
-        type: 'number'
+        validations: 'number'
       },
       likeDogs: {
         label: 'Do you like dogs',
-        type: 'boolean'
+        validations: 'boolean'
       },
       color: {
-        type: 'string'
+        validations: 'string'
       },
       country: {
-        type: 'string'
+        validations: 'string'
       }
     };
   },

@@ -8,11 +8,11 @@ var Form = CreateForm({
     return {
       name: {
         label: 'Name',
-        type: 'string'
+        validations: 'string'
       },
       email: {
         label: 'Email',
-        type: 'string'
+        validations: 'string'
       }
     };
   },
@@ -27,12 +27,12 @@ var Form = CreateForm({
 
       <div className="form-group">
         <label>Name</label>
-        <input type="text" valueLink={this.linkField('name')} />
+        <input validations="text" valueLink={this.linkField('name')} />
       </div>
 
       <div className="form-group">
         <label>Email</label>
-        <input type="text" valueLink={this.linkField('email')} />
+        <input validations="text" valueLink={this.linkField('email')} />
       </div>
 
       <div className="form-group">

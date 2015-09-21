@@ -10,12 +10,12 @@ var PersonalInfo = CreateForm({
     return {
       name: {
         label: 'Name',
-        type: 'string',
+        validations: 'string',
         required: true
       },
       email: {
         label: 'Email',
-        type: 'email',
+        validations: 'email',
         required: true
       }
     }
@@ -30,13 +30,13 @@ var PersonalInfo = CreateForm({
     var inputs = [
       <div className="form-group">
         <label>Name</label>
-        <input type="text" name="name" valueLink={this.linkField('name')} />
+        <input validations="text" name="name" valueLink={this.linkField('name')} />
         <ErrorMessage field="name" />
       </div>,
 
       <div className="form-group">
         <label>Email</label>
-        <input type="text" name="email" valueLink={this.linkField('email')} />
+        <input validations="text" name="email" valueLink={this.linkField('email')} />
         <ErrorMessage field="email" />
       </div>
     ];

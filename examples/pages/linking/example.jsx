@@ -11,12 +11,12 @@ var Form = CreateForm({
     return {
       name: {
         label: 'Name',
-        type: 'string',
+        validations: 'string',
         required: true
       },
       color: {
         label: 'Favourite Color',
-        type: 'string',
+        validations: 'string',
         required: true
       }
     };
@@ -32,7 +32,7 @@ var Form = CreateForm({
 
       <div className="form-group">
         <label>Name</label>
-        <input type="text" name="name" valueLink={this.linkField('name')} />
+        <input validations="text" name="name" valueLink={this.linkField('name')} />
         <ErrorMessage field="name" />
       </div>
 

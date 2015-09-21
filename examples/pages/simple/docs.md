@@ -20,10 +20,10 @@ var Form = Formation.CreateForm({
     return (<form>
 
       <label>Name</label>
-      <input type="text" name="name" />
+      <input validations="text" name="name" />
 
       <label>Email</label>
-      <input type="text" name="email" />
+      <input validations="text" name="email" />
 
       <button>Submit</button>
 
@@ -40,7 +40,7 @@ var Form = Formation.CreateForm({
   getSchema: function () {
     return {
       name: {required: true}
-      email: {type: 'email'}
+      email: {validations: 'email'}
     };
   },
 
@@ -48,10 +48,10 @@ var Form = Formation.CreateForm({
     return (<form>
 
       <label>Name</label>
-      <input type="text" valueLink={this.linkField('name')} />
+      <input validations="text" valueLink={this.linkField('name')} />
 
       <label>Email</label>
-      <input type="text" valueLink={this.linkField('email')} />
+      <input validations="text" valueLink={this.linkField('email')} />
 
       <button>Submit</button>
 
@@ -69,7 +69,7 @@ var Form = Formation.CreateForm({
   getSchema: function () {
     return {
       name: {required: true}
-      email: {type: 'email'}
+      email: {validations: 'email'}
     };
   },
 
@@ -81,10 +81,10 @@ var Form = Formation.CreateForm({
     return (<form>
 
       <label>Name</label>
-      <input type="text" valueLink={this.linkField('name')} />
+      <input validations="text" valueLink={this.linkField('name')} />
 
       <label>Email</label>
-      <input type="text" valueLink={this.linkField('email')} />
+      <input validations="text" valueLink={this.linkField('email')} />
 
       <button onClick={this.submitForm}>Submit</button>
 
