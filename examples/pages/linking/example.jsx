@@ -32,7 +32,7 @@ var Form = CreateForm({
 
       <div className="form-group">
         <label>Name</label>
-        <input validations="text" name="name" valueLink={this.linkField('name')} />
+        <input type="text" name="name" valueLink={this.linkField('name')} />
         <ErrorMessage field="name" />
       </div>
 

@@ -17,7 +17,7 @@ Keep in mind if you are adding inputs to child components of the form, you will 
 Checkboxes work a little bit differently in React; instead of `valueLink`, used `checkedLink`:
 
 ```jsx
-<input validations="checkbox" checkedLink={this.linkField('isHappy')} />
+<input type="checkbox" checkedLink={this.linkField('isHappy')} />
 ```
 
 ### Radio Buttons

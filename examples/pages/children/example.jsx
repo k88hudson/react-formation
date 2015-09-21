@@ -17,7 +17,7 @@ var CreditCard = React.createClass({
   render: function () {
     return (<div className="form-group">
       <label>Enter your credit card number (try 4111111111111111):</label>
-      <input validations="number" valueLink={this.linkField('cardNumber')} />
+      <input type="number" valueLink={this.linkField('cardNumber')} />
       <ErrorMessage field="cardNumber" />
     </div>);
   }
@@ -31,12 +31,12 @@ var PersonalInfo = React.createClass({
     return (<div>
       <div className="form-group">
         <label>Username</label>
-        <input validations="text" name="username" valueLink={this.linkField('username')} />
+        <input type="text" name="username" valueLink={this.linkField('username')} />
         <ErrorMessage field="username" />
       </div>
       <div className="form-group">
         <label>Email</label>
-        <input validations="text" name="email" valueLink={this.linkField('email')} />
+        <input type="text" name="email" valueLink={this.linkField('email')} />
         <ErrorMessage field="email" />
       </div>
     </div>);

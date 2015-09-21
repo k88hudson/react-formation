@@ -17,7 +17,7 @@ var Child = React.createClass({
   render: function () {
     return (<div>
       <label>Name</label>
-      <input validations="text" name="name" valueLink={this.linkField('name')} />
+      <input type="text" name="name" valueLink={this.linkField('name')} />
       <ErrorMessage field="name" />
     </div>);
   }

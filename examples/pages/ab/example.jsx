@@ -30,13 +30,13 @@ var PersonalInfo = CreateForm({
     var inputs = [
       <div className="form-group">
         <label>Name</label>
-        <input validations="text" name="name" valueLink={this.linkField('name')} />
+        <input type="text" name="name" valueLink={this.linkField('name')} />
         <ErrorMessage field="name" />
       </div>,
 
       <div className="form-group">
         <label>Email</label>
-        <input validations="text" name="email" valueLink={this.linkField('email')} />
+        <input type="text" name="email" valueLink={this.linkField('email')} />
         <ErrorMessage field="email" />
       </div>
     ];

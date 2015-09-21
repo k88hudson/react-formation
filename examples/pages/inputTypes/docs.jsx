@@ -12,23 +12,23 @@ var InputEg = React.createClass({
       <div className="form-group">
         <h4>Text input</h4>
         <label>Name</label>
-        <input validations="text" valueLink={this.linkField('name')} />
+        <input type="text" valueLink={this.linkField('name')} />
         <ErrorMessage field="name" />
       </div>
 
       <Highlight className={hljsClass}>
-        {`<input validations="text" valueLink={this.linkField('name')} />`}
+        {`<input type="text" valueLink={this.linkField('name')} />`}
       </Highlight>
 
       <div className="form-group">
         <h4>Number input</h4>
         <label>Age</label>
-        <input validations="number" valueLink={this.linkField('age')} />
+        <input type="number" valueLink={this.linkField('age')} />
         <ErrorMessage field="age" />
       </div>
 
       <Highlight className={hljsClass}>
-        {`<input validations="number" valueLink={this.linkField('age')} />`}
+        {`<input type="number" valueLink={this.linkField('age')} />`}
       </Highlight>
 
     </div>);
@@ -40,11 +40,11 @@ var CheckboxEg = React.createClass({
   render: function () {
     return (<div>
       <h4>Checkbox</h4>
-      <label><input validations="checkbox" checkedLink={this.linkField('likeDogs')} /> Do you like dogs?</label>
+      <label><input type="checkbox" checkedLink={this.linkField('likeDogs')} /> Do you like dogs?</label>
 
       <Highlight className={hljsClass}>
         {`<label>
-  <input validations="checkbox" checkedLink={this.linkField('likeDogs')} />
+  <input type="checkbox" checkedLink={this.linkField('likeDogs')} />
   Do you like dogs?
 </label>`}
       </Highlight>

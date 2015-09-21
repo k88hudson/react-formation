@@ -25,12 +25,12 @@ var Form = CreateForm({
 
       <p>
         <label>Name</label>
-        <input validations="text" valueLink={this.linkField('name')} />
+        <input type="text" valueLink={this.linkField('name')} />
       </p>
 
       <p>
         <label>Email</label>
-        <input validations="text" valueLink={this.linkField('email')} />
+        <input type="text" valueLink={this.linkField('email')} />
       </p>
 
       <p><SubmitButton /></p>

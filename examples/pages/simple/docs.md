@@ -20,10 +20,10 @@ var Form = Formation.CreateForm({
     return (<form>
 
       <label>Name</label>
-      <input validations="text" name="name" />
+      <input type="text" name="name" />
 
       <label>Email</label>
-      <input validations="text" name="email" />
+      <input type="text" name="email" />
 
       <button>Submit</button>
 
@@ -48,10 +48,10 @@ var Form = Formation.CreateForm({
     return (<form>
 
       <label>Name</label>
-      <input validations="text" valueLink={this.linkField('name')} />
+      <input type="text" valueLink={this.linkField('name')} />
 
       <label>Email</label>
-      <input validations="text" valueLink={this.linkField('email')} />
+      <input type="text" valueLink={this.linkField('email')} />
 
       <button>Submit</button>
 
@@ -81,10 +81,10 @@ var Form = Formation.CreateForm({
     return (<form>
 
       <label>Name</label>
-      <input validations="text" valueLink={this.linkField('name')} />
+      <input type="text" valueLink={this.linkField('name')} />
 
       <label>Email</label>
-      <input validations="text" valueLink={this.linkField('email')} />
+      <input type="text" valueLink={this.linkField('email')} />
 
       <button onClick={this.submitForm}>Submit</button>
 

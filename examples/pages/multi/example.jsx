@@ -62,15 +62,15 @@ var CreditCard = React.createClass({
 
       <div className="form-group">
         <label>Enter your credit card number:</label>
-        <input validations="number" valueLink={this.linkField('cardNumber')} />
+        <input type="number" valueLink={this.linkField('cardNumber')} />
         <ErrorMessage field="cardNumber" />
       </div>
 
       <div className="form-group">
         <label>Expiry</label>
-        <input placeholder="MM" className="small" validations="text" valueLink={this.linkField('cardExpiryM')} /> /
-        <input placeholder="YY" className="small" validations="text" valueLink={this.linkField('cardExpiryY')} />
-        <input placeholder="CVC" className="small" validations="text" valueLink={this.linkField('cardCVC')} />
+        <input placeholder="MM" className="small" type="text" valueLink={this.linkField('cardExpiryM')} /> /
+        <input placeholder="YY" className="small" type="text" valueLink={this.linkField('cardExpiryY')} />
+        <input placeholder="CVC" className="small" type="text" valueLink={this.linkField('cardCVC')} />
         <ErrorMessage field="cardExpiryM" />
         <ErrorMessage field="cardExpiryY" />
         <ErrorMessage field="cardCVC" />
@@ -119,12 +119,12 @@ var PersonalInfo = React.createClass({
     return (<div>
       <div className="form-group">
         <label>Name</label>
-        <input validations="text" name="name" valueLink={this.linkField('name')} />
+        <input type="text" name="name" valueLink={this.linkField('name')} />
         <ErrorMessage field="name" />
       </div>
       <div className="form-group">
         <label>Email</label>
-        <input validations="text" name="email" valueLink={this.linkField('email')} />
+        <input type="text" name="email" valueLink={this.linkField('email')} />
         <ErrorMessage field="email" />
       </div>
 

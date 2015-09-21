@@ -30,13 +30,13 @@ var Form = CreateForm({
 
       <div className="form-group">
         <label>Name (error is shown after submit attempt)</label>
-        <input validations="text" name="name" valueLink={this.linkField('name')} />
+        <input type="text" name="name" valueLink={this.linkField('name')} />
         <ErrorMessage field="name" />
       </div>
 
       <div className="form-group">
         <label>Email (error is shown immediately)</label>
-        <input validations="text" name="email" valueLink={this.linkField('email')} />
+        <input type="text" name="email" valueLink={this.linkField('email')} />
         <ErrorMessage show={true} field="email" />
       </div>
 
