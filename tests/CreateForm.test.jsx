@@ -275,10 +275,16 @@ describe('CreateForm', function () {
       should.equal(form.validateField('name'), false);
     });
     it('should warn to use validations instead of type in schema', function () {
-      should.throws((err) => {
-        form.validateField('fizz');
-        return err.message === 'Using "type" in your schema is deprecated. Please use "validations" instead.';
-      });
+      var warn = console.warn;
+      var didWarn;
+      console.warn = function () {
+        didWarn = true;
+      };
+
+      form.validateField('fizz');
+      should.equal(didWarn, true);
+
+      console.warn = warn;
     });
   });
 
