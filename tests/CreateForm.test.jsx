@@ -227,6 +227,7 @@ describe('CreateForm', function () {
               if (val > this.state.max) return false;
               return 'Must be greater than ' + this.state.max;
             }},
+            fizz: {type: 'email'},
             email: {required: true, validations: 'email'},
             name: {validations: Formation.Validator.maxLength(10)},
             lastName: {required: function () {
@@ -273,9 +274,10 @@ describe('CreateForm', function () {
       should.equal(form.validateField('email'), false);
       should.equal(form.validateField('name'), false);
     });
-    it('should throw if console.warn', function () {
-      should.throws(() => {
-        console.warn('Yikes, Pippin\s human is deprecated, be careful. ')
+    it('should warn to use validations instead of type in schema', function () {
+      should.throws((err) => {
+        form.validateField('fizz');
+        return err.message === 'Using "type" in your schema is deprecated. Please use "validations" instead.';
       });
     });
   });
