@@ -49,15 +49,15 @@ var Form = CreateForm({
       username: {
         required: true,
         label: 'Username',
-        type: Validator.alpha()
+        validations: Validator.alpha()
       },
       email: {
         required: true,
         label: 'Email',
-        type: Validator.email()
+        validations: Validator.email()
       },
       cardNumber: {
-        type: Validator.creditCard(),
+        validations: Validator.creditCard(),
         label: 'Credit card'
       }
     };

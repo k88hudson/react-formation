@@ -40,7 +40,7 @@ var Form = Formation.CreateForm({
   getSchema: function () {
     return {
       name: {required: true}
-      email: {type: 'email'}
+      email: {validations: 'email'}
     };
   },
 
@@ -69,7 +69,7 @@ var Form = Formation.CreateForm({
   getSchema: function () {
     return {
       name: {required: true}
-      email: {type: 'email'}
+      email: {validations: 'email'}
     };
   },
 

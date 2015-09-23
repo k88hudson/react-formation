@@ -170,37 +170,37 @@ var Form = CreateForm({
         amount: {
           required: true,
           label: 'Amount',
-          type: 'number'
+          validations: 'number'
         },
         isMonthly: {
           initial: false,
-          type: 'boolean'
+          validations: 'boolean'
         }
       },
       {
         paymentType: {
-          type: 'string',
+          validations: 'string',
           label: 'Payment type',
           required: true
         },
         cardNumber: {
           required: requiredIfCreditCard,
-          type: 'number',
+          validations: 'number',
           label: 'Credit card number'
         },
         cardExpiryM: {
           required: requiredIfCreditCard,
-          type: 'number',
+          validations: 'number',
           label: 'Expiry Month'
         },
         cardExpiryY: {
           required: requiredIfCreditCard,
-          type: 'number',
+          validations: 'number',
           label: 'Expiry Year'
         },
         cardCVC: {
           required: requiredIfCreditCard,
-          type: 'string',
+          validations: 'string',
           label: 'Credit card CVC'
         }
       },
@@ -208,16 +208,16 @@ var Form = CreateForm({
         name: {
           required: true,
           label: 'Name',
-          type: 'string'
+          validations: 'string'
         },
         email: {
           required: true,
           label: 'Email',
-          type: 'email'
+          validations: 'email'
         },
         country: {
           required: true,
-          type: 'string',
+          validations: 'string',
           label: 'Country'
         },
         province: {
@@ -225,7 +225,7 @@ var Form = CreateForm({
             if (this.state.paymentType !== 'creditCard') return false;
             if (PROVINCES[this.state.country]) return true;
           },
-          type: 'string',
+          validations: 'string',
           label: 'Province'
         }
       }

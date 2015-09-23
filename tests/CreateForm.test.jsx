@@ -28,8 +28,8 @@ describe('CreateForm', function () {
       var Form = Formation.CreateForm({
         getSchema: function () {
           return {
-            foo: {required: true, type: 'email', initial: this.props.foo},
-            bar: {required: true, type: 'number', initial: this.props.bar}
+            foo: {required: true, validations: 'email', initial: this.props.foo},
+            bar: {required: true, validations: 'number', initial: this.props.bar}
           };
         },
         onSuccess: function () {},
@@ -43,10 +43,10 @@ describe('CreateForm', function () {
     it('should create instance property __schema correctly', function () {
       should.equal(form.__schema.foo.required, true);
       should.equal(form.__schema.foo.initial, foo);
-      should.equal(form.__schema.foo.type, 'email');
+      should.equal(form.__schema.foo.validations, 'email');
       should.equal(form.__schema.bar.required, true);
       should.equal(form.__schema.bar.initial, bar);
-      should.equal(form.__schema.bar.type, 'number');
+      should.equal(form.__schema.bar.validations, 'number');
     });
 
     it('should set initial state correctly', function () {
@@ -172,8 +172,8 @@ describe('CreateForm', function () {
           return {
             foo: {required: true, group: 0},
             bar: {required: true, group: 1},
-            baz: {required: true, type: 'email', group: 1},
-            qux: {type: 'number', group: 1}
+            baz: {required: true, validations: 'email', group: 1},
+            qux: {validations: 'number', group: 1}
           };
         },
         onSuccess: function (data) {
@@ -223,12 +223,13 @@ describe('CreateForm', function () {
         getSchema: function () {
           return {
             foo: {label: 'Foo', required: true},
-            bar : {type: function (val) {
+            bar : {validations: function (val) {
               if (val > this.state.max) return false;
               return 'Must be greater than ' + this.state.max;
             }},
-            email: {required: true, type: 'email'},
-            name: {type: Formation.Validator.maxLength(10)},
+            fizz: {type: 'email'},
+            email: {required: true, validations: 'email'},
+            name: {validations: Formation.Validator.maxLength(10)},
             lastName: {required: function () {
               return this.state.name;
             }}
@@ -262,7 +263,7 @@ describe('CreateForm', function () {
       form.setState({email: 'hello'});
       should.deepEqual(form.validateField('email'), ['Must be an email']);
     });
-    it('should return a validation error for a custom type with the right context', function () {
+    it('should return a validation error for a custom validation with the right context', function () {
       form.setState({bar: 4, max: 10});
       should.deepEqual(form.validateField('bar'), ['Must be greater than 10']);
       form.setState({bar: 11});
@@ -272,6 +273,18 @@ describe('CreateForm', function () {
       form.setState({email: 'kate@fff.com'});
       should.equal(form.validateField('email'), false);
       should.equal(form.validateField('name'), false);
+    });
+    it('should warn to use validations instead of type in schema', function () {
+      var warn = console.warn;
+      var didWarn;
+      console.warn = function () {
+        didWarn = true;
+      };
+
+      form.validateField('fizz');
+      should.equal(didWarn, true);
+
+      console.warn = warn;
     });
   });
 

@@ -8,11 +8,11 @@ var Form = CreateForm({
     return {
       name: {
         label: 'Name',
-        type: 'string'
+        validations: 'string'
       },
       email: {
         label: 'Email',
-        type: 'string'
+        validations: 'string'
       }
     };
   },

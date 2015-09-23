@@ -14,7 +14,7 @@ var Form = CreateForm({
       username: {
         required: true,
         label: 'Username',
-        type: function (val) {
+        validations: function (val) {
           if (/^[a-zA-Z0-9\-]{1,20}$/.test(val)) return false;
           return 'Must be 1-20 characters long and use only "-" and alphanumeric symbols';
         }
@@ -22,18 +22,18 @@ var Form = CreateForm({
       email: {
         required: true,
         label: 'Email',
-        type: 'email'
+        validations: 'email'
       },
       password: {
         required: true,
         label: 'Password',
-        type: function (val) {
+        validations: function (val) {
           if (val && zxcvbn(val).score > 0) return false;
           return 'Password is not strong enough';
         },
       },
       subscribe: {
-        type: 'boolean'
+        validations: 'boolean'
       }
     }
   },

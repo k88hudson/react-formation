@@ -10,12 +10,12 @@ var Form = CreateForm({
     return {
       name: {
         label: 'Name',
-        type: 'string',
+        validations: 'string',
         required: true
       },
       email: {
         label: 'Email',
-        type: 'email',
+        validations: 'email',
         required: true
       }
     };

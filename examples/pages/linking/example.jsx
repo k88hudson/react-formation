@@ -11,12 +11,12 @@ var Form = CreateForm({
     return {
       name: {
         label: 'Name',
-        type: 'string',
+        validations: 'string',
         required: true
       },
       color: {
         label: 'Favourite Color',
-        type: 'string',
+        validations: 'string',
         required: true
       }
     };

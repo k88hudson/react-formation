@@ -91,21 +91,21 @@ var Form = CreateForm({
     return {
       name: {
         label: 'Name',
-        type: 'string'
+        validations: 'string'
       },
       age: {
         label: 'Age',
-        type: 'number'
+        validations: 'number'
       },
       likeDogs: {
         label: 'Do you like dogs',
-        type: 'boolean'
+        validations: 'boolean'
       },
       color: {
-        type: 'string'
+        validations: 'string'
       },
       country: {
-        type: 'string'
+        validations: 'string'
       }
     };
   },

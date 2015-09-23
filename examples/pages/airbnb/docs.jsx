@@ -41,23 +41,23 @@ var Form = CreateForm({
     return {
       firstName: {
         required: true,
-        type: Validator.maxLength(5),
+        validations: Validator.maxLength(5),
         label: 'First name'
       },
       lastName: {
         required: true,
         label: 'Last name',
-        type: 'string'
+        validations: 'string'
       },
       email: {
         label: 'Email',
         required: true,
-        type: 'email'
+        validations: 'email'
       },
       password: {
         required: true,
         label: 'Password',
-        type: function (val) {
+        validations: function (val) {
           if (val.length >= 5) return false;
           return 'Password must be at least 5 characters. Please try again';
         },
@@ -72,7 +72,7 @@ var Form = CreateForm({
         required: true
       },
       mailingList: {
-        type: 'boolean'
+        validations: 'boolean'
       }
     };
   },
