@@ -1,10 +1,10 @@
 language: node_js
 node_js:
 - '0.12'
-- 'iojs'
+- iojs
 matrix:
   allow_failures:
-  - node_js: 'iojs'
+  - node_js: iojs
 before_install:
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
@@ -13,3 +13,12 @@ after_script:
 cache:
   directories:
   - node_modules
+deploy:
+  provider: npm
+  email: k88hudson@gmail.com
+  api_key:
+    secure: l+xdLejeMID6oao0VEHLgHIndY1lMg+Q2JUC0byGDVUgChU0+bsO9H2MnxjhuI/uj87xXOKt/ungswuj5fTPx2fjDxgk/llVRVEnJuLpAParlKbeSrI8TpoD5kDpUoofqlZje5vz+2AmnKjVFc0Djs0NmesjuwMdWSAThbnLa1QYDHi/Y1+dRNh5xuJt9xq/6rKlEfFNo7alaDk8fcBCobFOW4ERxJUdaAS1j1m8+NqvxdLvmeaHULsJ6g319W/yTCPm+V7NITftmsuR3Rgn60i8JT0z2N6AvWVMNDw3EbztrVptlAhoeHj0J0Y7xmzTCAJPWN8RYs23QDfOonCbHIeXNuSg41ceN/YP2bLRXaEUjRaFfhEJK0g6T+hLlGrSCX7GbzfXZtVorSR1CAb0tJUP0Hx7uPJb3g9RGZvjHKoD8RuhHe4kg465+ghoQDOE+qA/BtdHwSx7ea9zGWJIcx0NZqFbNf8CZZ09hMxmCbn+fo7xAVk++VYAaEN9t1V3AtryVC8uXxnpF/GHTLVYwv6Q6JqFP/EG0AwxY9AtyyxMLJo802Xg99xuzUN79Xp85NAoq2j1DPDQk6HEkV5T4P4YrnIfxT7lvVR02BXl4rk7sQLYGjnjoAVjvbzCR273FXWt1VADcpVbCnbhU7XXffBZiDeZoUjCACP/vC7HDqo=
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: k88hudson/react-formation
