@@ -34,7 +34,7 @@ var Form = Formation.CreateForm({
 
 Next, add **a `getSchema`** method that returns a schema defining all the fields in the form, and link corresponding inputs with `this.linkField`:
 
-```jsx{3-6,11,14}
+```jsx{3-8,14,17}
 var Form = Formation.CreateForm({
 
   getSchema: function () {
@@ -63,7 +63,7 @@ var Form = Formation.CreateForm({
 
 Finally, add **an onSuccess** callback that gets called on a successful submit, and add `this.submitForm` as a callback to any submit buttons.
 
-```jsx{8-10,21}
+```jsx{10-12,23}
 var Form = Formation.CreateForm({
 
   getSchema: function () {
