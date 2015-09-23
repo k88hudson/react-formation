@@ -67,27 +67,37 @@ module.exports = {
     var schema = this.__schema[key];
     var currentValue = this.state[key];
     var label = schema.label || key;
+    var validator = schema.validations;
 
     if (schema.type) {
       console.warn('Using "type" in your schema is deprecated. Please use "validations" instead.');
-      schema.validations = schema.type;
+      validator = schema.type;
     }
 
+    // Required field
     if (schema.required === true && !currentValue) errors.push(label + ' is required');
     if (typeof schema.required === 'function') {
       var isConditionallyRequred = schema.required.bind(this)();
       if (isConditionallyRequred && !currentValue) errors.push(label + ' is required');
     }
-    if (currentValue && schema.validations instanceof Validator) {
-      var typeError = schema.validations.assert(currentValue);
-      if (typeError) errors = errors.concat(typeError);
-    } else if (currentValue && typeof schema.validations === 'string' && Validator[schema.validations]) {
-       var typeError = Validator[schema.validations]().assert(currentValue);
-       if (typeError) errors = errors.concat(typeError);
-    } else if (currentValue && typeof schema.validations === 'function') {
-      var typeError = schema.validations.call(this, currentValue);
-      if (typeError) errors.push(typeError);
+
+    // Error messages
+    if (schema.messages) {
+      Object.keys(schema.messages).forEach(validationType => {
+        validator.messages[validationType] = schema.messages[validationType];
+      });
     }
+
+    // Test validations
+    var typeError;
+    if (currentValue && validator instanceof Validator) {
+      typeError = validator.assert(currentValue);
+    } else if (currentValue && typeof validator === 'string' && Validator[validator]) {
+      typeError = Validator[validator]().assert(currentValue);
+    } else if (currentValue && typeof validator === 'function') {
+      typeError = validator.call(this, currentValue);
+    }
+    if (typeError) errors = errors.concat(typeError);
 
     return errors.length ? errors : false;
   },
