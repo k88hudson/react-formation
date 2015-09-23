@@ -1,36 +1,28 @@
 {
   "name": "react-formation",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "",
   "main": "dist/form.js",
   "scripts": {
     "build": "npm-run-all build:**",
-      "prebuild": "rimraf www && mkdirp www",
-
+    "prebuild": "rimraf www && mkdirp www",
     "start": "npm run build && npm-run-all --parallel server watch:**",
-      "prestart": "npm run prebuild",
-
+    "prestart": "npm run prebuild",
     "postversion": "npm publish",
-      "prepublish": "npm run build:dist",
-
+    "prepublish": "npm run build:dist",
     "test": "karma start",
-      "pretest": "npm run test:lint",
-      "test:coverage": "KARMA_ENV=coverage karma start --reporters coverage,coveralls",
-      "test:lint": "eslint src/**/*.js*",
-      "watch:test": "karma start --no-single-run --browsers Chrome",
-
+    "pretest": "npm run test:lint",
+    "test:coverage": "KARMA_ENV=coverage karma start --reporters coverage,coveralls",
+    "test:lint": "eslint src/**/*.js*",
+    "watch:test": "karma start --no-single-run --browsers Chrome",
     "build:static": "cpx \"examples/static/**/*\" www",
     "watch:static": "npm run build:static -- -w",
-
     "build:js": "webpack",
     "watch:js": "npm run build:js -- --watch",
-
     "build:css": "npm run watch:css -- --no-watch",
     "watch:css": "autoless --source-map examples www",
-
     "build:dist": "babel src --out-dir dist",
     "watch:dist": "npm run build:dist --- --watch",
-
     "server": "live-server ./ --port=4240"
   },
   "author": "k88hudson",
