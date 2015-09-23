@@ -1,48 +1,111 @@
-# React Formation
+# Get started with React Formation
 
 [![Build Status](https://travis-ci.org/k88hudson/react-formation.svg)](https://travis-ci.org/k88hudson/react-formation)
 [![Coverage Status](https://coveralls.io/repos/k88hudson/react-formation/badge.svg?branch=master&service=github)](https://coveralls.io/github/k88hudson/react-formation?branch=master)
 
-## Important note
+## Install
 
-At current time of writing, this is a component API experiment -- the validation support etc. is still in progress.
+You can install React Formation from npm by running `npm install react-formation`. If you are using common js, you can require it like this:
 
-## Try it out
+```jsx
+var Formation = require('react-formation');
+```
 
-Clone the example repo from https://github.com/k88hudson/react-formation-example to try this out.
+## Create a Form
 
-##  What it does
+First, let's define the structure of your form. You can do that by using `CreateForm` just like how you would use `React.createClass`, including a `render` function:
 
-Using this form library, you can
+```jsx{3}
+var Formation = require('react-formation');
 
-* Create forms with a schema, including validations
-* Link inputs in child components back to the form
-* Handle submitting and showing errors with helper components
-* Get the "valid" or "submit attempt" state of the entire form at any time
+var Form = Formation.CreateForm({
+  render: function () {
+    return (<form>
 
-## Rationale
+      <label>Name</label>
+      <input type="text" name="name" />
 
-### Maintain a single source of truth in any component structure
+      <label>Email</label>
+      <input type="text" name="email" />
 
-Handling any kind of nested display and control of user input can be tricky in React. In order to prevent synchronization errors, we want to maintain a single source of truth for our form's data instead of fragmenting it down the component tree; however, this can become overly complex, verbose, and/or fragile if the components get too nested or the data model of the data set is very large.
+      <button>Submit</button>
 
-Inspired by `react-router`, react-formations uses a top-level schema in combination with React's `context` feature to maintain a consistent api at all levels of the component tree.
+    </form>);
+  }
+});
+```
 
-### Integrate existing input components and conventions
+Next, add **a `getSchema`** method that returns a schema defining all the fields in the form, and link corresponding inputs with `this.linkField`:
 
-Any form system that requires the use of generated inputs or specific input component structures quickly becomes too rigid except for the simplest of forms.
+```jsx{3-6,11,14}
+var Form = Formation.CreateForm({
 
-react-formations allows you to use **any input or component you like**, in any html structure you like. Links back to the single source of truth are managed via React's two-way-binding utility, which can be added directly to native inputs or controlled manually in an `onChange` handler.
+  getSchema: function () {
+    return {
+      name: {required: true}
+      email: {validations: 'email'}
+    };
+  },
 
-### Simplify display of errors
+  render: function () {
+    return (<form>
 
-No matter how you chose to validate your data, displaying error messages almost always requires a lot of complex logic from multiple sources: did the user attempt to submit? Are there any errors? Is the field required?
+      <label>Name</label>
+      <input type="text" valueLink={this.linkField('name')} />
 
-react-formations attemps to simplify this by providing a means of tracking submit status and validity/errors for each field at the top level component, and exposing this information to all child components via the context API.
+      <label>Email</label>
+      <input type="text" valueLink={this.linkField('email')} />
 
-It also includes an <ErrorMessage /> component with good default behaviour in both single and multi form contexts.
+      <button>Submit</button>
 
-## Guide and examples
+    </form>);
+  }
+
+});
+```
+
+Finally, add **an onSuccess** callback that gets called on a successful submit, and add `this.submitForm` as a callback to any submit buttons.
+
+```jsx{8-10,21}
+var Form = Formation.CreateForm({
+
+  getSchema: function () {
+    return {
+      name: {required: true}
+      email: {validations: 'email'}
+    };
+  },
+
+  onSuccess: function (data) {
+    console.log(data);
+  },
+
+  render: function () {
+    return (<form>
+
+      <label>Name</label>
+      <input type="text" valueLink={this.linkField('name')} />
+
+      <label>Email</label>
+      <input type="text" valueLink={this.linkField('email')} />
+
+      <button onClick={this.submitForm}>Submit</button>
+
+    </form>);
+  }
+
+});
+```
+
+## Rendering a Form
+
+You can use your new `Form` class just like you would any other React element, including passing props. For example, if you wanted to render it directly into `document.body`:
+
+```jsx
+React.render(<Form />, document.body);
+```
+
+## More
 
 Check out the guide and examples:
 
