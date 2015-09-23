@@ -34,7 +34,7 @@ var Form = Formation.CreateForm({
 
 Next, add **a `getSchema`** method that returns a schema defining all the fields in the form, and link corresponding inputs with `this.linkField`:
 
-```jsx{3-8,13,16}
+```jsx{3-8,14,17}
 var Form = Formation.CreateForm({
 
   getSchema: function () {
