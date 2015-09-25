@@ -24,7 +24,8 @@ describe('CreateForm', function () {
             lastName: {required: function () {
               return this.state.name;
             }},
-            apples: {validations: Formation.Validator.min(10, {message: 'Too few apples'})}
+            apples: {validations: Formation.Validator.min(10, {message: 'Must be ${min} apples'})},
+            oranges: {validations: Formation.Validator.number({message: 'Orange'})}
           };
         },
         onSuccess: function () {},
@@ -81,7 +82,11 @@ describe('CreateForm', function () {
     });
     it('should use custom validation errors', function () {
       form.setState({apples: 4});
-      should.deepEqual(form.validateField('apples'), ['Too few apples']);
+      should.deepEqual(form.validateField('apples'), ['Must be 10 apples']);
+    });
+    it('should use custom validation errors with the right context', function () {
+      form.setState({oranges: 'fooo'});
+      should.deepEqual(form.validateField('oranges'), ['Orange']);
     });
   });
 
