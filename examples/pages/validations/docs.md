@@ -2,7 +2,7 @@
 
 You can validate fields by adding a `Formation.Validator` object to the `validations` property of a schema definition:
 
-```jsx{6,9,12}
+```jsx{6,9,12-15}
 var Validator = require('react-formation').Validator;
 
 var getSchema = function () {
@@ -14,7 +14,10 @@ var getSchema = function () {
       validations: Validator.creditCard()
     },
     numberOfApples: {
-      validations: Validator.number().min(1, {message: 'Not enough apples'}).max(10)
+      validations: Validator
+        .number()
+        .min(1, {message: 'Not enough apples'})
+        .max(10)
     }
   };
 };
@@ -77,7 +80,6 @@ You can pass an optional options object as the *last* argument in any validation
 ```jsx
 Validator.email({message: 'Not an email!'});
 Validator.max(100, {message: 'Too much!'});
-Validator.oneOf(['foo', 'bar', 'baz'], {message: 'Must be foo, bar, or baz'});
 ```
 
 You can also chain multiple validations together like this:
@@ -92,7 +94,7 @@ Validator.number().creditCard();
 
 Each built-in validation in React Formation ships with an error message. If you would like to override it, you can do so by passing an options object as the last argument of any validator
 
-```jsx{5-7}
+```jsx{4}
 var getSchema = function () {
   return {
     email: {
@@ -102,13 +104,12 @@ var getSchema = function () {
 };
 ```
 
-
 You can also do so at the global level for any validation:
 
 ```jsx
 var Validator = require('react-formation').Validator;
 
-Validator.messages.creditCard = 'NO FOOLING'
+Validator.messages.creditCard = 'NO FOOLING';
 
 // Now any invalid fields with this validation
 // will return NO FOOLING as the error message
