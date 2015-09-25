@@ -14,7 +14,7 @@ var getSchema = function () {
       validations: Validator.creditCard()
     },
     numberOfApples: {
-      validations: Validator.number().min(1).max(10)
+      validations: Validator.number().min(1, {message: 'Not enough apples'}).max(10)
     }
   };
 };
@@ -64,12 +64,20 @@ email: {
 }
 ```
 
-Some validations take arguments, such as the `min`, `max`, and `oneOf` validations:
+Some validations have required arguments, such as the `min`, `max`, and `oneOf` validations:
 
 ```jsx
 Validator.min(0);
 Validator.max(100);
 Validator.oneOf(['foo', 'bar', 'baz'])
+```
+
+You can pass an optional options object as the *last* argument in any validation, which can include a custom error message:
+
+```jsx
+Validator.email({message: 'Not an email!'});
+Validator.max(100, {message: 'Too much!'});
+Validator.oneOf(['foo', 'bar', 'baz'], {message: 'Must be foo, bar, or baz'});
 ```
 
 You can also chain multiple validations together like this:
@@ -82,23 +90,20 @@ Validator.number().creditCard();
 
 ### Error messages
 
-Each built-in validation in React Formation ships with an error message. If you would like to override it, you can do so for each schema:
+Each built-in validation in React Formation ships with an error message. If you would like to override it, you can do so by passing an options object as the last argument of any validator
 
 ```jsx{5-7}
 var getSchema = function () {
   return {
     email: {
-      type: Validator.email(),
-      messages: {
-        email: 'Not an email, sorry!'
-      }
+      validations: Validator.email({message: 'Not an email!!'})
     }
   };
 };
 ```
 
 
-You can also do so at the global level:
+You can also do so at the global level for any validation:
 
 ```jsx
 var Validator = require('react-formation').Validator;

@@ -81,13 +81,6 @@ module.exports = {
       if (isConditionallyRequred && !currentValue) errors.push(label + ' is required');
     }
 
-    // Error messages
-    if (schema.messages) {
-      Object.keys(schema.messages).forEach(validationType => {
-        validator.messages[validationType] = schema.messages[validationType];
-      });
-    }
-
     // Test validations
     var typeError;
     if (currentValue && validator instanceof Validator) {

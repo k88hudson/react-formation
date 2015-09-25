@@ -24,7 +24,7 @@ describe('CreateForm', function () {
             lastName: {required: function () {
               return this.state.name;
             }},
-            apples: {validations: Formation.Validator.min(10), messages: {min: 'Too few apples'}}
+            apples: {validations: Formation.Validator.min(10, {message: 'Too few apples'})}
           };
         },
         onSuccess: function () {},
