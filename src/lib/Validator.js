@@ -137,7 +137,6 @@ Validator.definitions = {
 Object.keys(Validator.definitions).forEach(key => {
   Validator[key] = Validator.prototype[key] = function () {
     var instance = this instanceof Validator ? this : new Validator();
-    var args = Array.prototype.slice.call(arguments);
     var schema = Validator.definitions[key].apply(instance, arguments);
 
     var lastArg = arguments[arguments.length - 1];
