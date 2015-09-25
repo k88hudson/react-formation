@@ -1,7 +1,7 @@
 var assign = require('react/lib/Object.assign');
 
 var Validator = function () {
-  this.schema = [];
+  this.validationSchema = [];
   this._validator = require('validator');
   this.messages = assign({}, Validator.messages);
 };
@@ -28,22 +28,19 @@ Validator.messages = {
 Validator.definitions = {
   email: function () {
     return {
-      validate: this._validator.isEmail,
-      message: () => this.messages.email
+      validate: this._validator.isEmail
     };
   },
   url: function (options) {
     return {
       validate: function (value) {
         return this._validator.isURL(value, options);
-      },
-      message: () => this.messages.url
+      }
     };
   },
   date: function () {
     return {
-      validate: this._validator.isDate,
-      message: () => this.messages.date
+      validate: this._validator.isDate
     };
   },
   before: function (before) {
@@ -51,7 +48,7 @@ Validator.definitions = {
       validate: function (value) {
         return this._validator.isBefore(value, before);
       },
-      message: () => this.messages.before.replace('${before}', before)
+      message: (m) => m.replace('${before}', before)
     };
   },
   after: function (after) {
@@ -59,19 +56,17 @@ Validator.definitions = {
       validate: function (value) {
         return this._validator.isAfter(value, after);
       },
-      message: () => this.messages.after.replace('${after}', after)
+      message: (m) => m.replace('${after}', after)
     };
   },
   number: function () {
     return {
-      validate: this._validator.isNumeric,
-      message: () => this.messages.number
+      validate: this._validator.isNumeric
     };
   },
   alpha: function () {
     return {
-      validate: this._validator.isAlpha,
-      message: () => this.messages.alpha
+      validate: this._validator.isAlpha
     };
   },
   max: function (max) {
@@ -79,7 +74,7 @@ Validator.definitions = {
       validate: function (val) {
         return this._validator.isInt(val, {max}) || this._validator.isFloat(val, {max});
       },
-      message: () => this.messages.max.replace('${max}', max)
+      message: (m) => m.replace('${max}', max)
     };
   },
   min: function (min) {
@@ -87,7 +82,7 @@ Validator.definitions = {
       validate: function (val) {
         return this._validator.isInt(val, {min}) || this._validator.isFloat(val, {min});
       },
-      message: () => this.messages.min.replace('${min}', min)
+      message: (m) => m.replace('${min}', min)
     };
   },
   maxLength: function (max) {
@@ -95,7 +90,7 @@ Validator.definitions = {
       validate: function (val) {
         return this._validator.isLength(val, 0, max);
       },
-      message: () => this.messages.maxLength.replace('${max}', max)
+      message: (m) => m.replace('${max}', max)
     };
   },
   minLength: function (min) {
@@ -103,39 +98,35 @@ Validator.definitions = {
       validate: function (val) {
         return this._validator.isLength(val, min);
       },
-      message: () => this.messages.minLength.replace('${min}', min)
+      message: (m) => m.replace('${min}', min)
     };
   },
   creditCard: function () {
     return {
-      validate: this._validator.isCreditCard,
-      message: () => this.messages.creditCard
+      validate: this._validator.isCreditCard
     };
   },
   oneOf: function (allowed) {
     return {
       validate: (val) => this._validator.isIn(val, allowed),
-      message: () => this.messages.oneOf.replace('${allowed}', allowed.join(', '))
+      message: (m) => m.replace('${allowed}', allowed.join(', '))
     };
   },
   pattern: function (pattern) {
     return {
-      validate: (val) => this._validator.matches(val, pattern),
-      message: () => this.messages.pattern
+      validate: (val) => this._validator.matches(val, pattern)
     };
   },
   currency: function (options) {
     return {
       validate: function (value) {
         return this._validator.isCurrency(value, options);
-      },
-      message: () => this.messages.currency
+      }
     };
   },
   hexColor: function () {
     return {
-      validate: this._validator.isHexColor,
-      message: () => this.messages.hexColor
+      validate: this._validator.isHexColor
     };
   },
   custom: function (definition) {
@@ -146,14 +137,30 @@ Validator.definitions = {
 Object.keys(Validator.definitions).forEach(key => {
   Validator[key] = Validator.prototype[key] = function () {
     var instance = this instanceof Validator ? this : new Validator();
-    instance.schema.push(Validator.definitions[key].apply(instance, arguments));
+    var args = Array.prototype.slice.call(arguments);
+    var schema = Validator.definitions[key].apply(instance, arguments);
+
+    var lastArg = arguments[arguments.length - 1];
+    var customMessage = lastArg && typeof lastArg === 'object' && lastArg.message;
+
+    // If the validation function specifies a function, run the message template
+    // through it
+    if (typeof schema.message === 'function') {
+      var template = schema.message;
+      schema.message = () => template.call(instance, customMessage || instance.messages[key] || '');
+    } else {
+      schema.message = () => customMessage || instance.messages[key] || '';
+    }
+
+    instance.validationSchema.push(schema);
+
     return instance;
   };
 });
 
 Validator.prototype.assert = function (value, context) {
-  var results = this.schema.map(definition => {
-    var errorMessage = typeof definition.message === 'function' ? definition.message.call(this, value) : definition.message;
+  var results = this.validationSchema.map(definition => {
+    var errorMessage = definition.message.call(this, value);
     return definition.validate.call(context || this, value) ? false : errorMessage;
   }).filter(error => error);
   return results.length ? results : false;
