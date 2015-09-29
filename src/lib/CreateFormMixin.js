@@ -95,6 +95,28 @@ module.exports = {
     return errors.length ? errors : false;
   },
 
+  setGlobalError: function (field, error) {
+    var globalErrors = this.state.__globalErrors;
+
+    if (!this.__schema[field]) throw new Error(`Cannot set global error for non-existent field ${field}`);
+    if (error && typeof error !== 'string' && !(error instanceof Array)) {
+      throw new Error('Second argument must be a string on an array of strings');
+    }
+
+    if (!error) {
+      delete globalErrors[field];
+      this.setState({__globalErrors: globalErrors});
+    } else {
+      if (typeof error === 'string') error = [error];
+      globalErrors[field] = error;
+      this.setState({__globalErrors: globalErrors});
+    }
+  },
+
+  getGlobalErrors: function () {
+    return this.state.__globalErrors;
+  },
+
   didSubmit: function (field) {
     if (!field) return this.state.__didSubmit;
     return this.state.__dirtyFields[field];

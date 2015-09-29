@@ -15,7 +15,8 @@ var routeDefinitions = [
   <Route name="multi" label="Multi-part forms" handler={require('./pages/multi/docs.jsx')} />,
   <Route name="ab" label="A/B testing" handler={require('./pages/ab/docs.jsx')} />,
   <Route name="inputTypes" label="Input types reference" handler={require('./pages/inputTypes/docs.jsx')} />,
-  <Route name="airbnb" label="Example: airbnb" handler={require('./pages/airbnb/docs.jsx')} />
+  <Route name="airbnb" label="Example: airbnb" handler={require('./pages/airbnb/docs.jsx')} />,
+  <Route name="server" label="Server" handler={require('./pages/server/docs.jsx')} />
 ];
 
 var intlData = {
