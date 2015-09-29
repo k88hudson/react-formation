@@ -51,6 +51,9 @@ module.exports = {
 
     if (!this.isValid()) return;
 
+    // Clear all global errors
+    this.setState({__globalErrors: {}});
+
     var data = {};
 
     Object.keys(this.__schema).forEach(key => {
@@ -68,6 +71,7 @@ module.exports = {
     var currentValue = this.state[key];
     var label = schema.label || key;
     var validator = schema.validations;
+    var globalErrors = this.getGlobalErrors()[key];
 
     if (schema.type) {
       console.warn('Using "type" in your schema is deprecated. Please use "validations" instead.');
@@ -92,13 +96,15 @@ module.exports = {
     }
     if (typeError) errors = errors.concat(typeError);
 
+    // Global errors
+    if (globalErrors) errors = errors.concat(globalErrors);
+
     return errors.length ? errors : false;
   },
 
   setGlobalError: function (field, error) {
     var globalErrors = this.state.__globalErrors;
 
-    if (!this.__schema[field]) throw new Error(`Cannot set global error for non-existent field ${field}`);
     if (error && typeof error !== 'string' && !(error instanceof Array)) {
       throw new Error('Second argument must be a string on an array of strings');
     }
