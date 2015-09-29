@@ -1,4 +1,4 @@
-### `this.didSubmit(field)`
+## `this.didSubmit(field)`
 
 Returns `true` or `false`.
 

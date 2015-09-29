@@ -9,6 +9,7 @@ var routeDefinitions = [
   <Route name="linking" label="Adding inputs" handler={require('./pages/linking/docs.jsx')} />,
   <Route name="children" label="Building modular UI" handler={require('./pages/children/docs.jsx')} />,
   <Route name="validations" label="Validation" handler={require('./pages/validations/docs.jsx')} />,
+  <Route name="server" label="Validation on the server" handler={require('./pages/server/docs.jsx')} />,
   <Route name="errors" label="Errors" handler={require('./pages/errors/docs.jsx')} />,
   <Route name="submitting" label="Submitting" handler={require('./pages/submitting/docs.jsx')} />,
   <Route name="schema" label="Schema" handler={require('./pages/schema/docs.jsx')} />,
@@ -16,7 +17,7 @@ var routeDefinitions = [
   <Route name="ab" label="A/B testing" handler={require('./pages/ab/docs.jsx')} />,
   <Route name="inputTypes" label="Input types reference" handler={require('./pages/inputTypes/docs.jsx')} />,
   <Route name="airbnb" label="Example: airbnb" handler={require('./pages/airbnb/docs.jsx')} />,
-  <Route name="server" label="Server" handler={require('./pages/server/docs.jsx')} />
+  <Route name="api" label="API docs" handler={require('./pages/api/docs.jsx')} />
 ];
 
 var intlData = {

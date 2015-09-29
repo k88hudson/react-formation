@@ -4,7 +4,7 @@ Returns `false` if no errors were found when validating the field `fieldName`, o
 
 For example, if the field `email` must be an email:
 
-```js
+```jsx
 this.validateField('email');
 // => ['Email must be an email.']
 ```
