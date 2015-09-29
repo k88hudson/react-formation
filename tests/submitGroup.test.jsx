@@ -33,7 +33,7 @@ describe('CreateForm', function () {
     });
 
     it('should call onSuccess if the group is valid', function () {
-      var didSubmit = false;
+      var didSubmit = true;
       form.setState({foo: 'hi'});
       form.submitGroup(0, (data) => {
         // Doesn't actually pass data for now
@@ -44,7 +44,7 @@ describe('CreateForm', function () {
     });
 
     it('should call onError if the group is invalid', function () {
-      var didSubmit = false;
+      var didSubmit = true;
       form.setState({foo: 'hi'});
       form.submitGroup(1, () => true, (data) => {
         // Doesn't actually pass data for now

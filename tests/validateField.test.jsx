@@ -41,13 +41,13 @@ describe('CreateForm', function () {
     });
 
     it('should evaluate a conditional required function in the right contextConfig', function () {
-      should.equal(form.validateField('lastName'), false);
+      should.equal(form.validateField('lastName'), true);
       form.setState({name: 'Kate'});
       should.deepEqual(form.validateField('lastName'), ['lastName is required']);
     });
     it('should validate built in validators in the right context', function () {
       form.setState({name: 'Kate'});
-      should.deepEqual(form.validateField('name'), false);
+      should.deepEqual(form.validateField('name'), true);
       form.setState({name: 'Kateasdasdsadasdasdasdasd'});
       should.deepEqual(form.validateField('name'), ['Must be less than 10 characters']);
     });
@@ -60,12 +60,12 @@ describe('CreateForm', function () {
       form.setState({bar: 4, max: 10});
       should.deepEqual(form.validateField('bar'), ['Must be greater than 10']);
       form.setState({bar: 11});
-      should.deepEqual(form.validateField('bar'), false);
+      should.deepEqual(form.validateField('bar'), true);
     });
-    it('should return false for valid values', function () {
+    it('should return true for valid values', function () {
       form.setState({email: 'kate@fff.com'});
-      should.equal(form.validateField('email'), false);
-      should.equal(form.validateField('name'), false);
+      should.equal(form.validateField('email'), true);
+      should.equal(form.validateField('name'), true);
     });
 
     it('should warn to use validations instead of type in schema', function () {

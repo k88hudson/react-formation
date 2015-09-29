@@ -35,7 +35,7 @@ describe('ErrorMessage', function () {
   describe('hide/show', function () {
     it('should be hidden if there are no errors', function () {
       var ErrorMessage = CreateErrorMessage({
-        didSubmit: () => true
+        didSubmit: () => false
       });
       var testError = TestUtils.renderIntoDocument(<ErrorMessage field="foo" />);
       var el = testError.getDOMNode();
@@ -59,7 +59,7 @@ describe('ErrorMessage', function () {
       });
       var testError = TestUtils.renderIntoDocument(<ErrorMessage field="foo" />);
       var el = testError.getDOMNode();
-      should.equal(el.hidden, false);
+      should.equal(el.hidden, true);
     });
 
     it('should be shown if there is an error and the show prop is true', function () {
