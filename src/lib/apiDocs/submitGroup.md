@@ -1,4 +1,4 @@
-### `this.submitGroup(groupName, onSuccess, onError)`
+## `this.submitGroup(groupName, onSuccess, onError)`
 
 All fields in group `groupName` will be marked with a submit attempt, so errors will show up and `this.didSubmit(field)` will return `true` for those fields.
 

@@ -17,7 +17,8 @@ module.exports = function CreateForm(config) {
 
       var state = {
         __didSubmit: false,
-        __dirtyFields: {}
+        __dirtyFields: {},
+        __globalErrors: {}
       };
 
       this.__schema = this.getSchema();
@@ -33,6 +34,18 @@ module.exports = function CreateForm(config) {
       });
 
       return state;
+    },
+
+    componentDidUpdate: function (prevProps, prevState) {
+
+      // Reset global errors if the field they refer to is updated
+      var globalErrors = this.state.__globalErrors;
+      Object.keys(globalErrors).forEach(field => {
+        if (this.state[field] !== prevState[field]) {
+          this.setGlobalError(field, false);
+        }
+      });
+
     },
 
     childContextTypes: contextConfig.types,

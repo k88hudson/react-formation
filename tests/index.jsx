@@ -16,3 +16,4 @@ require('./submitGroup.test.jsx');
 require('./validateField.test.jsx');
 require('./isGroupValid.test.jsx');
 require('./isValid.test.jsx');
+require('./globalErrors.test.jsx');
