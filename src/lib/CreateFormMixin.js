@@ -50,7 +50,7 @@ module.exports = {
       __didSubmit: true
     });
 
-    console.log(this.isValid());
+    //console.log(this.isValid());
 
     if (!this.isValid()) return;
 
@@ -78,6 +78,7 @@ module.exports = {
     var label = schema.label || key;
     var validator = schema.validations;
     var globalErrors = this.getGlobalErrors()[key];
+    //console.log(globalErrors);
 
     if (schema.type) {
       console.warn('Using "type" in your schema is deprecated. Please use "validations" instead.');
@@ -103,7 +104,8 @@ module.exports = {
 
     // Global errors
     if (globalErrors) errors = errors.concat(globalErrors);
-
+    //console.log('errors: ' + errors);
+    //console.log('globalErrors: ' + globalErrors);
     return errors.length ? errors : true;
   },
 

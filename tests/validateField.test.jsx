@@ -48,6 +48,7 @@ describe('CreateForm', function () {
     it('should validate built in validators in the right context', function () {
       form.setState({name: 'Kate'});
       should.deepEqual(form.validateField('name'), true);
+      console.log(form.validateField('name'));
       form.setState({name: 'Kateasdasdsadasdasdasdasd'});
       should.deepEqual(form.validateField('name'), ['Must be less than 10 characters']);
     });
