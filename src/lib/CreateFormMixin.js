@@ -78,7 +78,6 @@ module.exports = {
     var label = schema.label || key;
     var validator = schema.validations;
     var globalErrors = this.getGlobalErrors()[key];
-    //console.log(globalErrors);
 
     if (schema.type) {
       console.warn('Using "type" in your schema is deprecated. Please use "validations" instead.');
@@ -104,12 +103,12 @@ module.exports = {
 
     // Global errors
     if (globalErrors) errors = errors.concat(globalErrors);
-    //console.log('errors: ' + errors);
-    //console.log('globalErrors: ' + globalErrors);
+
     return errors.length ? errors : true;
   },
 
   setGlobalError: function (field, error) {
+    console.log('runnnnnnnning');
     var globalErrors = this.state.__globalErrors;
 
     if (error && typeof error !== 'string' && !(error instanceof Array)) {
@@ -127,6 +126,7 @@ module.exports = {
   },
 
   getGlobalErrors: function () {
+    console.log(this.state.__globalErrors);
     return this.state.__globalErrors;
   },
 
