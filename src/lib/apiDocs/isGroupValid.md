@@ -1,4 +1,4 @@
 ## `this.isGroupValid(groupName)`
 
-Returns `true` or `false` depending on if all the fields in form group `groupName` are valid.
+Returns `true` if all fields in the form group `groupName` are valid, or `false` if any single field is invalid.
 

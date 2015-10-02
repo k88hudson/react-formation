@@ -36,6 +36,7 @@ module.exports = {
 
   submitForm: function(e) {
 
+
     if (e) e.preventDefault();
 
     // Make all fields dirty
@@ -99,7 +100,11 @@ module.exports = {
     // Global errors
     if (globalErrors) errors = errors.concat(globalErrors);
 
-    return errors.length ? errors : false;
+    if (errors.length && errors[0] !== true) {
+      return errors;
+    } else {
+      return true;
+    }
   },
 
   setGlobalError: function (field, error) {
@@ -132,7 +137,7 @@ module.exports = {
     var isValid = true;
     var fields = Object.keys(this.__schema).filter(key => this.__schema[key].group === groupName);
     fields.forEach(key => {
-      if (this.validateField(key)) isValid = false;
+      if (this.validateField(key) !== true) isValid = false;
     });
     return isValid;
   },
@@ -140,7 +145,7 @@ module.exports = {
   isValid: function () {
     var isValid = true;
     Object.keys(this.__schema).forEach(key => {
-      if (this.validateField(key)) isValid = false;
+      if (this.validateField(key) !== true ) isValid = false;
     });
     return isValid;
   }
