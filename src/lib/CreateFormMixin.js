@@ -38,6 +38,7 @@ module.exports = {
 
     if (e) e.preventDefault();
 
+
     // Make all fields dirty
     var __dirtyFields = this.state.__dirtyFields;
     Object.keys(this.__schema).forEach(key => {
@@ -49,6 +50,8 @@ module.exports = {
       __didSubmit: true
     });
 
+    //console.log(this.isValid());
+
     if (!this.isValid()) return;
 
     // Clear all global errors
@@ -58,7 +61,10 @@ module.exports = {
 
     Object.keys(this.__schema).forEach(key => {
       if (typeof this.state[key] !== 'undefined') data[key] = this.state[key];
+      //console.log(data[key]);
     });
+
+    //console.log(this.onSuccess);
 
     if (this.onSuccess) {
       this.onSuccess(data);
@@ -94,15 +100,15 @@ module.exports = {
     } else if (currentValue && typeof validator === 'function') {
       typeError = validator.call(this, currentValue);
     }
-    if (typeError) errors = errors.concat(typeError);
 
     // Global errors
     if (globalErrors) errors = errors.concat(globalErrors);
 
-    return errors.length ? errors : false;
+    return errors.length ? errors : true;
   },
 
   setGlobalError: function (field, error) {
+    console.log('runnnnnnnning');
     var globalErrors = this.state.__globalErrors;
 
     if (error && typeof error !== 'string' && !(error instanceof Array)) {
@@ -120,6 +126,7 @@ module.exports = {
   },
 
   getGlobalErrors: function () {
+    console.log(this.state.__globalErrors);
     return this.state.__globalErrors;
   },
 

@@ -34,7 +34,7 @@ describe('Validator', function () {
         message: 'Not the right email'
       };
       var v = Validator.custom(customValidation);
-      should.deepEqual(v.assert('dd@dd.com'), false);
+      should.deepEqual(v.assert('dd@dd.com'), true);
       should.deepEqual(v.assert('ff'), ['Not the right email']);
     });
 
@@ -46,7 +46,7 @@ describe('Validator', function () {
         }
       };
       var v = Validator.custom(customValidation);
-      should.deepEqual(v.assert('dd@dd.com'), false);
+      should.deepEqual(v.assert('dd@dd.com'), true);
       should.deepEqual(v.assert('ff'), ['Must be an email']);
     });
 
@@ -58,7 +58,7 @@ describe('Validator', function () {
         message: 'Not email!'
       };
       var v = Validator.custom(customValidation);
-      should.deepEqual(v.assert('baz@bar.com'), false);
+      should.deepEqual(v.assert('baz@bar.com'), true);
     });
 
     it('should call validate with custom context if provided', function () {
@@ -71,7 +71,7 @@ describe('Validator', function () {
       var v = Validator.custom(customValidation);
       function Foo() {
         this.foo = 100;
-        should.deepEqual(v.assert('baz', this), false);
+        should.deepEqual(v.assert('baz', this), true);
       }
       new Foo();
     });
@@ -181,7 +181,7 @@ describe('Validator', function () {
       var data = testData[key];
       it('#' + key, () => {
         data.valid.forEach( testCase => {
-          should.deepEqual(data.validatorTerm.assert(testCase), false);
+          should.deepEqual(data.validatorTerm.assert(testCase), true);
         });
         data.invalid.forEach( testCase => {
           should.deepEqual(data.validatorTerm.assert(testCase), data.invalidMessage );
@@ -195,7 +195,7 @@ describe('Validator', function () {
         message: 'Not foo'
       };
       var v = Validator.custom(customValidation);
-      should.deepEqual(v.assert('foo'), false);
+      should.deepEqual(v.assert('foo'), true);
       should.deepEqual(v.assert('ff'), ['Not foo']);
     });
   });

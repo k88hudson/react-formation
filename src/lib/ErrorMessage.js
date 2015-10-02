@@ -10,7 +10,7 @@ module.exports = React.createClass({
   showErrors: function (errors) {
     if (!errors) return false;
     if (typeof this.props.show !== 'undefined') return this.props.show;
-    if (errors && this.didSubmit(this.props.field)) return true;
+    if (errors && this.didSubmit(this.props.field)) return false;
   },
   render: function () {
     var errors = this.validateField(this.props.field);

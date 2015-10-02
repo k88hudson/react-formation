@@ -37,10 +37,13 @@ module.exports = function CreateForm(config) {
     },
 
     componentDidUpdate: function (prevProps, prevState) {
-
       // Reset global errors if the field they refer to is updated
       var globalErrors = this.state.__globalErrors;
+
+      //console.log( Object.keys(globalErrors)  );
+
       Object.keys(globalErrors).forEach(field => {
+        console.log(field);
         if (this.state[field] !== prevState[field]) {
           this.setGlobalError(field, false);
         }

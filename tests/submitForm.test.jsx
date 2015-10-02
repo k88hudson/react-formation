@@ -57,6 +57,7 @@ describe('CreateForm', function () {
     it('should call onSuccess if form is valid, skipping undefined values', function () {
       form.setState({foo: 'hi', bar: 'whatup', baz: 'f@ff.com'});
       form.submitForm();
+      //console.log(didSubmit);
       should.deepEqual(didSubmit, {foo: 'hi', bar: 'whatup', baz: 'f@ff.com'});
     });
 
