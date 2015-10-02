@@ -36,7 +36,6 @@ module.exports = {
 
   submitForm: function(e) {
 
-
     if (e) e.preventDefault();
 
     // Make all fields dirty
@@ -95,16 +94,13 @@ module.exports = {
     } else if (currentValue && typeof validator === 'function') {
       typeError = validator.call(this, currentValue);
     }
-    if (typeError) errors = errors.concat(typeError);
+
+    if (typeError && typeError.length) errors = errors.concat(typeError);
 
     // Global errors
     if (globalErrors) errors = errors.concat(globalErrors);
 
-    if (errors.length && errors[0] !== true) {
-      return errors;
-    } else {
-      return true;
-    }
+    return errors.length ? errors : true;
   },
 
   setGlobalError: function (field, error) {
