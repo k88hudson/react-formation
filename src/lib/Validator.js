@@ -160,9 +160,9 @@ Object.keys(Validator.definitions).forEach(key => {
 Validator.prototype.assert = function (value, context) {
   var results = this.validationSchema.map(definition => {
     var errorMessage = definition.message.call(this, value);
-    return definition.validate.call(context || this, value) ? false : errorMessage;
-  }).filter(error => error);
-  return results.length ? results : false;
+    return definition.validate.call(context || this, value) ? true : errorMessage;
+  }).filter(error => error !== true);
+  return results.length ? results : true;
 };
 
 
