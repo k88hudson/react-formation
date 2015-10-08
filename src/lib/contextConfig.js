@@ -20,7 +20,7 @@ var methods = [
   'linkField',
   'submitForm',
   'submitGroup',
-  'validateField'
+  'getErrors'
 ];
 
 module.exports = {

@@ -7,7 +7,7 @@ describe('CreateForm', function () {
 
   var Formation = require('../src/form');
 
-  describe('#validateField', function () {
+  describe('#getErrors', function () {
     var form;
     beforeEach(function () {
       var Form = Formation.CreateForm({
@@ -37,35 +37,35 @@ describe('CreateForm', function () {
     });
 
     it('should return an error if value is falsey and required', function () {
-      should.deepEqual(form.validateField('foo'), ['Foo is required']);
+      should.deepEqual(form.getErrors('foo'), ['Foo is required']);
     });
 
     it('should evaluate a conditional required function in the right contextConfig', function () {
-      should.equal(form.validateField('lastName'), true);
+      should.equal(form.getErrors('lastName'), false);
       form.setState({name: 'Kate'});
-      should.deepEqual(form.validateField('lastName'), ['lastName is required']);
+      should.deepEqual(form.getErrors('lastName'), ['lastName is required']);
     });
     it('should validate built in validators in the right context', function () {
       form.setState({name: 'Kate'});
-      should.deepEqual(form.validateField('name'), true);
+      should.deepEqual(form.getErrors('name'), false);
       form.setState({name: 'Kateasdasdsadasdasdasdasd'});
-      should.deepEqual(form.validateField('name'), ['Must be less than 10 characters']);
+      should.deepEqual(form.getErrors('name'), ['Must be less than 10 characters']);
     });
     it('should return a validation error for string', function () {
-      should.deepEqual(form.validateField('email'), ['email is required']);
+      should.deepEqual(form.getErrors('email'), ['email is required']);
       form.setState({email: 'hello'});
-      should.deepEqual(form.validateField('email'), ['Must be an email']);
+      should.deepEqual(form.getErrors('email'), ['Must be an email']);
     });
     it('should return a validation error for a custom validation with the right context', function () {
       form.setState({bar: 4, max: 10});
-      should.deepEqual(form.validateField('bar'), ['Must be greater than 10']);
+      should.deepEqual(form.getErrors('bar'), ['Must be greater than 10']);
       form.setState({bar: 11});
-      should.deepEqual(form.validateField('bar'), true);
+      should.deepEqual(form.getErrors('bar'), false);
     });
     it('should return true for valid values', function () {
       form.setState({email: 'kate@fff.com'});
-      should.equal(form.validateField('email'), true);
-      should.equal(form.validateField('name'), true);
+      should.equal(form.getErrors('email'), false);
+      should.equal(form.getErrors('name'), false);
     });
 
     it('should warn to use validations instead of type in schema', function () {
@@ -75,18 +75,18 @@ describe('CreateForm', function () {
         didWarn = true;
       };
 
-      form.validateField('fizz');
+      form.getErrors('fizz');
       should.equal(didWarn, true);
 
       console.warn = warn;
     });
     it('should use custom validation errors', function () {
       form.setState({apples: 4});
-      should.deepEqual(form.validateField('apples'), ['Must be 10 apples']);
+      should.deepEqual(form.getErrors('apples'), ['Must be 10 apples']);
     });
     it('should use custom validation errors with the right context', function () {
       form.setState({oranges: 'fooo'});
-      should.deepEqual(form.validateField('oranges'), ['Orange']);
+      should.deepEqual(form.getErrors('oranges'), ['Orange']);
     });
   });
 

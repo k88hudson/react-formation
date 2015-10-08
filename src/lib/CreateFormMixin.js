@@ -65,7 +65,7 @@ module.exports = {
     }
   },
 
-  validateField: function (key) {
+  getErrors: function (key) {
     var errors = [];
     var schema = this.__schema[key];
     var currentValue = this.state[key];
@@ -100,7 +100,7 @@ module.exports = {
     // Global errors
     if (globalErrors) errors = errors.concat(globalErrors);
 
-    return errors.length ? errors : true;
+    return errors.length ? errors : false;
   },
 
   setGlobalError: function (field, error) {
@@ -133,7 +133,7 @@ module.exports = {
     var isValid = true;
     var fields = Object.keys(this.__schema).filter(key => this.__schema[key].group === groupName);
     fields.forEach(key => {
-      if (this.validateField(key) !== true) isValid = false;
+      if (this.getErrors(key)) isValid = false;
     });
     return isValid;
   },
@@ -141,7 +141,7 @@ module.exports = {
   isValid: function () {
     var isValid = true;
     Object.keys(this.__schema).forEach(key => {
-      if (this.validateField(key) !== true ) isValid = false;
+      if (this.getErrors(key)) isValid = false;
     });
     return isValid;
   }
