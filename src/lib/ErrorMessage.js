@@ -13,7 +13,7 @@ module.exports = React.createClass({
     if (errors && this.didSubmit(this.props.field)) return true;
   },
   render: function () {
-    var errors = this.validateField(this.props.field);
+    var errors = this.getErrors(this.props.field);
     var props = assign({className: 'errors'}, this.props, {
       hidden: !this.showErrors(errors)
     });

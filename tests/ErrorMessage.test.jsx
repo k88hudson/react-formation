@@ -13,7 +13,7 @@ describe('ErrorMessage', function () {
   function CreateErrorMessage(customProps) {
     return Injector({'./FormMixin': assign({
       didSubmit: () => {},
-      validateField: () => {}
+      getErrors: () => {}
     }, customProps || {})});
   }
 
@@ -45,7 +45,7 @@ describe('ErrorMessage', function () {
     it('should be hidden if the field was never submitted', function () {
       var ErrorMessage = CreateErrorMessage({
         didSubmit: () => false,
-        validateField: () => ['Has an error']
+        getErrors: () => ['Has an error']
       });
       var testError = TestUtils.renderIntoDocument(<ErrorMessage field="foo" />);
       var el = testError.getDOMNode();
@@ -55,7 +55,7 @@ describe('ErrorMessage', function () {
     it('should be shown if there was an error and the form was submitted', function () {
       var ErrorMessage = CreateErrorMessage({
         didSubmit: () => true,
-        validateField: () => ['Has an error']
+        getErrors: () => ['Has an error']
       });
       var testError = TestUtils.renderIntoDocument(<ErrorMessage field="foo" />);
       var el = testError.getDOMNode();
@@ -65,7 +65,7 @@ describe('ErrorMessage', function () {
     it('should be shown if there is an error and the show prop is true', function () {
       var ErrorMessage = CreateErrorMessage({
         didSubmit: () => false,
-        validateField: () => ['Has an error']
+        getErrors: () => ['Has an error']
       });
       var testError = TestUtils.renderIntoDocument(<ErrorMessage show={true} field="foo" />);
       var el = testError.getDOMNode();
@@ -76,7 +76,7 @@ describe('ErrorMessage', function () {
   describe('error message', function () {
     it('should show the error text', function () {
       var ErrorMessage = CreateErrorMessage({
-        validateField: () => ['Has an error']
+        getErrors: () => ['Has an error']
       });
       var testError = TestUtils.renderIntoDocument(<ErrorMessage field="foo" className="foo" />);
       var el = testError.getDOMNode();
