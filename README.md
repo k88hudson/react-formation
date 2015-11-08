@@ -1,5 +1,7 @@
 # Get started with React Formation
 
+[![Join the chat at https://gitter.im/k88hudson/react-formation](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/k88hudson/react-formation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://travis-ci.org/k88hudson/react-formation.svg)](https://travis-ci.org/k88hudson/react-formation)
 [![Coverage Status](https://coveralls.io/repos/k88hudson/react-formation/badge.svg?branch=master&service=github)](https://coveralls.io/github/k88hudson/react-formation?branch=master)
 
