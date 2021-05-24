@@ -23,7 +23,7 @@ var dateData = {
 var Input = React.createClass({
   mixins: [Formation.FormMixin],
   render: function () {
-    var errors = this.validateField(this.props.field);
+    var errors = this.getErrors(this.props.field);
     var inputClass = classnames('input', {
       valid: this.didSubmit() && !errors,
       invalid: this.didSubmit() && errors
@@ -88,7 +88,7 @@ var Form = CreateForm({
         <Input label="Password" field="password" type="password" />
 
         <label><FormattedMessage message={this.getIntlMessage('birthday')} /></label>
-        <div className="helper-error" hidden={!this.didSubmit() || (!this.validateField('birthdayMonth') && !this.validateField('birthdayDay') && !this.validateField('birthdayYear'))}>
+        <div className="helper-error" hidden={!this.didSubmit() || (!this.getErrors('birthdayMonth') && !this.getErrors('birthdayDay') && !this.getErrors('birthdayYear'))}>
           Select your birth date to continue
         </div>
         <select valueLink={this.linkField('birthdayMonth')}>

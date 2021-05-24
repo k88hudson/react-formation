@@ -92,7 +92,7 @@ describe('global errors', function () {
 
     it('should add global errors to result of valdiateField', function () {
       form.setGlobalError('foo', 'Foo is not valid');
-      should.deepEqual(form.validateField('foo'), ['foo is required', 'Foo is not valid']);
+      should.deepEqual(form.getErrors('foo'), ['foo is required', 'Foo is not valid']);
     });
 
     it('should prevent form submission if fields with global errors are not updated', function () {

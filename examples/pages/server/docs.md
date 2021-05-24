@@ -85,7 +85,7 @@ this.setGlobalError('creditCard', [
 
 ## Displaying errors
 
-Errors related to a field will show up when you call `this.validateField('fieldName')` or use the `ErrorMessage` component. You can also access the global errors object like this:
+Errors related to a field will show up when you call `this.getErrors('fieldName')` or use the `ErrorMessage` component. You can also access the global errors object like this:
 
 ```jsx
 this.getGlobalErrors();
