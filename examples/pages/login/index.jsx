@@ -1,22 +1,22 @@
-var React = require('react/addons');
-var Formation = require('../../../src/form');
+ React = ('react/addons');
+ Formation = ('../../../src/form');
 
-var CreateForm = Formation.CreateForm;
-var SubmitButton = Formation.SubmitButton;
-var ErrorMessage = Formation.ErrorMessage;
+ CreateForm = .CreateForm;
+ SubmitButton = .SubmitButton;
+ ErrorMessage = .ErrorMessage;
 
-var zxcvbn = require('zxcvbn');
-var classnames = require('classnames');
+ zxcvbn = ('zxcvbn');
+ classnames = ('classnames');
 
-var Form = CreateForm({
-  getSchema: function () {
-    return {
+ Form = CreateForm({
+  getSchema: () {
+     {
       username: {
         required: true,
         label: 'Username',
-        validations: function (val) {
-          if (/^[a-zA-Z0-9\-]{1,20}$/.test(val)) return false;
-          return 'Must be 1-20 characters long and use only "-" and alphanumeric symbols';
+        validations: (val) {
+          (/^[a-zA-Z0-9\-]{1,20}$/.test(val)) return false;
+           'Must be 1-20 characters long and use only "-" and alphanumeric symbols';
         }
       },
       email: {
@@ -27,9 +27,9 @@ var Form = CreateForm({
       password: {
         required: true,
         label: 'Password',
-        validations: function (val) {
-          if (val && zxcvbn(val).score > 0) return false;
-          return 'Password is not strong enough';
+        validations: (val) {
+           (val && zxcvbn(val).score > 0) return false;
+           'Password is not strong enough';
         },
       },
       subscribe: {
@@ -38,29 +38,29 @@ var Form = CreateForm({
     }
   },
 
-  getInitialState: function () {
-    return {
+  getInitialState: () {
+     {
       blurred: {}
     };
   },
-  onSuccess: function (data) {
+  onSuccess: (data) {
     alert(JSON.stringify(data));
   },
   onBlur: function (field) {
-    return () => {
+     () => {
       var blurred = this.state.blurred;
       blurred[field] = true;
       this.setState({blurred});
     }
   },
-  getPassStrength: function () {
-    return this.state.password ? zxcvbn(this.state.password).score : -1;
+  getPassStrength: () {
+     this.state.password ? zxcvbn(this.state.password).score : -1;
   },
   passStrengthStrings: ['Not strong enough', 'Weak', 'OK', 'Good', 'Strong'],
 
-  render: function () {
-    var passStrength = this.getPassStrength();
-    return (<form className="login-eg animated fadeInUp">
+  render: () {
+    passStrength = this.getPassStrength();
+    (<form className="login-eg animated fadeInUp">
 
       <div className="body">
         <div className="form-group">
